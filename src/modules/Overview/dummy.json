@@ -1,0 +1,359 @@
+{
+  "unitType": "brigade",
+  "unitName": "10-та окрема бригада \"Свобода\"",
+  "commander": {
+    "id": "p-0001",
+    "name": "Полковник Іваненко Олексій",
+    "rank": "Brigadier General ★",
+    "statusCode": "800",
+    "assignmentRole": "BRIGADE_COMMANDER",
+    "awards": ["OrderOfBohdanKhmelnytskyII", "MedalForMilitaryService"],
+    "unit": {
+      "type": "brigade",
+      "name": "10-та окрема бригада \"Свобода\""
+    },
+    "subordinates": [
+      {
+        "id": "p-0100",
+        "name": "Підполковник Коваль Андрій",
+        "rank": "Lieutenant Colonel ★★",
+        "statusCode": "800",
+        "assignmentRole": "CHIEF_OF_STAFF",
+        "awards": ["GSCForDiligentService", "UnitBadge"],
+        "unit": {
+          "type": "staff",
+          "name": "Штаб бригади"
+        },
+        "subordinates": [
+          {
+            "id": "p-0110",
+            "name": "Майор Бондар Олег",
+            "rank": "Major ★",
+            "statusCode": "800",
+            "assignmentRole": "soldier",
+            "awards": ["GSCParticipantOOS"],
+            "unit": { "type": "section", "name": "Оперативний відділ" },
+            "subordinates": []
+          },
+          {
+            "id": "p-0111",
+            "name": "Капітан Мельник Сергій",
+            "rank": "Captain ★★★★",
+            "statusCode": "800",
+            "assignmentRole": "soldier",
+            "awards": ["OrderDanyloHalytsky"],
+            "unit": { "type": "section", "name": "Розвідка" },
+            "subordinates": []
+          },
+          {
+            "id": "p-0112",
+            "name": "Капітан Литвиненко Павло",
+            "rank": "Captain ★★★★",
+            "statusCode": "800",
+            "assignmentRole": "soldier",
+            "awards": ["ArmyLandForCourage"],
+            "unit": { "type": "section", "name": "Артилерія" },
+            "subordinates": []
+          },
+          {
+            "id": "p-0113",
+            "name": "Капітан Горбач Олександр",
+            "rank": "Captain ★★★★",
+            "statusCode": "800",
+            "assignmentRole": "soldier",
+            "awards": ["MOUForExemplaryService"],
+            "unit": { "type": "section", "name": "Зв’язок" },
+            "subordinates": []
+          },
+          {
+            "id": "p-0114",
+            "name": "Майор Ткаченко Ігор",
+            "rank": "Major ★",
+            "statusCode": "800",
+            "assignmentRole": "soldier",
+            "awards": ["MOUForStrengtheningDefense"],
+            "unit": { "type": "section", "name": "Логістика" },
+            "subordinates": []
+          }
+        ]
+      },
+      {
+        "id": "b-100",
+        "name": "1-й мотопіхотний батальйон",
+        "unit": { "type": "battalion", "name": "1-й мотопіхотний батальйон" },
+        "commander": {
+          "id": "p-0200",
+          "name": "Підполковник Рудак Олександр",
+          "rank": "Lieutenant Colonel ★★",
+          "statusCode": "800",
+          "assignmentRole": "BATTALION_COMMANDER",
+          "awards": ["OrderForCourageIII"],
+          "unit": { "type": "battalion", "name": "1-й мотопіхотний батальйон" }
+        },
+        "subordinates": [
+          {
+            "id": "c-101",
+            "unit": { "type": "company", "name": "Рота A" },
+            "commander": {
+              "id": "p-0210",
+              "name": "Капітан Савчук Дмитро",
+              "rank": "Captain ★★★★",
+              "statusCode": "800",
+              "assignmentRole": "COMPANY_COMMANDER",
+              "awards": ["UnitBadge"],
+              "unit": { "type": "company", "name": "Рота A" }
+            },
+            "subordinates": [
+              {
+                "id": "pl-0211",
+                "unit": { "type": "platoon", "name": "Взвод 1" },
+                "commander": {
+                  "id": "p-0211",
+                  "name": "Лейтенант Ярош Олег",
+                  "rank": "Lieutenant ★★",
+                  "statusCode": "800",
+                  "assignmentRole": "PLATOON_COMMANDER",
+                  "awards": [],
+                  "unit": { "type": "platoon", "name": "Взвод 1" }
+                },
+                "subordinates": [
+                  {
+                    "id": "sq-0211-1",
+                    "unit": { "type": "squad", "name": "Відділення 1" },
+                    "commander": {
+                      "id": "p-021100",
+                      "name": "Старший сержант Кравченко Іван",
+                      "rank": "Senior Sergeant ★★★",
+                      "statusCode": "800",
+                      "assignmentRole": "SQUAD_LEADER",
+                      "awards": ["MOUForDefenseOfUkraine"],
+                      "unit": { "type": "squad", "name": "Відділення 1" }
+                    },
+                    "subordinates": [
+                      {
+                        "id": "p-021101",
+                        "name": "Солдат Грищук Антон",
+                        "rank": "Private",
+                        "statusCode": "800",
+                        "assignmentRole": "SOLDIER",
+                        "awards": [],
+                        "unit": { "type": "squad", "name": "Відділення 1" },
+                        "subordinates": []
+                      },
+                      {
+                        "id": "p-021102",
+                        "name": "Солдат Петренко Олексій",
+                        "rank": "Private",
+                        "statusCode": "800",
+                        "assignmentRole": "SOLDIER",
+                        "awards": ["MOUDistinctionForWoundII"],
+                        "unit": { "type": "squad", "name": "Відділення 1" },
+                        "subordinates": []
+                      },
+                      {
+                        "id": "p-021103",
+                        "name": "Солдат Тимчук Богдан",
+                        "rank": "Senior Private",
+                        "statusCode": "300",
+                        "assignmentRole": "SOLDIER",
+                        "awards": ["MOUDistinctionForWoundI"],
+                        "unit": { "type": "squad", "name": "Відділення 1" },
+                        "subordinates": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "pl-0212",
+                "unit": { "type": "platoon", "name": "Взвод 2" },
+                "commander": {
+                  "id": "p-0212",
+                  "name": "Лейтенант Остафійчук Микола",
+                  "rank": "Lieutenant ★★",
+                  "statusCode": "800",
+                  "assignmentRole": "PLATOON_COMMANDER",
+                  "awards": ["GSCBestWarrior"],
+                  "unit": { "type": "platoon", "name": "Взвод 2" }
+                },
+                "subordinates": [
+                  {
+                    "id": "sq-0212-1",
+                    "unit": { "type": "squad", "name": "Відділення A" },
+                    "commander": {
+                      "id": "p-021200",
+                      "name": "Сержант Левченко Юрій",
+                      "rank": "Sergeant ★★",
+                      "statusCode": "800",
+                      "assignmentRole": "SQUAD_LEADER",
+                      "awards": [],
+                      "unit": { "type": "squad", "name": "Відділення A" }
+                    },
+                    "subordinates": [
+                      {
+                        "id": "p-021201",
+                        "name": "Солдат Ковтун Ілля",
+                        "rank": "Private",
+                        "statusCode": "800",
+                        "assignmentRole": "SOLDIER",
+                        "awards": [],
+                        "unit": { "type": "squad", "name": "Відділення A" },
+                        "subordinates": []
+                      },
+                      {
+                        "id": "p-021202",
+                        "name": "Солдат Нечитайло Роман",
+                        "rank": "Private",
+                        "statusCode": "800",
+                        "assignmentRole": "SOLDIER",
+                        "awards": ["UnitBadge"],
+                        "unit": { "type": "squad", "name": "Відділення A" },
+                        "subordinates": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "id": "c-102",
+            "unit": { "type": "company", "name": "Рота B" },
+            "commander": {
+              "id": "p-0220",
+              "name": "Капітан Романчук Сергій",
+              "rank": "Captain ★★★★",
+              "statusCode": "800",
+              "assignmentRole": "COMPANY_COMMANDER",
+              "awards": ["OrderForCourageII"],
+              "unit": { "type": "company", "name": "Рота B" }
+            },
+            "subordinates": [
+              {
+                "id": "pl-0221",
+                "unit": { "type": "platoon", "name": "Взвод 1" },
+                "commander": {
+                  "id": "p-0221",
+                  "name": "Лейтенант Шевчук Назар",
+                  "rank": "Junior Lieutenant ★",
+                  "statusCode": "800",
+                  "assignmentRole": "PLATOON_COMMANDER",
+                  "awards": [],
+                  "unit": { "type": "platoon", "name": "Взвод 1" }
+                },
+                "subordinates": [
+                  {
+                    "id": "sq-0221-1",
+                    "unit": { "type": "squad", "name": "Відділення 1" },
+                    "commander": {
+                      "id": "p-022100",
+                      "name": "Старший сержант Орлик Роман",
+                      "rank": "Senior Sergeant ★★★",
+                      "statusCode": "800",
+                      "assignmentRole": "SQUAD_LEADER",
+                      "awards": ["MOUForDefenseOfUkraine"],
+                      "unit": { "type": "squad", "name": "Відділення 1" }
+                    },
+                    "subordinates": [
+                      {
+                        "id": "p-022101",
+                        "name": "Солдат Баранович Олег",
+                        "rank": "Private",
+                        "statusCode": "800",
+                        "assignmentRole": "SOLDIER",
+                        "awards": [],
+                        "unit": { "type": "squad", "name": "Відділення 1" },
+                        "subordinates": []
+                      },
+                      {
+                        "id": "p-022102",
+                        "name": "Солдат Коваленко Назар",
+                        "rank": "Private",
+                        "statusCode": "700",
+                        "assignmentRole": "SOLDIER",
+                        "awards": [],
+                        "unit": { "type": "squad", "name": "Відділення 1" },
+                        "subordinates": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": "b-200",
+        "name": "2-й механізований батальйон",
+        "unit": { "type": "battalion", "name": "2-й механізований батальйон" },
+        "commander": {
+          "id": "p-0300",
+          "name": "Полковник Черненко Віктор",
+          "rank": "Colonel ★★★",
+          "statusCode": "800",
+          "assignmentRole": "BATTALION_COMMANDER",
+          "awards": ["OrderOfBohdanKhmelnytskyI"],
+          "unit": { "type": "battalion", "name": "2-й механізований батальйон" }
+        },
+        "subordinates": [
+          {
+            "id": "c-201",
+            "unit": { "type": "company", "name": "Рота C" },
+            "commander": {
+              "id": "p-0310",
+              "name": "Капітан Дубровський Іван",
+              "rank": "Captain ★★★★",
+              "statusCode": "800",
+              "assignmentRole": "COMPANY_COMMANDER",
+              "awards": ["GSCForDiligentService"],
+              "unit": { "type": "company", "name": "Рота C" }
+            },
+            "subordinates": [
+              {
+                "id": "pl-0311",
+                "unit": { "type": "platoon", "name": "Взвод 1" },
+                "commander": {
+                  "id": "p-0311",
+                  "name": "Лейтенант Савицький Ростислав",
+                  "rank": "Lieutenant ★★",
+                  "statusCode": "800",
+                  "assignmentRole": "PLATOON_COMMANDER",
+                  "awards": [],
+                  "unit": { "type": "platoon", "name": "Взвод 1" }
+                },
+                "subordinates": [
+                  {
+                    "id": "sq-0311-1",
+                    "unit": { "type": "squad", "name": "Відділення 1" },
+                    "commander": {
+                      "id": "p-031100",
+                      "name": "Старший сержант Поліщук Сергій",
+                      "rank": "Senior Sergeant ★★★",
+                      "statusCode": "800",
+                      "assignmentRole": "SQUAD_LEADER",
+                      "awards": [],
+                      "unit": { "type": "squad", "name": "Відділення 1" }
+                    },
+                    "subordinates": [
+                      {
+                        "id": "p-031101",
+                        "name": "Солдат Микитенко Тарас",
+                        "rank": "Private",
+                        "statusCode": "800",
+                        "assignmentRole": "SOLDIER",
+                        "awards": ["MedalDefenderOfFatherland"],
+                        "unit": { "type": "squad", "name": "Відділення 1" },
+                        "subordinates": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
