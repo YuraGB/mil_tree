@@ -5,13 +5,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ASSIGNMENT_ROLES, AWARDS, UNIT_TYPES } from '@/constants';
+import { ASSIGNMENT_ROLES, UNIT_TYPES } from '@/constants';
 
 export const AssignmentSelector = ({
   onValueChange,
   value,
 }: {
-  onValueChange: (...event: any[]) => void;
+  onValueChange: (...event: string[]) => void;
   value: string | undefined;
 }) => {
   return (
@@ -21,7 +21,7 @@ export const AssignmentSelector = ({
           <SelectValue placeholder="UNIT_TYPES" />
         </SelectTrigger>
         <SelectContent className="w-[200px]">
-          {Object.values(UNIT_TYPES).map((unit, index) => (
+          {Object.values(UNIT_TYPES).map((unit) => (
             <SelectItem
               key={unit}
               value={unit}
@@ -37,7 +37,7 @@ export const AssignmentSelector = ({
           <SelectValue placeholder="ASSIGNMENT_ROLES" />
         </SelectTrigger>
         <SelectContent className="w-[200px]">
-          {Object.values(ASSIGNMENT_ROLES).map((assign, index) => (
+          {Object.values(ASSIGNMENT_ROLES).map((assign) => (
             <SelectItem
               key={assign}
               value={assign}

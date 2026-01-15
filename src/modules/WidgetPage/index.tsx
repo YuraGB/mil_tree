@@ -4,6 +4,7 @@ import { useWidget } from './hooks/useWidget';
 import { ButtonSave } from './components/ButtonSave';
 
 export const WidgetPage = ({ personId }: { personId: string }) => {
+  console.log(personId);
   const { addNewWidget, removeWidget, widgets, saveWidget, savePage, content } =
     useWidget();
 

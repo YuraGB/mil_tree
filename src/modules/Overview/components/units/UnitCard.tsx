@@ -1,35 +1,24 @@
+'use client';
 import { STATUSES } from '@/constants';
 import { DynamicIcon } from 'lucide-react/dynamic';
-import { TreeNode } from '@/types';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-
-interface RenderNodeProps {
-  draggingId?: string | null;
-  dropTargetId?: string | null;
-  dropPos?: 'above' | 'below' | 'inside' | null;
-  onDragStart?: (e: React.MouseEvent, el: HTMLElement, id: string) => void;
-}
+import { UnitNode } from '@/types/units';
 
 export const UnitCard: React.FC<{
-  node: TreeNode;
-  dragProps?: RenderNodeProps;
+  node: UnitNode;
   css?: string;
-}> = ({ node, dragProps, css }) => {
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (dragProps?.onDragStart) {
-      dragProps.onDragStart(e, e.currentTarget as HTMLElement, node.id);
-    }
-  };
-
+}> = ({ node, css }) => {
   return (
-    <div
-      className={`card ${dragProps?.dropTargetId === node.id ? 'drop-target' : ''} ${css ? css : ''} relative`}
+    <section
+      role="button"
+      tabIndex={0}
+      aria-pressed="false"
+      className={`card ${css ? css : ''} relative`}
       data-node-id={node.id}
-      onMouseDown={handleMouseDown}
     >
       {'rank' in node ? (
         <>
@@ -39,23 +28,25 @@ export const UnitCard: React.FC<{
               <TooltipTrigger asChild>
                 <span className="absolute top-2 right-2">
                   <DynamicIcon
-                    name={STATUSES[node.statusCode].icon}
+                    name={STATUSES[node.commander?.statusCode ?? '800'].icon}
                     size={24}
-                    color={STATUSES[node.statusCode].color}
+                    color={STATUSES[node.commander?.statusCode ?? '800'].color}
                   />
                 </span>
               </TooltipTrigger>
               <TooltipContent>
-                <p>{STATUSES[node.statusCode].description}</p>
+                <p>
+                  {STATUSES[node.commander?.statusCode ?? '800'].description}
+                </p>
               </TooltipContent>
             </Tooltip>
           </strong>
-          <div>{node.rank}</div>
-          <small>{node.unit.name}</small>
+          <div>{node?.commander?.rank}</div>
         </>
       ) : (
         <>
-          <strong>{node.unit?.name ?? node.name}</strong>
+          <strong>{node.name}</strong>
+
           {node.commander && (
             <p>
               <small>{node.commander.name}</small>
@@ -64,6 +55,6 @@ export const UnitCard: React.FC<{
           )}
         </>
       )}
-    </div>
+    </section>
   );
 };

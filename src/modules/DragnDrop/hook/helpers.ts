@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { DropPos } from './useTreeDnD';
 
 // The Global helper hook for Drag and Drop functionality
@@ -9,9 +9,9 @@ export const useDnDHelpers = (
     dropPos: Exclude<DropPos, null>,
   ) => void,
 ) => {
-  const [draggingId, setDraggingId] = useState<string | null>(null);
-  const [dropTargetId, setDropTargetId] = useState<string | null>(null);
-  const [dropPos, setDropPos] = useState<DropPos>(null);
+  const draggingId = useRef<string | null>(null);
+  const dropTargetId = useRef<string | null>(null);
+  const dropPos = useRef<DropPos>(null);
   const cloneRef = useRef<{
     nodeEl: HTMLElement;
     offsetX: number;
@@ -29,32 +29,32 @@ export const useDnDHelpers = (
       ev.clientY,
     ) as HTMLElement | null;
     if (!el) {
-      setDropTargetId(null);
-      setDropPos(null);
+      dropTargetId.current = null;
+      dropPos.current = null;
       return;
     }
 
     const item = el.closest('[data-node-id]') as HTMLElement | null;
     if (!item) {
-      setDropTargetId(null);
-      setDropPos(null);
+      dropTargetId.current = null;
+      dropPos.current = null;
       return;
     }
 
     const id = item.dataset.nodeId!;
-    if (id === draggingId) {
-      setDropTargetId(null);
-      setDropPos(null);
+    if (id === draggingId.current) {
+      dropTargetId.current = null;
+      dropPos.current = null;
       return;
     }
 
     const r = item.getBoundingClientRect();
     const y = ev.clientY - r.top;
     const h = r.height;
-    if (y < h * 0.25) setDropPos('above');
-    else if (y > h * 0.75) setDropPos('below');
-    else setDropPos('inside');
-    setDropTargetId(id);
+    if (y < h * 0.25) dropPos.current = 'above';
+    else if (y > h * 0.75) dropPos.current = 'below';
+    else dropPos.current = 'inside';
+    dropTargetId.current = id;
   }
 
   function onUp() {
@@ -63,18 +63,27 @@ export const useDnDHelpers = (
       cloneRef.current = null;
     }
 
-    if (draggingId && dropTargetId && dropPos) {
+    if (draggingId.current && dropTargetId.current && dropPos.current) {
       // update the state
-      callBack(draggingId, dropTargetId, dropPos);
+      callBack(draggingId.current, dropTargetId.current, dropPos.current);
     }
 
-    setDraggingId(null);
-    setDropTargetId(null);
-    setDropPos(null);
+    draggingId.current = null;
+    dropTargetId.current = null;
+    dropPos.current = null;
   }
 
-  function onDragStart(e: React.MouseEvent, nodeEl: HTMLElement, id: string) {
+  // Start the drag process
+  // Delegate the event from parent to child
+  function onDragStart(e: React.MouseEvent) {
     e.preventDefault();
+    const nodeEl = (e.target as HTMLElement)?.closest(
+      '[data-node-id]',
+    ) as HTMLElement | null;
+    if (!nodeEl) return;
+    const id = nodeEl.dataset.nodeId!;
+    if (!id) return;
+
     const rect = nodeEl.getBoundingClientRect();
     const clone = nodeEl.cloneNode(true) as HTMLElement;
     clone.style.position = 'fixed';
@@ -91,7 +100,7 @@ export const useDnDHelpers = (
       offsetX: e.clientX - rect.left,
       offsetY: e.clientY - rect.top,
     };
-    setDraggingId(id);
+    draggingId.current = id;
   }
 
   return {

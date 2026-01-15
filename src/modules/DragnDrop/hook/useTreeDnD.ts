@@ -1,16 +1,17 @@
 'use client';
-import { useCallback, useEffect, useRef, useState } from 'react';
-import { ICommandPerson, IUnitNode } from '@/types';
+import { useCallback, useEffect } from 'react';
 import { useDnDHelpers } from './helpers';
 import { moveNode } from '@/lib/dndMoveOverview';
+import { UnitNode } from '@/types/units';
 
-export type TreeNode = ICommandPerson | IUnitNode;
 export type DropPos = 'above' | 'below' | 'inside' | null;
 
 export function useTreeDnD(
-  rootTree: TreeNode,
-  setRootTree: (t: TreeNode) => void,
+  rootTree: UnitNode,
+  setRootTree: (t: UnitNode) => void,
 ) {
+  // this will update the overview state
+  // This callback will trigger if drag and drop will be successfull
   const onUpdateStateCallback = useCallback(
     (
       draggingId: string,
@@ -33,7 +34,7 @@ export function useTreeDnD(
       document.removeEventListener('mousemove', onMove);
       document.removeEventListener('mouseup', onUp);
     };
-  }, [draggingId, dropTargetId, dropPos, rootTree, setRootTree]);
+  }, [draggingId, dropTargetId, dropPos, rootTree, setRootTree, onMove, onUp]);
 
   return {
     draggingId,

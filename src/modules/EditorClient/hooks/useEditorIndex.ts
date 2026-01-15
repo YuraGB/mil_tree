@@ -1,7 +1,6 @@
 import { EditorIndexProps } from '@/types';
 import Quill from 'quill';
 import { useEffect, useRef, useState } from 'react';
-import { set } from 'zod';
 
 export const useEditorIndex = ({
   valueDefault,

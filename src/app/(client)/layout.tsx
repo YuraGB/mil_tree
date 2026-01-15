@@ -11,7 +11,7 @@ export default function LayoutClient({
     <PageWrapper
       sidebar={<SideBarClient links={sideBarLinks} key={'side'} />}
       classes={{
-        root: 'grid-cols-[150px_1fr] justify justify-items-start',
+        root: 'grid-cols-[150px_minmax(0,1fr)] justify justify-items-start',
         main: 'w-full h-full',
       }}
     >

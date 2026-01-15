@@ -1,5 +1,5 @@
-import { AWARDSNAMES, WIDGETS } from '@/constants';
-import { TAwardName, TWidgetNames } from '@/types';
+import { AWARDSNAMES } from '@/constants';
+import { TAwardName } from '@/types/persons';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import z from 'zod';

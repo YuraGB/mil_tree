@@ -13,7 +13,9 @@ export const useChartPie = (widgets: Widget[]) => {
         config[key.createdAt.toDateString()] = {
           label: key.createdAt.toDateString(),
           color:
-            karma > 0 ? 'var(--color-success)' : 'var(--color-destructive)',
+            Number(karma) > 0
+              ? 'var(--color-success)'
+              : 'var(--color-destructive)',
         };
       }
     }
@@ -27,7 +29,7 @@ export const useChartPie = (widgets: Widget[]) => {
       widgets
         ?.filter((w) => typeof w.props?.karmaValue === 'number')
         .map((w, i, arr) => {
-          const karma = w.props!.karmaValue || 0;
+          const karma = Number(w.props!.karmaValue || 0);
           const abs = Math.abs(karma);
           const intensity = Math.min(100, abs); // нормалізуємо до [0, 100]
 

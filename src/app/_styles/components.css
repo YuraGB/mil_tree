@@ -1,0 +1,31 @@
+.scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #282242 transparent;
+}
+
+/* Chrome / Edge / Safari */
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #282242;
+  border-radius: 100px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .scrollbar {
+    scroll-behavior: smooth;
+  }
+}
+
+.leaflet-container {
+  height: 500px;
+  width: 100%;
+}

@@ -1,0 +1,1 @@
+ALTER TABLE "release_report" RENAME COLUMN "reason" TO "release_reason";

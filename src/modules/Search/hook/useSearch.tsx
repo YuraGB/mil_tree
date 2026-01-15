@@ -1,27 +1,16 @@
-import { IPerson, IUnitNode, TreeNode } from '@/types';
+import { PersonNode } from '@/types/persons';
+import { UnitNode } from '@/types/units';
 import { useState } from 'react';
 
-export const useSearch = (data: TreeNode) => {
-  const [results, setSearchResults] = useState<IPerson[]>([]);
-  const findPerson = (value: string, person: IPerson): boolean => {
+export const useSearch = (data: UnitNode) => {
+  const [results, setSearchResults] = useState<PersonNode[]>([]);
+  const findPerson = (value: string, person: PersonNode): boolean => {
     return person.name.toLowerCase().includes(value.toLowerCase());
   };
 
-  const searchSurf = (value: string, obj: TreeNode): IPerson[] => {
+  const searchSurf = (value: string, obj: UnitNode): PersonNode[] => {
     if (value.length < 3) return [];
-    const results: IPerson[] = [];
-
-    // Якщо це Person
-    if (isPerson(obj)) {
-      if (findPerson(value, obj)) results.push(obj);
-
-      // Перевіряємо підлеглих
-      for (const sub of obj.subordinates) {
-        results.push(...searchSurf(value, sub));
-      }
-
-      return results;
-    }
+    const results: PersonNode[] = [];
 
     // Якщо це UnitNode
     if (isUnitNode(obj)) {
@@ -31,7 +20,7 @@ export const useSearch = (data: TreeNode) => {
       }
 
       // Перевіряємо підлеглих unit
-      for (const sub of obj.subordinates) {
+      for (const sub of obj.subUnits) {
         results.push(...searchSurf(value, sub));
       }
 
@@ -41,12 +30,8 @@ export const useSearch = (data: TreeNode) => {
     return results;
   };
 
-  function isUnitNode(node: TreeNode): node is IUnitNode {
+  function isUnitNode(node: UnitNode) {
     return 'commander' in node;
-  }
-
-  function isPerson(node: TreeNode): node is IPerson {
-    return 'rank' in node;
   }
 
   const onSearchChange = (value: string) => {

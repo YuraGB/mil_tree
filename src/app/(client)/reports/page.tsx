@@ -1,6 +1,7 @@
+'use cache';
 import { ReportsComponent } from '@/modules/Reports';
 
-const ReportsPage = () => {
+const ReportsPage = async () => {
   return <ReportsComponent />;
 };
 

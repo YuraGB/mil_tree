@@ -1,4 +1,3 @@
-import KarmaBar from '@/components/KarmaProgressDashboard';
 import EditorIndex from '@/modules/EditorClient';
 import WidgetContainer from '@/modules/WidgetPage/WidgetConteiner';
 import { IWidgetProps } from '@/types';
@@ -10,7 +9,9 @@ export const EditorWidget = React.memo(
     // Callback to update editor content
     const updateEditorContent = useCallback(
       (delta?: Delta) => {
-        saveWidget(widget.id, { content: delta });
+        if (delta) {
+          saveWidget(widget.id, { content: delta as unknown as string });
+        }
       },
       [saveWidget, widget.id],
     );
@@ -22,13 +23,10 @@ export const EditorWidget = React.memo(
         widgetId={widget.id}
         key={widget.id}
       >
-        <KarmaBar
-          valueDefault={widget.props?.karmaValue ?? 0}
-          saveWidget={saveWidget}
-          widgetId={widget.id}
-        />
         <EditorIndex handleSave={updateEditorContent} />
       </WidgetContainer>
     );
   },
 );
+
+EditorWidget.displayName = 'EditorWidget';

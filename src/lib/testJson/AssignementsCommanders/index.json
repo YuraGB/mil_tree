@@ -1,0 +1,109 @@
+{
+  "commanders": [
+    {
+      "id": "p-0001",
+      "name": "Полковник Іваненко Олексій",
+      "rank": "Brigadier General ★",
+      "assignmentRole": "BRIGADE_COMMANDER",
+      "unit": { "type": "brigade", "name": "10-та окрема бригада \"Свобода\"" }
+    },
+    {
+      "id": "p-0100",
+      "name": "Підполковник Коваль Андрій",
+      "rank": "Lieutenant Colonel ★★",
+      "assignmentRole": "CHIEF_OF_STAFF",
+      "unit": { "type": "staff", "name": "Штаб бригади" }
+    },
+    {
+      "id": "p-0200",
+      "name": "Підполковник Рудак Олександр",
+      "rank": "Lieutenant Colonel ★★",
+      "assignmentRole": "BATTALION_COMMANDER",
+      "unit": { "type": "battalion", "name": "1-й мотопіхотний батальйон" }
+    },
+    {
+      "id": "p-0210",
+      "name": "Капітан Савчук Дмитро",
+      "rank": "Captain ★★★★",
+      "assignmentRole": "COMPANY_COMMANDER",
+      "unit": { "type": "company", "name": "Рота A" }
+    },
+    {
+      "id": "p-0211",
+      "name": "Лейтенант Ярош Олег",
+      "rank": "Lieutenant ★★",
+      "assignmentRole": "PLATOON_COMMANDER",
+      "unit": { "type": "platoon", "name": "Взвод 1" }
+    },
+    {
+      "id": "p-021100",
+      "name": "Старший сержант Кравченко Іван",
+      "rank": "Senior Sergeant ★★★",
+      "assignmentRole": "SQUAD_LEADER",
+      "unit": { "type": "squad", "name": "Відділення 1" }
+    },
+    {
+      "id": "p-0212",
+      "name": "Лейтенант Остафійчук Микола",
+      "rank": "Lieutenant ★★",
+      "assignmentRole": "PLATOON_COMMANDER",
+      "unit": { "type": "platoon", "name": "Взвод 2" }
+    },
+    {
+      "id": "p-021200",
+      "name": "Сержант Левченко Юрій",
+      "rank": "Sergeant ★★",
+      "assignmentRole": "SQUAD_LEADER",
+      "unit": { "type": "squad", "name": "Відділення A" }
+    },
+    {
+      "id": "p-0220",
+      "name": "Капітан Романчук Сергій",
+      "rank": "Captain ★★★★",
+      "assignmentRole": "COMPANY_COMMANDER",
+      "unit": { "type": "company", "name": "Рота B" }
+    },
+    {
+      "id": "p-0221",
+      "name": "Лейтенант Шевчук Назар",
+      "rank": "Junior Lieutenant ★",
+      "assignmentRole": "PLATOON_COMMANDER",
+      "unit": { "type": "platoon", "name": "Взвод 1" }
+    },
+    {
+      "id": "p-022100",
+      "name": "Старший сержант Орлик Роман",
+      "rank": "Senior Sergeant ★★★",
+      "assignmentRole": "SQUAD_LEADER",
+      "unit": { "type": "squad", "name": "Відділення 1" }
+    },
+    {
+      "id": "p-0300",
+      "name": "Полковник Черненко Віктор",
+      "rank": "Colonel ★★★",
+      "assignmentRole": "BATTALION_COMMANDER",
+      "unit": { "type": "battalion", "name": "2-й механізований батальйон" }
+    },
+    {
+      "id": "p-0310",
+      "name": "Капітан Дубровський Іван",
+      "rank": "Captain ★★★★",
+      "assignmentRole": "COMPANY_COMMANDER",
+      "unit": { "type": "company", "name": "Рота C" }
+    },
+    {
+      "id": "p-0311",
+      "name": "Лейтенант Савицький Ростислав",
+      "rank": "Lieutenant ★★",
+      "assignmentRole": "PLATOON_COMMANDER",
+      "unit": { "type": "platoon", "name": "Взвод 1" }
+    },
+    {
+      "id": "p-031100",
+      "name": "Старший сержант Поліщук Сергій",
+      "rank": "Senior Sergeant ★★★",
+      "assignmentRole": "SQUAD_LEADER",
+      "unit": { "type": "squad", "name": "Відділення 1" }
+    }
+  ]
+}

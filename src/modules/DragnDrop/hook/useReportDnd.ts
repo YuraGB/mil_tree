@@ -1,17 +1,17 @@
 'use client';
 import { useCallback, useEffect } from 'react';
 import { useDnDHelpers } from './helpers';
-import { TReportAssigned, TRoot } from '@/types/client/Reports';
 import { findReport, moveReport } from '@/lib/dndMoveReports';
+import { TReportView, TRoot } from '@/types/reports';
 
 export function useReportDnD(
-  root: TRoot,
+  root: { [name: string]: TReportView[] },
   setRoot: React.Dispatch<React.SetStateAction<TRoot>>,
 ) {
   // this will update the Reports state
   // This callback will trigger if drag and drop will be successfull
   const onUpdateStateCallback = useCallback(
-    (draggingId: string, dropTargetId: TReportAssigned) => {
+    (draggingId: TReportView['id'], dropTargetId: TReportView['id']) => {
       setRoot((prev) => {
         const found = findReport(prev, draggingId);
         if (!found) return prev;

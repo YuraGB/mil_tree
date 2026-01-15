@@ -1,7 +1,7 @@
-import { IPerson } from '@/types';
+import { PersonNode } from '@/types/persons';
 import { memo } from 'react';
 
-const SearchResultsComponent: React.FC<{ results?: IPerson[] }> = ({
+const SearchResultsComponent: React.FC<{ results?: PersonNode[] }> = ({
   results,
 }) => {
   if (!results || results.length === 0) {

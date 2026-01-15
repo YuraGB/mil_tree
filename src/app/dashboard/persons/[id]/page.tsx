@@ -1,10 +1,12 @@
+// src/app/dashboard/persons/[id]/page.tsx
 import { PageWrapper } from '@/components/PageWrapper';
 import { WidgetPage } from '@/modules/WidgetPage';
-import { use } from 'react';
 
-type Props = Promise<{ id: string }>;
-
-const PersonPage = async (params: Props) => {
+export default async function PersonPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const { id } = await params;
   return (
     <PageWrapper>
@@ -12,6 +14,4 @@ const PersonPage = async (params: Props) => {
       <WidgetPage personId={id} />
     </PageWrapper>
   );
-};
-
-export default PersonPage;
+}

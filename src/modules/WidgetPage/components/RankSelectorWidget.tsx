@@ -42,3 +42,5 @@ export const RankSelectorWidget = memo(
     );
   },
 );
+
+RankSelectorWidget.displayName = 'RankSelectorWidget';

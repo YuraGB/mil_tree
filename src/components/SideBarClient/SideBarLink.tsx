@@ -7,7 +7,7 @@ export const SideBarLink = ({ url, text }: TSideBarLink) => {
     <li className="p-4 text-amber-900">
       <Link
         href={url}
-        onNavigate={(e) => {
+        onNavigate={() => {
           // Only executes during SPA navigation
           console.log('Navigating...');
 

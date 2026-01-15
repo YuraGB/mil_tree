@@ -42,7 +42,7 @@ const MainImageDashboard = ({
           className="hidden"
           onChange={handleFileChange}
         />
-        <label htmlFor="upload-image">
+        <label htmlFor="upload-image" aria-label="Upload image">
           <Button variant="secondary" asChild>
             <span>Upload Image</span>
           </Button>

@@ -6,11 +6,12 @@ import 'quill/dist/quill.snow.css';
 import { EditorProps } from '@/types';
 
 /* ─────────────────────────────────────────────────────
-   ✅ MUST-HAVE FIX: allow blob: URLs for images
+   MUST-HAVE FIX: allow blob: URLs for images
    Quill by default sanitizes blob URLs → "//:0"
    ───────────────────────────────────────────────────── */
 const Image = Quill.import('formats/image');
-(Image as any).sanitize = (url: string) => url;
+type TImage = typeof Image & { sanitize: (url: string) => string };
+(Image as TImage).sanitize = (url: string) => url;
 
 /* ─────────────────────────────────────────────────────
    Hook
@@ -46,7 +47,7 @@ export const useEditorClient = (
     const container = containerRef.current;
     if (!container) return;
 
-    // 🔥 CRITICAL: prevent double init in React 18 StrictMode
+    // CRITICAL: prevent double init in React 18 StrictMode
     if (container.querySelector('.ql-editor')) return;
 
     const editorContainer = document.createElement('div');
@@ -80,7 +81,7 @@ export const useEditorClient = (
                 const file = input.files?.[0];
                 if (!file) return;
 
-                // ✅ preview without upload
+                // preview without upload
                 const blobUrl = URL.createObjectURL(file);
 
                 const range = quill.getSelection(true);
@@ -120,14 +121,14 @@ export const useEditorClient = (
       onSelectionChangeRef.current?.(...args);
     });
 
-    // ❗ NO DOM cleanup
-    return () => {
-      if (ref && typeof ref !== 'function') {
-        // ref.current = null;
-      }
-      // quillRef.current = null;
-    };
-  }, []);
+    // NO DOM cleanup
+    // return () => {
+    //   if (ref && typeof ref !== 'function') {
+    //     // ref.current = null;
+    //   }
+    //   // quillRef.current = null;
+    // };
+  }, [props, readOnly, ref]);
 
   return { containerRef };
 };

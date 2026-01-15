@@ -1,10 +1,10 @@
 import { PageWrapper } from '@/components/PageWrapper';
-import { OverviewModule } from '@/modules/Overview';
+import { HomePageComponent } from '@/modules/HomePageComponent';
 
 export default function Home() {
   return (
     <PageWrapper>
-      <OverviewModule />
+      <HomePageComponent />
     </PageWrapper>
   );
 }

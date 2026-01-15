@@ -8,3 +8,4 @@ export const ButtonSave = memo(({ onClick }: { onClick: () => void }) => {
     </Button>
   );
 });
+ButtonSave.displayName = 'ButtonSave';

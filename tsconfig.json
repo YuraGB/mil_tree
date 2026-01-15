@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "types": [],
     "strictNullChecks": true,
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -13,6 +14,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "sourceMap": true,
     "jsx": "react-jsx",
     "incremental": true,
     "plugins": [
@@ -21,7 +23,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@globalStyles/*": ["./src/app/_styles/*"]
     }
   },
   "include": [

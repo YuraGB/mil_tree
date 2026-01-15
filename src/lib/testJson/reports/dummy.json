@@ -29,13 +29,15 @@
       "type": "vacation",
       "description": "Прошу надати щорічну відпустку строком 10 діб у звʼязку з сімейними обставинами.",
       "createdAt": "2025-03-01T08:30:00.000Z",
+      "vacationFrom": "2025-03-10T00:00:00.000Z",
+      "vacationTo": "2025-03-20T00:00:00.000Z",
       "updatedAt": "2025-03-01T08:30:00.000Z",
       "status": "created",
       "assigned": "created"
     }
   ],
 
-  "approoved": [
+  "approved": [
     {
       "id": "r-0002",
       "to": {
@@ -64,10 +66,12 @@
       },
       "type": "medical",
       "description": "Прошу направити на медичне обстеження у звʼязку з отриманим пораненням.",
+      "diagnosis": "Легке поранення ноги.",
+      "treatment": "Перев'язка та відпочинок протягом 7 днів.",
       "createdAt": "2025-02-20T09:15:00.000Z",
       "updatedAt": "2025-02-22T14:40:00.000Z",
-      "status": "approoved",
-      "assigned": "approoved"
+      "status": "approved",
+      "assigned": "approved"
     }
   ],
 
@@ -103,6 +107,9 @@
       "createdAt": "2025-02-10T07:50:00.000Z",
       "updatedAt": "2025-02-11T10:20:00.000Z",
       "status": "declined",
+      "transferTo": "Рота B",
+      "transferFrom": "Рота A",
+      "reason": "Відмова через нестачу місць у цільовому підрозділі.",
       "assigned": "declined"
     }
   ]

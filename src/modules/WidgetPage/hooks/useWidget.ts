@@ -12,7 +12,7 @@ export const useWidget = () => {
       {
         id: state.length + 1,
         type,
-        props: [],
+        props: {},
         createdAt: new Date(),
       },
     ]);
@@ -29,7 +29,13 @@ export const useWidget = () => {
       setWidgets((state) =>
         state.map((widget) =>
           widget.id === widgetId
-            ? { ...widget, props: { ...widget.props, ...newProps } }
+            ? {
+                ...widget,
+                props: {
+                  ...widget.props,
+                  [newProps.key]: newProps.value.toString(), // ✅ перетворюємо number у string
+                },
+              }
             : widget,
         ),
       );
@@ -37,10 +43,15 @@ export const useWidget = () => {
     [],
   );
 
-  // const savePage = useCallback(() => {
-  //   // Логіка збереження сторінки з віджетами
-  //   // setWidgets([]);
-  // }, [widgets]);
+  const savePage = useCallback(
+    () => {
+      // Логіка збереження сторінки з віджетами
+      // setWidgets([]);
+    },
+    [
+      /*widgets*/
+    ],
+  );
 
   const widgetType = useWidgetType();
 
@@ -55,5 +66,6 @@ export const useWidget = () => {
     removeWidget,
     saveWidget,
     content,
+    savePage,
   };
 };

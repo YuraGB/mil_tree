@@ -1,7 +1,5 @@
-import { Report, TReportAssigned, TRoot } from '@/types/client/Reports';
+import { Report, TReportAssigned, TRoot } from '@/types/reports';
 
-// -----------------------------
-// 1. Клонування дерева
 // -----------------------------
 function cloneTree(root: TRoot): TRoot {
   return structuredClone(root);
@@ -50,7 +48,8 @@ export function moveReport(
 
   const moved: Report = {
     ...removed,
-    assigned: to,
+
+    assignedToPersonId: to,
   };
 
   insertNode(updated, moved, to);

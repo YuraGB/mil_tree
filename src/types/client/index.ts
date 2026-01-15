@@ -1,18 +1,8 @@
-import {
-  AssignmentRole,
-  ICommandPerson,
-  TAwardName,
-  TRank,
-  TStatusCodes,
-  TUNIT,
-} from '../widgets';
-
-export type UnitComponentProps = ICommandPerson & {
-  children?: React.ReactNode;
-};
+import { AssignmentRole, TAwardName, TRank, TStatusCodes } from '../persons';
+import { TUnit } from '../units';
 
 export interface Unit {
-  type: TUNIT;
+  type: TUnit;
   name: string;
 }
 

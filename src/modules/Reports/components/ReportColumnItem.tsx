@@ -1,26 +1,40 @@
 import { Button } from '@/components/ui/button';
-import { RenderNodeProps } from '@/modules/Overview/components/units/renderTree';
-import { Report } from '@/types/client/Reports';
+import { Report } from '@/types/reports';
+import { Edit2Icon } from 'lucide-react';
 
 export const ReportColumnItem = ({
   report,
-  dragProps,
+  setSelectedReport,
 }: {
   report: Report;
-  dragProps: RenderNodeProps;
+  setSelectedReport?: (report: Report | null) => void;
 }) => {
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (dragProps?.onDragStart) {
-      dragProps.onDragStart(e, e.currentTarget as HTMLElement, report.id);
+  const onDialogOpen = () => {
+    if (setSelectedReport) {
+      setSelectedReport(report);
     }
   };
   return (
     <Button
       variant={'secondary'}
-      className={`card flex p-2 ${dragProps?.dropTargetId === report.id ? 'drop-target' : ''}`}
-      onMouseDown={handleMouseDown}
+      data-node-id={report.id}
+      className={`card flex p-2`}
     >
       {report.type}
+      <span
+        role="button"
+        tabIndex={0}
+        className="relative top-0 right-0 z-10 m-2 ml-auto inline-block cursor-pointer"
+        onClick={onDialogOpen}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            onDialogOpen();
+          }
+        }}
+        aria-label="Edit report"
+      >
+        <Edit2Icon />
+      </span>
     </Button>
   );
 };

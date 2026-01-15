@@ -3,39 +3,40 @@
 import React, { useState } from 'react';
 import { Tree } from 'react-organizational-chart';
 import { renderNode } from './renderTree';
-import { IBrigadeTree, TreeNode } from '@/types';
 import { useTreeDnD } from '@/modules/DragnDrop/hook/useTreeDnD';
 import { Search } from '@/modules/Search';
+import { UnitNode } from '@/types/units';
 
 type Props = {
-  data: IBrigadeTree;
+  data: UnitNode;
 };
 
 export const BrigadeTree: React.FC<Props> = ({ data }) => {
-  const [tree, setTree] = useState<TreeNode>(data.commander);
+  const [tree, setTree] = useState<UnitNode>(data);
 
-  const { draggingId, dropTargetId, dropPos, onDragStart } = useTreeDnD(
-    tree,
-    setTree,
-  );
+  const { onDragStart } = useTreeDnD(tree, setTree);
 
   return (
-    <>
+    <article
+      role="presentation"
+      className="brigade-tree-container scrollbar overflow-auto"
+      onMouseDown={onDragStart}
+    >
       <Search data={tree} />
       <Tree
         lineWidth={'2px'}
         lineColor={'#bbb'}
         lineBorderRadius={'10px'}
         label={
-          <div className="card root" data-node-id={data.commander.id}>
-            <strong>{data.unitName}</strong>
+          <div className="card root" data-node-id={data.commander?.id}>
+            <strong>{data.name}</strong>
             <div>Бригада</div>
           </div>
         }
       >
-        {renderNode(tree, { draggingId, dropTargetId, dropPos, onDragStart })}
+        {renderNode(tree)}
       </Tree>
-    </>
+    </article>
   );
 };
 

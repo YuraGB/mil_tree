@@ -1,14 +1,16 @@
 import React, { useCallback } from 'react';
 import WidgetContainer from '@/modules/WidgetPage/WidgetConteiner';
 import MainImageDashboard from '@/components/MainImageDashboard';
-import { IWidgetProps, Widget } from '@/types';
+import { IWidgetProps } from '@/types';
 
 export const MainImageWidget = React.memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
     // Callback to update editor content
     const saveImageHandler = useCallback(
       (file?: File) => {
-        saveWidget(widget.id, { CharacterDataimage: file });
+        saveWidget(widget.id, {
+          CharacterDataimage: file as unknown as string,
+        });
       },
       [saveWidget, widget.id],
     );
@@ -25,3 +27,5 @@ export const MainImageWidget = React.memo(
     );
   },
 );
+
+MainImageWidget.displayName = 'MainImageWidget';

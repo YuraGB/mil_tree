@@ -2,14 +2,7 @@ import { IWidgetProps } from '@/types';
 import WidgetContainer from '../WidgetConteiner';
 import { AwardsSelector } from '@/modules/Awards';
 import { useAwards } from '@/modules/Awards/hooks/useAwards';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/components/ui/form';
+import { Form, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import { AWARDS } from '@/constants';
 import { Activity } from 'react';
@@ -21,8 +14,14 @@ export const AwardsSelectorWidget = ({
 }: IWidgetProps) => {
   const { form, onSubmit, currentSelectedAward } = useAwards((awardName) => {
     widget.props = widget.props || {};
-    const awards = widget.props.awards || [];
-    awards.push(awardName);
+
+    // Гарантуємо, що awards — масив рядків
+    let awards: string = Array.isArray(widget.props.awards)
+      ? widget.props.awards.join()
+      : '';
+
+    awards += ' ' + awardName;
+
     saveWidget(widget.id, { awards });
   });
   return (
@@ -57,21 +56,23 @@ export const AwardsSelectorWidget = ({
 
       {widget.props?.awards && (
         <div className="mt-4">
-          {widget.props.awards.map((awardName: string, index: number) => {
-            return (
-              <div
-                key={awardName + index}
-                className="mb-2 flex items-center space-x-2"
-              >
-                <span className="text-xl">
-                  {AWARDS.find((award) => award.name === awardName)?.icon}
-                </span>
-                <span className="capitalize">
-                  {AWARDS.find((award) => award.name === awardName)?.title}
-                </span>
-              </div>
-            );
-          })}
+          {widget.props.awards
+            .split(' ')
+            .map((awardName: string, index: number) => {
+              return (
+                <div
+                  key={awardName + index}
+                  className="mb-2 flex items-center space-x-2"
+                >
+                  <span className="text-xl">
+                    {AWARDS.find((award) => award.name === awardName)?.icon}
+                  </span>
+                  <span className="capitalize">
+                    {AWARDS.find((award) => award.name === awardName)?.title}
+                  </span>
+                </div>
+              );
+            })}
         </div>
       )}
     </WidgetContainer>

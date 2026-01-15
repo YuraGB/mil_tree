@@ -11,7 +11,7 @@ export const AwardsSelector = ({
   onValueChange,
   value,
 }: {
-  onValueChange: (...event: any[]) => void;
+  onValueChange: (...event: string[]) => void;
   value: string | undefined;
 }) => {
   return (

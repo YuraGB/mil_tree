@@ -16,8 +16,13 @@ import {
 } from '@/components/ui/chart';
 import { Widget } from '@/types';
 import { useChartPie } from './hooks/useChartPie';
+import { TooltipProps } from 'recharts';
 
 export const description = 'A pie chart with no separator';
+
+const tooltipFormatter: TooltipProps<number, string>['formatter'] = (name) => [
+  `Created at ${name}`,
+];
 
 function ChartPieComponent({ widgets }: { widgets?: Widget[] }) {
   const { baseConfig, chartData } = useChartPie(widgets || []);
@@ -40,9 +45,7 @@ function ChartPieComponent({ widgets }: { widgets?: Widget[] }) {
           <PieChart>
             <ChartTooltip
               cursor={false}
-              formatter={(value: number, name: string, props: any) => [
-                `Created at ${name}`,
-              ]}
+              formatter={tooltipFormatter}
               content={<ChartTooltipContent hideLabel />}
             />
             <Pie data={chartData} dataKey="value" nameKey="date" stroke="0">

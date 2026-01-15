@@ -1,9 +1,9 @@
 'use client';
-import { TreeNode } from '@/types';
 import { useSearch } from './hook/useSearch';
 import { SearchResults } from './components/SearchResults';
+import { UnitNode } from '@/types/units';
 
-export const Search = ({ data }: { data: TreeNode }) => {
+export const Search = ({ data }: { data: UnitNode }) => {
   const { onSearchChange, results } = useSearch(data);
 
   return (

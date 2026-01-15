@@ -1,20 +1,17 @@
 'use client';
 import dynamic from 'next/dynamic';
-import rawData from './dummy.json';
-import { IBrigadeTree, ICommandPerson } from '@/types';
-import { useTreeDnD } from '../DragnDrop/hook/useTreeDnD';
+import { UnitNode } from '@/types/units';
+import { FC } from 'react';
 
 const BrigadeTree = dynamic(
   () => import('./components/units/BrigadeTree').then((mod) => mod.BrigadeTree),
   { ssr: false },
 );
 
-const data = rawData as IBrigadeTree;
-
-export const OverviewModule = () => {
+export const OverviewModule: FC<{ data: UnitNode }> = ({ data }) => {
   return (
-    <div>
+    <article className="h-full w-full p-4">
       <BrigadeTree data={data} />
-    </div>
+    </article>
   );
 };

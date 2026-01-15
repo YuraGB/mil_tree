@@ -2,7 +2,7 @@
   "unitType": "brigade",
   "unitName": "10-та окрема бригада \"Свобода\"",
   "commander": {
-    "id": "p-0001",
+    "id": "c-0001",
     "name": "Полковник Іваненко Олексій",
     "rank": "Brigadier General ★",
     "statusCode": "800",
@@ -14,7 +14,7 @@
     },
     "subordinates": [
       {
-        "id": "p-0100",
+        "id": "c-0100",
         "name": "Підполковник Коваль Андрій",
         "rank": "Lieutenant Colonel ★★",
         "statusCode": "800",
@@ -26,7 +26,7 @@
         },
         "subordinates": [
           {
-            "id": "p-0110",
+            "id": "c-0110",
             "name": "Майор Бондар Олег",
             "rank": "Major ★",
             "statusCode": "800",
@@ -36,7 +36,7 @@
             "subordinates": []
           },
           {
-            "id": "p-0111",
+            "id": "c-0111",
             "name": "Капітан Мельник Сергій",
             "rank": "Captain ★★★★",
             "statusCode": "800",
@@ -46,7 +46,7 @@
             "subordinates": []
           },
           {
-            "id": "p-0112",
+            "id": "c-0112",
             "name": "Капітан Литвиненко Павло",
             "rank": "Captain ★★★★",
             "statusCode": "800",
@@ -56,7 +56,7 @@
             "subordinates": []
           },
           {
-            "id": "p-0113",
+            "id": "c-0113",
             "name": "Капітан Горбач Олександр",
             "rank": "Captain ★★★★",
             "statusCode": "800",
@@ -66,7 +66,7 @@
             "subordinates": []
           },
           {
-            "id": "p-0114",
+            "id": "c-0114",
             "name": "Майор Ткаченко Ігор",
             "rank": "Major ★",
             "statusCode": "800",

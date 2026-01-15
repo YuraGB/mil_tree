@@ -1,4 +1,12 @@
-import { IAward, TAwardName, TRank, TWidgetNames } from '@/types';
+export const BASE_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+
+export const EDITOR_TABS = [
+  'editor',
+  'main_image',
+  'status_selector',
+  'rank_selector',
+  'awards',
+] as const;
 
 export const WIDGETS = [
   'editor',
@@ -285,12 +293,10 @@ export const ASSIGNMENT_ROLES = {
   BRIGADE_COMMANDER: 'brigade_commander',
   DEPUTY_COMMANDER: 'deputy_commander',
   CHIEF_OF_STAFF: 'chief_of_staff',
-
   BATTALION_COMMANDER: 'battalion_commander',
   COMPANY_COMMANDER: 'company_commander',
   PLATOON_COMMANDER: 'platoon_commander',
   SQUAD_LEADER: 'squad_leader',
-
   SOLDIER: 'soldier',
 } as const;
 
@@ -299,4 +305,24 @@ export const sideBarLinks = [
   { url: '/orders', text: 'Orders' },
   { url: '/reports', text: 'Reports' },
   { url: '/settings', text: 'Settings' },
+
+  { url: '/map', text: 'Map' },
 ] as const;
+
+export const REPORT_TYPES = [
+  'complaint',
+  'vacation',
+  'transfer',
+  'medical',
+  'release',
+] as const;
+
+export const REPORT_STATUSES = ['inProgress', 'approved', 'declined'] as const;
+
+export const IS_VERCEL = process.env.VERCEL === '1';
+
+export const isDev = process.env.NODE_ENV !== 'production';
+
+export const MAP_ATTR_URL =
+  'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+export const MAP_MAP_ATTR_URL = '&copy; OpenStreetMap';

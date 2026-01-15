@@ -27,7 +27,7 @@ export const StatusSelectorWidjet = memo(
             <SelectValue placeholder="Select a widget to display" />
           </SelectTrigger>
           <SelectContent className="w-[200px]">
-            {STATUSES.map((status) => (
+            {Object.values(STATUSES).map((status) => (
               <SelectItem
                 key={status.code}
                 value={status.code}
@@ -42,3 +42,5 @@ export const StatusSelectorWidjet = memo(
     );
   },
 );
+
+StatusSelectorWidjet.displayName = 'StatusSelectorWidjet';

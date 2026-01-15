@@ -1,10 +1,18 @@
-import { TReportColProps } from '@/types/client/Reports';
 import { ReportColumnItem } from './ReportColumnItem';
+import { Report, TReportView } from '@/types/reports';
 
-export const ReportColumn = ({ name, reports, dragProps }: TReportColProps) => {
+export const ReportColumn = ({
+  name,
+  reports,
+  setSelectedReport,
+}: {
+  name: string;
+  reports: TReportView[];
+  setSelectedReport: (report: Report | null) => void;
+}) => {
   return (
     <section
-      className="flex w-full max-w-[200px] flex-col border px-2"
+      className="flex w-full min-w-[200px] flex-col border px-2"
       data-node-id={name}
     >
       <h3 className="mb-2 border-b py-2 text-center text-amber-950">{name}</h3>
@@ -12,7 +20,7 @@ export const ReportColumn = ({ name, reports, dragProps }: TReportColProps) => {
         <ReportColumnItem
           key={rep.id + name}
           report={rep}
-          dragProps={dragProps}
+          setSelectedReport={setSelectedReport}
         />
       ))}
     </section>

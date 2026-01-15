@@ -7,9 +7,10 @@ export default function GlobalError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  console.log(error.message);
   return (
     // global-error must include html and body tags
-    <html>
+    <html lang={'en'}>
       <body>
         <h2>Something went wrong!</h2>
         <button onClick={() => reset()}>Try again</button>

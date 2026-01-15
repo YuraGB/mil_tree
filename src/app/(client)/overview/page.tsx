@@ -1,14 +1,16 @@
+'use cache';
+import { api } from '@/elysia/eden';
 import { OverviewModule } from '@/modules/Overview';
+import { UnitNode } from '@/types/units';
+import { Suspense } from 'react';
 
-export default function Overview() {
+export default async function Overview() {
+  const { data }: { data: UnitNode | null } = await api.overview.get();
+  console.log(data);
+  if (!data) return null;
   return (
-    <>
-      <link
-        href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css"
-        rel="stylesheet"
-      />
-
-      <OverviewModule />
-    </>
+    <Suspense fallback={<div>Loading...</div>}>
+      <OverviewModule data={data} />
+    </Suspense>
   );
 }
