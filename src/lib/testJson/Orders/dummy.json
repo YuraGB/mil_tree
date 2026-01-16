@@ -1,0 +1,96 @@
+{
+  "orders": [
+    {
+      "id": "o-0001",
+      "type": "release",
+      "craetedAt": "2025-03-01T09:00:00.000Z",
+      "updatedAt": "2025-03-01T10:15:00.000Z",
+      "fromWhatDate": "2025-03-05",
+      "whoOrdered": {
+        "id": "p-0001",
+        "name": "Полковник Іваненко Олексій",
+        "rank": "Brigadier General ★",
+        "assignmentRole": "BRIGADE_COMMANDER",
+        "unit": {
+          "type": "brigade",
+          "name": "10-та окрема бригада \"Свобода\""
+        }
+      },
+      "onWhichName": {
+        "id": "p-021103",
+        "name": "Солдат Тимчук Богдан",
+        "rank": "Senior Private",
+        "statusCode": "300",
+        "assignmentRole": "SOLDIER",
+        "awards": ["MOUDistinctionForWoundI"],
+        "unit": {
+          "type": "squad",
+          "name": "Відділення 1"
+        }
+      },
+      "description": "Наказую звільнити зі служби за станом здоровʼя відповідно до висновку ВЛК."
+    },
+
+    {
+      "id": "o-0002",
+      "type": "vacation",
+      "craetedAt": "2025-03-02T08:20:00.000Z",
+      "updatedAt": "2025-03-02T08:45:00.000Z",
+      "fromWhatDate": "2025-03-10",
+      "whoOrdered": {
+        "id": "p-0210",
+        "name": "Капітан Савчук Дмитро",
+        "rank": "Captain ★★★★",
+        "assignmentRole": "COMPANY_COMMANDER",
+        "unit": {
+          "type": "company",
+          "name": "Рота A"
+        }
+      },
+      "onWhichName": {
+        "id": "p-021101",
+        "name": "Солдат Грищук Антон",
+        "rank": "Private",
+        "statusCode": "800",
+        "assignmentRole": "SOLDIER",
+        "awards": [],
+        "unit": {
+          "type": "squad",
+          "name": "Відділення 1"
+        }
+      },
+      "description": "Надати щорічну основну відпустку строком на 10 календарних днів."
+    },
+
+    {
+      "id": "o-0003",
+      "type": "transfer",
+      "craetedAt": "2025-02-25T14:10:00.000Z",
+      "updatedAt": "2025-02-26T09:30:00.000Z",
+      "fromWhatDate": "2025-03-03",
+      "whoOrdered": {
+        "id": "p-0200",
+        "name": "Підполковник Рудак Олександр",
+        "rank": "Lieutenant Colonel ★★",
+        "assignmentRole": "BATTALION_COMMANDER",
+        "unit": {
+          "type": "battalion",
+          "name": "1-й мотопіхотний батальйон"
+        }
+      },
+      "onWhichName": {
+        "id": "p-021102",
+        "name": "Солдат Петренко Олексій",
+        "rank": "Private",
+        "statusCode": "800",
+        "assignmentRole": "SOLDIER",
+        "awards": ["MOUDistinctionForWoundII"],
+        "unit": {
+          "type": "squad",
+          "name": "Відділення 1"
+        }
+      },
+      "description": "Перевести до 2-го механізованого батальйону для подальшого проходження служби."
+    }
+  ]
+}

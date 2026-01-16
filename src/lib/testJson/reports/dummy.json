@@ -1,0 +1,116 @@
+{
+  "created": [
+    {
+      "id": "r-0001",
+      "to": {
+        "id": "p-0100",
+        "name": "Підполковник Коваль Андрій",
+        "rank": "Lieutenant Colonel ★★",
+        "statusCode": "800",
+        "assignmentRole": "CHIEF_OF_STAFF",
+        "awards": ["GSCForDiligentService", "UnitBadge"],
+        "unit": {
+          "type": "staff",
+          "name": "Штаб бригади"
+        }
+      },
+      "from": {
+        "id": "p-021101",
+        "name": "Солдат Грищук Антон",
+        "rank": "Private",
+        "statusCode": "800",
+        "assignmentRole": "SOLDIER",
+        "awards": [],
+        "unit": {
+          "type": "squad",
+          "name": "Відділення 1"
+        }
+      },
+      "type": "vacation",
+      "description": "Прошу надати щорічну відпустку строком 10 діб у звʼязку з сімейними обставинами.",
+      "createdAt": "2025-03-01T08:30:00.000Z",
+      "vacationFrom": "2025-03-10T00:00:00.000Z",
+      "vacationTo": "2025-03-20T00:00:00.000Z",
+      "updatedAt": "2025-03-01T08:30:00.000Z",
+      "status": "created",
+      "assigned": "created"
+    }
+  ],
+
+  "approved": [
+    {
+      "id": "r-0002",
+      "to": {
+        "id": "p-0200",
+        "name": "Підполковник Рудак Олександр",
+        "rank": "Lieutenant Colonel ★★",
+        "statusCode": "800",
+        "assignmentRole": "BATTALION_COMMANDER",
+        "awards": ["OrderForCourageIII"],
+        "unit": {
+          "type": "battalion",
+          "name": "1-й мотопіхотний батальйон"
+        }
+      },
+      "from": {
+        "id": "p-021102",
+        "name": "Солдат Петренко Олексій",
+        "rank": "Private",
+        "statusCode": "800",
+        "assignmentRole": "SOLDIER",
+        "awards": ["MOUDistinctionForWoundII"],
+        "unit": {
+          "type": "squad",
+          "name": "Відділення 1"
+        }
+      },
+      "type": "medical",
+      "description": "Прошу направити на медичне обстеження у звʼязку з отриманим пораненням.",
+      "diagnosis": "Легке поранення ноги.",
+      "treatment": "Перев'язка та відпочинок протягом 7 днів.",
+      "createdAt": "2025-02-20T09:15:00.000Z",
+      "updatedAt": "2025-02-22T14:40:00.000Z",
+      "status": "approved",
+      "assigned": "approved"
+    }
+  ],
+
+  "declined": [
+    {
+      "id": "r-0003",
+      "to": {
+        "id": "p-0210",
+        "name": "Капітан Савчук Дмитро",
+        "rank": "Captain ★★★★",
+        "statusCode": "800",
+        "assignmentRole": "COMPANY_COMMANDER",
+        "awards": ["UnitBadge"],
+        "unit": {
+          "type": "company",
+          "name": "Рота A"
+        }
+      },
+      "from": {
+        "id": "p-021103",
+        "name": "Солдат Тимчук Богдан",
+        "rank": "Senior Private",
+        "statusCode": "300",
+        "assignmentRole": "SOLDIER",
+        "awards": ["MOUDistinctionForWoundI"],
+        "unit": {
+          "type": "squad",
+          "name": "Відділення 1"
+        }
+      },
+      "type": "transfer",
+      "description": "Прошу перевести до іншого підрозділу за станом здоровʼя.",
+      "createdAt": "2025-02-10T07:50:00.000Z",
+      "updatedAt": "2025-02-11T10:20:00.000Z",
+      "status": "declined",
+      "transferTo": "Рота B",
+      "transferFrom": "Рота A",
+      "reason": "Відмова через нестачу місць у цільовому підрозділі.",
+      "assigned": "declined"
+    }
+  ]
+}
