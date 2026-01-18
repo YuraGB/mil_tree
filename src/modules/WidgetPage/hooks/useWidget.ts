@@ -1,6 +1,6 @@
-import { TWidgetNames, Widget } from '@/types';
-import { useCallback, useMemo, useState } from 'react';
-import { useWidgetType } from './useWidgetType';
+import { TWidgetNames, Widget } from "@/types";
+import { useCallback, useState } from "react";
+import { useWidgetType } from "./useWidgetType";
 
 export const useWidget = () => {
   const [widgets, setWidgets] = useState<Widget[]>([]);
@@ -21,7 +21,7 @@ export const useWidget = () => {
   const removeWidget = useCallback(
     (widgetId: number) =>
       setWidgets((prev) => prev.filter(({ id }) => id !== widgetId)),
-    [],
+    []
   );
 
   const saveWidget = useCallback(
@@ -36,11 +36,11 @@ export const useWidget = () => {
                   [newProps.key]: newProps.value.toString(), // ✅ перетворюємо number у string
                 },
               }
-            : widget,
-        ),
+            : widget
+        )
       );
     },
-    [],
+    []
   );
 
   const savePage = useCallback(
@@ -50,15 +50,13 @@ export const useWidget = () => {
     },
     [
       /*widgets*/
-    ],
+    ]
   );
 
   const widgetType = useWidgetType();
 
-  const content = useMemo(
-    () => widgets.map((widget) => widgetType[widget.type]),
-    [widgets.length, widgetType],
-  );
+  const content = widgets.map((widget) => widgetType[widget.type]);
+
   return {
     widgets,
     setWidgets,

@@ -2,7 +2,6 @@ import { stringifyObjectUtil } from "@/utils/stringifyObject";
 import Elysia from "elysia";
 import { IS_VERCEL } from "@/constants";
 import { batchSpanProcessor } from "@/lib/otel/batchSpanProcessor";
-import { betterAuthView } from "@/elysia/modules/auth/auth.route";
 import { utilityRoutes } from "@/elysia/modules/utilityRoutes/utilityHandlers";
 import { DefaultContext, rateLimit } from "elysia-rate-limit";
 import { compression } from "@/elysia/modules/compression/copressionPlagin";

@@ -1,9 +1,9 @@
-import { Report } from '@/types/reports';
-import { useEffect, useState } from 'react';
+import { Report } from "@/types/reports";
+import { useEffect, useState } from "react";
 
 export const useReportDialog = (
   selectedReport: Report | null,
-  setSelectedReport: (report: Report | null) => void,
+  setSelectedReport: (report: Report | null) => void
 ) => {
   const [open, setOpen] = useState(false);
 
@@ -17,7 +17,7 @@ export const useReportDialog = (
 
   useEffect(() => {
     if (selectedReport) {
-      setOpen(true);
+      requestAnimationFrame(() => setOpen(true));
     }
   }, [selectedReport]);
 

@@ -1,6 +1,6 @@
-import { api } from '@/elysia/eden';
-import { TMArkGeometry } from '@/types/map';
-import { useMutation } from '@tanstack/react-query';
+import { api } from "@/elysia/eden";
+import { TMArkGeometry } from "@/types/map";
+import { useMutation } from "@tanstack/react-query";
 
 export const useMapService = () => {
   //   const {
@@ -38,7 +38,7 @@ export const useMapService = () => {
     error: errorDeleteMark,
     isPending: loadingDeleteMark,
   } = useMutation({
-    mutationFn: async (id: string) => await api.deleteMarks.delete(id),
+    mutationFn: async (id: string) => await api.deleteMarks.delete({ id }),
   });
 
   return {

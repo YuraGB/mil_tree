@@ -1,39 +1,53 @@
-import { MARK_TYPES } from '@/types/map';
-import { Elysia } from 'elysia';
-import z from 'zod';
+import { Elysia } from "elysia";
 
-export const MarkCoordinatesSchema = z.tuple([z.number(), z.number()]);
+import {
+  deleteMark,
+  getAllMarkTypes,
+  saveMark,
+  updateMark,
+} from "./map.service";
+import {
+  createUpdateMarkSchema,
+  deleteMarkSchema,
+} from "./map.validation.schemas";
 
-export const CoordinatesSchema = z.union([
-  MarkCoordinatesSchema,
-  z.array(MarkCoordinatesSchema),
-]);
-
+// Routes
 export const mapRoutes = new Elysia({
-  name: 'map_routes',
+  name: "map_routes",
 })
-  .get('/map', () => {
-    return { mapData: 'data' };
+  // Handler
+  .get("/map", async () => {
+    return await getAllMarkTypes();
   })
   .post(
-    '/createMapMark',
+    "/createMapMark",
+    // Handler
     ({ body }) => {
-      console.log(body);
-      return body;
+      return saveMark(body);
     },
+    // Validation schema
     {
-      body: z.object({
-        type: z.literal(MARK_TYPES),
-        id: z.string,
-        coordinates: CoordinatesSchema,
-      }),
-    },
+      body: createUpdateMarkSchema,
+    }
   )
-  .put('/updateMarks', () => {
-    return { mark: 'updated' };
-  })
-  .delete('/deleteMarks', () => {
-    return {
-      markDeleted: true,
-    };
-  });
+  .put(
+    "/updateMarks",
+    async ({ body }) => {
+      return await updateMark(body);
+    },
+    // Validation schema
+    {
+      body: createUpdateMarkSchema,
+    }
+  )
+  .delete(
+    "/deleteMarks",
+    // Handler
+    async ({ body }) => {
+      return await deleteMark(body.id);
+    },
+    // Validation schema
+    {
+      body: deleteMarkSchema,
+    }
+  );

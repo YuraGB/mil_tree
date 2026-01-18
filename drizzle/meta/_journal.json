@@ -36,6 +36,20 @@
       "when": 1768499791200,
       "tag": "0004_narrow_nemesis",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1768757577554,
+      "tag": "0005_illegal_wrecking_crew",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1768761311186,
+      "tag": "0006_tearful_alice",
+      "breakpoints": true
     }
   ]
 }

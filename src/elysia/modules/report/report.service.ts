@@ -1,19 +1,18 @@
-import { db } from '@/db';
+import { db } from "@/db";
 import {
   medicalReport,
   releaseReport,
   report,
   transferReport,
   vacationReport,
-} from '@/db/schemas/reports';
+} from "@/db/schemas/reports";
 import {
   MedicalReport,
   ReleaseReport,
-  TDBReport,
   TransferReport,
   VacationReport,
-} from '@/types/reports';
-import { eq } from 'drizzle-orm';
+} from "@/types/reports";
+import { eq } from "drizzle-orm";
 
 export const getAllReports = async () => {
   try {
@@ -50,10 +49,10 @@ export const getAllReports = async () => {
 
     return rows.map((r) => {
       switch (r.type) {
-        case 'medical':
+        case "medical":
           return {
             id: r.id,
-            type: 'medical',
+            type: "medical",
             createdAt: r.createdAt,
             updatedAt: r.updatedAt,
             fromPersonId: r.fromPersonId,
@@ -67,10 +66,10 @@ export const getAllReports = async () => {
             treatment: r.treatment!,
           } as MedicalReport;
 
-        case 'release':
+        case "release":
           return {
             id: r.id,
-            type: 'release',
+            type: "release",
             createdAt: r.createdAt,
             updatedAt: r.updatedAt,
             fromPersonId: r.fromPersonId,
@@ -84,10 +83,10 @@ export const getAllReports = async () => {
             releaseReason: r.releaseReason!,
           } as ReleaseReport;
 
-        case 'transfer':
+        case "transfer":
           return {
             id: r.id,
-            type: 'transfer',
+            type: "transfer",
             createdAt: r.createdAt,
             updatedAt: r.updatedAt,
             fromPersonId: r.fromPersonId,
@@ -102,10 +101,10 @@ export const getAllReports = async () => {
             transferReason: r.transferReason!,
           } as unknown as TransferReport;
 
-        case 'vacation':
+        case "vacation":
           return {
             id: r.id,
-            type: 'vacation',
+            type: "vacation",
             createdAt: r.createdAt,
             updatedAt: r.updatedAt,
             fromPersonId: r.fromPersonId,
@@ -121,14 +120,14 @@ export const getAllReports = async () => {
           } as unknown as VacationReport;
 
         default:
-          throw new Error('Unknown report type: ' + r.type);
+          throw new Error("Unknown report type: " + r.type);
       }
     });
   } catch (e: unknown) {
     if (e instanceof Error) {
-      console.log('No Reports found', e.message);
+      console.log("No Reports found", e.message);
     } else {
-      console.log('No Reports found', e);
+      console.log("No Reports found", e);
     }
     return null;
   }

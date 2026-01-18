@@ -1,0 +1,1 @@
+ALTER TABLE "map_marks" RENAME COLUMN "geometry" TO "coordinates";

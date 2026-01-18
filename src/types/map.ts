@@ -1,12 +1,19 @@
+import { MARK_TYPES } from "@/constants";
+import { mapMarks } from "@/db/schemas/mapMarks";
 import * as L from "leaflet";
-export const MARK_TYPES = ["Point", "LineString", "Polygon"] as const;
+
 export type TMArkTypes = (typeof MARK_TYPES)[number];
 
 export type TMarkCoordinates = [number, number];
 
 export type TMArkGeometry = {
-  type: TMArkTypes;
   coordinates: TMarkCoordinates | TMarkCoordinates[];
+  type: TMArkTypes;
+  properties: {
+    radius?: number;
+    color?: string;
+    serverId?: string;
+  };
 };
 
 export type TMarkJson = {
@@ -20,3 +27,7 @@ export type LayerWithMeta = L.Layer & {
     serverId?: string;
   };
 };
+
+export type TDBMark = typeof mapMarks.$inferSelect;
+
+export type TMark = Omit<TDBMark, "createdAt" | "updatedAt">;
