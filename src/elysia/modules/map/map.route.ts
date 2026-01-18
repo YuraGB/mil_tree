@@ -30,8 +30,8 @@ export const mapRoutes = new Elysia({
     },
     {
       body: z.object({
-        type: z.literal(MARK_TYPES, "Invalid mark type"),
-        id: z.string("id is required"),
+        type: z.enum(MARK_TYPES, { error: "Invalid mark type" }),
+        id: z.string({ error: "id is required" }),
         coordinates: CoordinatesSchema,
       }),
     }
