@@ -31,7 +31,7 @@ export const saveMark = async (markData: TMark): Promise<TDBMark | null> => {
       .onConflictDoNothing({ target: mapMarks.id })
       .returning();
 
-    return saved;
+    return saved ?? null;
   } catch (e) {
     console.error("Error fetching marks:", e);
     return null;
@@ -77,7 +77,7 @@ export const updateMark = async (
       .where(eq(mapMarks.id, updateData.id))
       .returning();
 
-    return updated;
+    return updated ?? null;
   } catch (e) {
     console.error("Error fetching marks:", e);
     return null;

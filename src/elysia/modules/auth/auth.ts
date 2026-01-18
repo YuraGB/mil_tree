@@ -42,11 +42,15 @@ export const auth = betterAuth({
   hooks: {
     before: createAuthMiddleware(async (ctx) => {
       // Execute before processing the request
-      console.log("Request path:", ctx.path);
+      if (process.env.NODE_ENV !== "production") {
+        console.debug("Auth request path:", ctx.path);
+      }
     }),
-    after: createAuthMiddleware(async (ctx) => {
+    after: createAuthMiddleware(async () => {
       // Execute after processing the request
-      console.log("Response:", ctx.context.returned);
+      if (process.env.NODE_ENV !== "production") {
+        console.debug("Auth response sent");
+      }
     }),
   },
   telemetry: {
