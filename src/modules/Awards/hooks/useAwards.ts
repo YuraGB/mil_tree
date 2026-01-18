@@ -21,6 +21,11 @@ export const useAwards = (addAwardHandler: (awardName: TAwardName) => void) => {
     },
   });
 
+  /**
+   * Handles submission of the awards form by adding the selected award and resetting the selector.
+   *
+   * @param data - Form values containing `award_selector`; if `award_selector` is an empty string, no action is taken.
+   */
   function onSubmit(data: z.infer<typeof FormSchema>) {
     if (!data.award_selector) return;
     addAwardHandler(data.award_selector);
