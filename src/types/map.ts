@@ -16,11 +16,9 @@ export type TMArkGeometry = {
 export type TMarkJson = {
   geometry: TMArkGeometry;
   type: "Feature";
-  properties?:
-    | object
-    | {
-        radius?: number;
-      };
+  properties?: {
+    radius?: number;
+  };
 };
 
 export type LayerWithMeta = L.Layer & {

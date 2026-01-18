@@ -10,6 +10,7 @@ export const MarkComponent = ({ markData }: { markData: TMark }) => {
       return (
         <Circle
           center={geometry.coordinates as TMarkCoordinates}
+          radius={properties?.radius ?? 10}
           {...properties}
         />
       );

@@ -10,7 +10,7 @@ export const useMapDraw = () => {
   const onEditPath: EditControlProps["onEdited"] = (e) => {
     e.layers.eachLayer((layer: GeoJSONLayer) => {
       const geo = toGeoJSONSafe(layer);
-      console.log(geo);
+
       let id = layer.options?.serverId;
 
       if (!id) id = crypto.randomUUID();
@@ -23,7 +23,6 @@ export const useMapDraw = () => {
 
   const onCreate: EditControlProps["onCreated"] = (e) => {
     const geo = toGeoJSONSafe(e.layer);
-    console.log(geo);
     const id = crypto.randomUUID();
     (e.layer as LayerWithMeta).options.serverId = id;
 
