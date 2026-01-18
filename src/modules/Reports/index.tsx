@@ -1,6 +1,6 @@
-'use cache';
-import ReportsWrapper from './components/ReportsWrapper';
-import { getReportsData } from './util/getReportsData';
+"use cache";
+import ReportsWrapper from "./components/ReportsWrapper";
+import { getReportsData } from "./util/getReportsData";
 
 export const ReportsComponent = async () => {
   const data = await getReportsData();

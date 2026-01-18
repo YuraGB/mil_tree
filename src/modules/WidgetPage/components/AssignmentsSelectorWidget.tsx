@@ -1,6 +1,6 @@
-import { IWidgetProps } from '@/types';
-import WidgetContainer from '../WidgetConteiner';
-import { AssignmentSelector } from '@/modules/Assignments';
+import { IWidgetProps } from "@/types";
+import WidgetContainer from "../WidgetConteiner";
+import { AssignmentSelector } from "@/modules/Assignments";
 
 export const AssignmentSelectorWidget = ({
   removeWidget,
@@ -16,7 +16,7 @@ export const AssignmentSelectorWidget = ({
       <div>Assignment Selector Widget</div>
       <AssignmentSelector
         onValueChange={(val) => saveWidget(widget.id, { assignmentRole: val })}
-        value={widget.props?.assignmentRole || ''}
+        value={widget.props?.assignmentRole || ""}
       />
     </WidgetContainer>
   );

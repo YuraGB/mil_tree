@@ -1,8 +1,8 @@
-import EditorIndex from '@/modules/EditorClient';
-import WidgetContainer from '@/modules/WidgetPage/WidgetConteiner';
-import { IWidgetProps } from '@/types';
-import Delta from 'quill-delta';
-import React, { useCallback } from 'react';
+import EditorIndex from "@/modules/EditorClient";
+import WidgetContainer from "@/modules/WidgetPage/WidgetConteiner";
+import { IWidgetProps } from "@/types";
+import Delta from "quill-delta";
+import React, { useCallback } from "react";
 
 export const EditorWidget = React.memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
@@ -29,4 +29,4 @@ export const EditorWidget = React.memo(
   },
 );
 
-EditorWidget.displayName = 'EditorWidget';
+EditorWidget.displayName = "EditorWidget";

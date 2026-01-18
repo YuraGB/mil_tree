@@ -1,5 +1,5 @@
-'use cache';
-import { ReportsComponent } from '@/modules/Reports';
+"use cache";
+import { ReportsComponent } from "@/modules/Reports";
 
 const ReportsPage = async () => {
   return <ReportsComponent />;

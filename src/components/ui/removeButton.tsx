@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 const RemoveButton = ({ onRemoveHandler }: { onRemoveHandler: () => void }) => {
   return (

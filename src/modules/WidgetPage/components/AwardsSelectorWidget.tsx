@@ -13,7 +13,7 @@ export const AwardsSelectorWidget = ({
   widget,
 }: IWidgetProps) => {
   const { form, onSubmit, currentSelectedAward } = useAwards((awardName) => {
-    const widgetProps = widget.props || {};
+    const widgetProps = widget.props ?? {};
 
     // Гарантуємо, що awards — масив рядків
     let awards: string = Array.isArray(widgetProps.awards)

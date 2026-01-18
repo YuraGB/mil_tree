@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button';
-import { memo } from 'react';
+import { Button } from "@/components/ui/button";
+import { memo } from "react";
 
 export const ButtonSave = memo(({ onClick }: { onClick: () => void }) => {
   return (
@@ -8,4 +8,4 @@ export const ButtonSave = memo(({ onClick }: { onClick: () => void }) => {
     </Button>
   );
 });
-ButtonSave.displayName = 'ButtonSave';
+ButtonSave.displayName = "ButtonSave";

@@ -62,9 +62,9 @@ export const deleteMark = async (markId: string): Promise<string | null> => {
         id: mapMarks.id,
       });
 
-    return deleted.id;
+    return deleted?.id ?? null;
   } catch (e) {
-    console.error("Error fetching marks:", e);
+    console.error("Error delete mark:", e);
     return null;
   }
 };
@@ -80,7 +80,10 @@ export const updateMark = async (
   try {
     const [updated] = await db
       .update(mapMarks)
-      .set(updateData)
+      .set({
+        ...updateData,
+        updatedAt: new Date(),
+      })
       .where(eq(mapMarks.id, updateData.id))
       .returning();
 

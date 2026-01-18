@@ -1,5 +1,5 @@
-import { PersonNode } from '@/types/persons';
-import { memo } from 'react';
+import { PersonNode } from "@/types/persons";
+import { memo } from "react";
 
 const SearchResultsComponent: React.FC<{ results?: PersonNode[] }> = ({
   results,
@@ -12,7 +12,7 @@ const SearchResultsComponent: React.FC<{ results?: PersonNode[] }> = ({
       {results.map((person) => (
         <p key={person.id} className="border-b border-gray-700 p-2">
           <strong className="flex justify-between font-semibold">
-            <b>{person.name}</b>{' '}
+            <b>{person.name}</b>{" "}
             <span className="text-gray-400">Status: {person.statusCode}</span>
           </strong>
           <small className="block text-sm text-gray-300">{person.rank}</small>

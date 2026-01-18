@@ -1,6 +1,6 @@
-import { db } from '@/db';
-import { unit } from '@/db/schemas/unit';
-import { TDBUnit } from '@/types/units';
+import { db } from "@/db";
+import { unit } from "@/db/schemas/unit";
+import { TDBUnit } from "@/types/units";
 
 export const getAllUnits = async (): Promise<TDBUnit[] | null> => {
   try {

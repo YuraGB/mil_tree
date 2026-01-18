@@ -110,12 +110,8 @@
           "name": "account_user_id_Person_id_fk",
           "tableFrom": "account",
           "tableTo": "Person",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -275,12 +271,8 @@
           "name": "Person_commander_id_Person_id_fk",
           "tableFrom": "Person",
           "tableTo": "Person",
-          "columnsFrom": [
-            "commander_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["commander_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         }
@@ -290,9 +282,7 @@
         "Person_email_unique": {
           "name": "Person_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},
@@ -375,12 +365,8 @@
           "name": "session_user_id_Person_id_fk",
           "tableFrom": "session",
           "tableTo": "Person",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -390,9 +376,7 @@
         "session_token_unique": {
           "name": "session_token_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
+          "columns": ["token"]
         }
       },
       "policies": {},
@@ -548,12 +532,8 @@
           "name": "medical_report_report_id_report_id_fk",
           "tableFrom": "medical_report",
           "tableTo": "report",
-          "columnsFrom": [
-            "report_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["report_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -593,12 +573,8 @@
           "name": "release_report_report_id_report_id_fk",
           "tableFrom": "release_report",
           "tableTo": "report",
-          "columnsFrom": [
-            "report_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["report_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -701,12 +677,8 @@
           "name": "report_from_person_id_Person_id_fk",
           "tableFrom": "report",
           "tableTo": "Person",
-          "columnsFrom": [
-            "from_person_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["from_person_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -714,12 +686,8 @@
           "name": "report_to_person_id_Person_id_fk",
           "tableFrom": "report",
           "tableTo": "Person",
-          "columnsFrom": [
-            "to_person_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["to_person_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -727,12 +695,8 @@
           "name": "report_assigned_to_person_id_Person_id_fk",
           "tableFrom": "report",
           "tableTo": "Person",
-          "columnsFrom": [
-            "assigned_to_person_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["assigned_to_person_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -740,12 +704,8 @@
           "name": "report_decided_by_person_id_Person_id_fk",
           "tableFrom": "report",
           "tableTo": "Person",
-          "columnsFrom": [
-            "decided_by_person_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["decided_by_person_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -791,12 +751,8 @@
           "name": "transfer_report_report_id_report_id_fk",
           "tableFrom": "transfer_report",
           "tableTo": "report",
-          "columnsFrom": [
-            "report_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["report_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -842,12 +798,8 @@
           "name": "vacation_report_report_id_report_id_fk",
           "tableFrom": "vacation_report",
           "tableTo": "report",
-          "columnsFrom": [
-            "report_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["report_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -894,12 +846,8 @@
           "name": "brigade_unit_commander_id_Person_id_fk",
           "tableFrom": "brigade_unit",
           "tableTo": "Person",
-          "columnsFrom": [
-            "commander_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["commander_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
@@ -909,9 +857,7 @@
         "uniq_brigade_commander": {
           "name": "uniq_brigade_commander",
           "nullsNotDistinct": false,
-          "columns": [
-            "commander_id"
-          ]
+          "columns": ["commander_id"]
         }
       },
       "policies": {},
@@ -990,12 +936,8 @@
           "name": "unit_commander_id_Person_id_fk",
           "tableFrom": "unit",
           "tableTo": "Person",
-          "columnsFrom": [
-            "commander_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["commander_id"],
+          "columnsTo": ["id"],
           "onDelete": "set null",
           "onUpdate": "no action"
         },
@@ -1003,12 +945,8 @@
           "name": "unit_parent_unit_id_unit_id_fk",
           "tableFrom": "unit",
           "tableTo": "unit",
-          "columnsFrom": [
-            "parent_unit_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["parent_unit_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }

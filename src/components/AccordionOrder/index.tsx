@@ -1,9 +1,9 @@
-import { TOrders } from '@/types/orders';
+import { TOrders } from "@/types/orders";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from '../ui/accordion';
+} from "../ui/accordion";
 
 export const AccordionOrder = ({ order }: { order: TOrders }) => {
   return (

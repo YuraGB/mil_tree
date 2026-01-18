@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 
 const MapComponent = dynamic(
-  () => import('@/modules/Map').then((mod) => mod.default),
+  () => import("@/modules/Map").then((mod) => mod.default),
   {
     ssr: false,
   },

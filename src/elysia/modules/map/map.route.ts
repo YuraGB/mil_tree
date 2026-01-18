@@ -22,13 +22,13 @@ export const mapRoutes = new Elysia({
   .post(
     "/createMapMark",
     // Handler
-    ({ body }) => {
-      return saveMark(body);
+    async ({ body }) => {
+      return await saveMark(body);
     },
     // Validation schema
     {
       body: createUpdateMarkSchema,
-    }
+    },
   )
   .put(
     "/updateMarks",
@@ -38,7 +38,7 @@ export const mapRoutes = new Elysia({
     // Validation schema
     {
       body: createUpdateMarkSchema,
-    }
+    },
   )
   .delete(
     "/deleteMarks",
@@ -49,5 +49,5 @@ export const mapRoutes = new Elysia({
     // Validation schema
     {
       body: deleteMarkSchema,
-    }
+    },
   );

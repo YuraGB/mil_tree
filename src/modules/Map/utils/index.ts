@@ -1,4 +1,4 @@
-import { LayerWithMeta, TMarkJson } from '@/types/map';
+import { LayerWithMeta, TMarkJson } from "@/types/map";
 
 export type GeoJSONLayer = LayerWithMeta & {
   toGeoJSON: () => GeoJSON.GeoJsonObject;

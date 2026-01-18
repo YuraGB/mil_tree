@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export const useReportDialog = (
   selectedReport: Report | null,
-  setSelectedReport: (report: Report | null) => void
+  setSelectedReport: (report: Report | null) => void,
 ) => {
   const [open, setOpen] = useState(false);
 

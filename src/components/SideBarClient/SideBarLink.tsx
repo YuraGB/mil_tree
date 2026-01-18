@@ -1,6 +1,6 @@
-'use client';
-import { TSideBarLink } from '@/types/client';
-import Link from 'next/link';
+"use client";
+import { TSideBarLink } from "@/types/client";
+import Link from "next/link";
 
 export const SideBarLink = ({ url, text }: TSideBarLink) => {
   return (
@@ -9,7 +9,7 @@ export const SideBarLink = ({ url, text }: TSideBarLink) => {
         href={url}
         onNavigate={() => {
           // Only executes during SPA navigation
-          console.log('Navigating...');
+          console.log("Navigating...");
 
           // Optionally prevent navigation
           // e.preventDefault()

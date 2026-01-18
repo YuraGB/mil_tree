@@ -1,5 +1,5 @@
-import { Report } from '@/types/reports';
-import { ReportTypeSwitcher } from './ReportTypes/ReportType';
+import { Report } from "@/types/reports";
+import { ReportTypeSwitcher } from "./ReportTypes/ReportType";
 
 export const EditReport = ({
   report,

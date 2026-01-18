@@ -4,8 +4,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { ASSIGNMENT_ROLES, UNIT_TYPES } from '@/constants';
+} from "@/components/ui/select";
+import { ASSIGNMENT_ROLES, UNIT_TYPES } from "@/constants";
 
 export const AssignmentSelector = ({
   onValueChange,

@@ -1,10 +1,10 @@
-'use client';
-import React from 'react';
-import { ReportColumn } from './ReportColumn';
-import { useReport } from '../hooks/useReport';
-import { Report } from '@/types/reports';
-import { TDBPerson } from '@/types/persons';
-import { ReportDialog } from './ReportDialog';
+"use client";
+import React from "react";
+import { ReportColumn } from "./ReportColumn";
+import { useReport } from "../hooks/useReport";
+import { Report } from "@/types/reports";
+import { TDBPerson } from "@/types/persons";
+import { ReportDialog } from "./ReportDialog";
 
 export const ReportsWrapper: React.FC<{
   reports: Report[] | [];

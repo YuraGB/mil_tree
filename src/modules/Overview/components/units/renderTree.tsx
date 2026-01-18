@@ -1,25 +1,25 @@
 // renderTree.tsx
-import { TreeNode as OrgNode } from 'react-organizational-chart';
-import { UnitCard } from './UnitCard';
-import { UnitNode } from '@/types/units';
+import { TreeNode as OrgNode } from "react-organizational-chart";
+import { UnitCard } from "./UnitCard";
+import { UnitNode } from "@/types/units";
 
 export interface RenderNodeProps {
   draggingId?: string | null;
   dropTargetId?: string | null;
-  dropPos?: 'above' | 'below' | 'inside' | null;
+  dropPos?: "above" | "below" | "inside" | null;
   onDragStart?: (e: React.MouseEvent, el: HTMLElement, id: string) => void;
 }
 
 // Перевірка, чи це "листова" особа
 const isLeafPerson = (node: UnitNode) =>
-  'rank' in node && (!node.subUnits || node.subUnits.length === 0);
+  "rank" in node && (!node.subUnits || node.subUnits.length === 0);
 
 // LeafList приймає dragProps і кожного члена draggable
 const LeafList = ({ people }: { people: UnitNode[] }) => (
   <div className="leaf-list">
     {people.map((p) => (
       <div key={p.id} className="leaf-item">
-        <UnitCard node={p} css={'flex flex-col items-start'} />
+        <UnitCard node={p} css={"flex flex-col items-start"} />
       </div>
     ))}
   </div>

@@ -1,6 +1,6 @@
-import { Accordion } from '@/components/ui/accordion';
-import { useOrders } from './hooks/useOrders';
-import { AccordionOrder } from '@/components/AccordionOrder';
+import { Accordion } from "@/components/ui/accordion";
+import { useOrders } from "./hooks/useOrders";
+import { AccordionOrder } from "@/components/AccordionOrder";
 
 export const Orders = () => {
   const { orders } = useOrders();

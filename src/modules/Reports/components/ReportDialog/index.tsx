@@ -1,12 +1,12 @@
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
-import { CreateReport } from '../ReportTypes';
-import { EditReport } from '../EditReport';
-import { Report } from '@/types/reports';
-import { useReportDialog } from '../../hooks/useReportDialog';
-import { ReportDialogFooter } from './RepordDialogFooter';
-import { CreateReportDialogHeader } from './CreateReportDialogHeader';
-import { EditReportDialogHeader } from './EditReportDialogHeader';
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { CreateReport } from "../ReportTypes";
+import { EditReport } from "../EditReport";
+import { Report } from "@/types/reports";
+import { useReportDialog } from "../../hooks/useReportDialog";
+import { ReportDialogFooter } from "./RepordDialogFooter";
+import { CreateReportDialogHeader } from "./CreateReportDialogHeader";
+import { EditReportDialogHeader } from "./EditReportDialogHeader";
 
 export function ReportDialog({
   selectedReport,

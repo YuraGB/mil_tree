@@ -1,4 +1,4 @@
-import { Report, TReportAssigned, TRoot } from '@/types/reports';
+import { Report, TReportAssigned, TRoot } from "@/types/reports";
 
 // -----------------------------
 function cloneTree(root: TRoot): TRoot {

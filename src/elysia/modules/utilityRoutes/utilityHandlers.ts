@@ -33,7 +33,7 @@ export const utilityRoutes = new Elysia({ name: "utility_handlers" })
           console.log(end, begin, error);
         });
       });
-    }
+    },
   )
   .use(elysiaHelmet(helmetConfig))
   .use(ip())
@@ -44,7 +44,7 @@ export const utilityRoutes = new Elysia({ name: "utility_handlers" })
           resource: otelResource,
           spanProcessors: [batchSpanProcessor],
         })
-      : new Elysia()
+      : new Elysia(),
   )
   .use(
     serverTiming({
@@ -59,7 +59,7 @@ export const utilityRoutes = new Elysia({ name: "utility_handlers" })
         mapResponse: true,
         total: true,
       },
-    })
+    }),
   )
   // // --- CORS configuration for cross-origin requests ---
   .use(
@@ -69,5 +69,5 @@ export const utilityRoutes = new Elysia({ name: "utility_handlers" })
       allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
       credentials: true, // Allow credentials (e.g., cookies, authorization headers)
       maxAge: 86_400, // Cache the preflight response for 24 hours
-    })
+    }),
   );

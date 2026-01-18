@@ -1,5 +1,5 @@
-'use client';
-import { Button } from '@/components/ui/button';
+"use client";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -7,18 +7,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
+} from "@/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { useWidgetSelector } from './hooks/useWidgetSelector';
-import { WIDGETS } from '@/constants';
-import { TWidgetNames } from '@/types';
-import React from 'react';
+} from "@/components/ui/select";
+import { useWidgetSelector } from "./hooks/useWidgetSelector";
+import { WIDGETS } from "@/constants";
+import { TWidgetNames } from "@/types";
+import React from "react";
 
 function WidgetSelector({
   addWidgetHandler,
@@ -56,7 +56,7 @@ function WidgetSelector({
                       className="w-[200px] capitalize"
                     >
                       {widget[0].toUpperCase() +
-                        widget.substring(1).replace('_', ' ')}
+                        widget.substring(1).replace("_", " ")}
                     </SelectItem>
                   ))}
                 </SelectContent>

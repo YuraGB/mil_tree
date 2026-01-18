@@ -6,19 +6,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { Report } from '@/types/reports';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import z from 'zod';
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Report } from "@/types/reports";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import z from "zod";
 
 const formSchema = z.object({
   assignedTo: z.string().min(2, {
-    message: 'Assigned To must be at least 2 characters.',
+    message: "Assigned To must be at least 2 characters.",
   }),
   description: z.string().min(10, {
-    message: 'Description must be at least 10 characters.',
+    message: "Description must be at least 10 characters.",
   }),
 });
 
@@ -29,8 +29,8 @@ export const ComplaintReport: React.FC<{
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      assignedTo: reportData?.assignedToPersonId || '',
-      description: reportData?.description || '',
+      assignedTo: reportData?.assignedToPersonId || "",
+      description: reportData?.description || "",
     },
   });
   const onSubmit = (values: z.infer<typeof formSchema>) => {

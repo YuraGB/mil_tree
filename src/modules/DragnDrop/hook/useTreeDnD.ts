@@ -1,10 +1,10 @@
-'use client';
-import { useCallback, useEffect } from 'react';
-import { useDnDHelpers } from './helpers';
-import { moveNode } from '@/lib/dndMoveOverview';
-import { UnitNode } from '@/types/units';
+"use client";
+import { useCallback, useEffect } from "react";
+import { useDnDHelpers } from "./helpers";
+import { moveNode } from "@/lib/dndMoveOverview";
+import { UnitNode } from "@/types/units";
 
-export type DropPos = 'above' | 'below' | 'inside' | null;
+export type DropPos = "above" | "below" | "inside" | null;
 
 export function useTreeDnD(
   rootTree: UnitNode,
@@ -28,11 +28,11 @@ export function useTreeDnD(
     useDnDHelpers(onUpdateStateCallback);
 
   useEffect(() => {
-    document.addEventListener('mousemove', onMove);
-    document.addEventListener('mouseup', onUp);
+    document.addEventListener("mousemove", onMove);
+    document.addEventListener("mouseup", onUp);
     return () => {
-      document.removeEventListener('mousemove', onMove);
-      document.removeEventListener('mouseup', onUp);
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseup", onUp);
     };
   }, [draggingId, dropTargetId, dropPos, rootTree, setRootTree, onMove, onUp]);
 

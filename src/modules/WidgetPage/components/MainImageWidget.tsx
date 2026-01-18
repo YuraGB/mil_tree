@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
-import WidgetContainer from '@/modules/WidgetPage/WidgetConteiner';
-import MainImageDashboard from '@/components/MainImageDashboard';
-import { IWidgetProps } from '@/types';
+import React, { useCallback } from "react";
+import WidgetContainer from "@/modules/WidgetPage/WidgetConteiner";
+import MainImageDashboard from "@/components/MainImageDashboard";
+import { IWidgetProps } from "@/types";
 
 export const MainImageWidget = React.memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
@@ -28,4 +28,4 @@ export const MainImageWidget = React.memo(
   },
 );
 
-MainImageWidget.displayName = 'MainImageWidget';
+MainImageWidget.displayName = "MainImageWidget";

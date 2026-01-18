@@ -1,4 +1,4 @@
-import { api } from '@/elysia/eden';
+import { api } from "@/elysia/eden";
 
 export const getReportsData = async () => {
   const [reportsRes, personsRes] = await Promise.allSettled([
@@ -6,7 +6,7 @@ export const getReportsData = async () => {
     api.persons.get(),
   ]);
 
-  if (reportsRes.status !== 'fulfilled' || personsRes.status !== 'fulfilled')
+  if (reportsRes.status !== "fulfilled" || personsRes.status !== "fulfilled")
     return null;
 
   const { data: repsData } = reportsRes.value;

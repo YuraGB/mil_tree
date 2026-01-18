@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
-import { useEffect, useLayoutEffect, useRef } from 'react';
-import Quill, { Delta } from 'quill';
-import 'quill/dist/quill.snow.css';
-import { EditorProps } from '@/types';
+import { useEffect, useLayoutEffect, useRef } from "react";
+import Quill, { Delta } from "quill";
+import "quill/dist/quill.snow.css";
+import { EditorProps } from "@/types";
 
 /* ─────────────────────────────────────────────────────
    MUST-HAVE FIX: allow blob: URLs for images
    Quill by default sanitizes blob URLs → "//:0"
    ───────────────────────────────────────────────────── */
-const Image = Quill.import('formats/image');
+const Image = Quill.import("formats/image");
 type TImage = typeof Image & { sanitize: (url: string) => string };
 (Image as TImage).sanitize = (url: string) => url;
 
@@ -48,33 +48,33 @@ export const useEditorClient = (
     if (!container) return;
 
     // CRITICAL: prevent double init in React 18 StrictMode
-    if (container.querySelector('.ql-editor')) return;
+    if (container.querySelector(".ql-editor")) return;
 
-    const editorContainer = document.createElement('div');
+    const editorContainer = document.createElement("div");
     container.appendChild(editorContainer);
 
     const quill = new Quill(editorContainer, {
-      theme: 'snow',
+      theme: "snow",
       readOnly,
       modules: {
         toolbar: {
           container: [
             [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ['bold', 'italic', 'underline', 'strike'],
+            ["bold", "italic", "underline", "strike"],
             [{ color: [] }, { background: [] }],
-            [{ script: 'sub' }, { script: 'super' }],
-            ['blockquote', 'code-block'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ indent: '-1' }, { indent: '+1' }],
+            [{ script: "sub" }, { script: "super" }],
+            ["blockquote", "code-block"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ indent: "-1" }, { indent: "+1" }],
             [{ align: [] }],
-            ['link', 'image', 'video'],
-            ['clean'],
+            ["link", "image", "video"],
+            ["clean"],
           ],
           handlers: {
             image: () => {
-              const input = document.createElement('input');
-              input.type = 'file';
-              input.accept = 'image/*';
+              const input = document.createElement("input");
+              input.type = "file";
+              input.accept = "image/*";
               input.click();
 
               input.onchange = () => {
@@ -87,7 +87,7 @@ export const useEditorClient = (
                 const range = quill.getSelection(true);
                 const index = range?.index ?? quill.getLength();
 
-                quill.insertEmbed(index, 'image', blobUrl, 'user');
+                quill.insertEmbed(index, "image", blobUrl, "user");
                 quill.setSelection(index + 1, 0);
 
                 // optional: upload → replace src → revoke
@@ -101,7 +101,7 @@ export const useEditorClient = (
     quillRef.current = quill;
 
     // forward ref
-    if (ref && typeof ref !== 'function') {
+    if (ref && typeof ref !== "function") {
       ref.current = quill;
     }
 
@@ -113,11 +113,11 @@ export const useEditorClient = (
     }
 
     // events
-    quill.on('text-change', (...args) => {
+    quill.on("text-change", (...args) => {
       onTextChangeRef.current?.(...args);
     });
 
-    quill.on('selection-change', (...args) => {
+    quill.on("selection-change", (...args) => {
       onSelectionChangeRef.current?.(...args);
     });
 

@@ -1,6 +1,6 @@
-import { UNIT_TYPES, WIDGETS } from '@/constants';
-import Quill, { Delta, Range } from 'quill';
-import { ReactNode } from 'react';
+import { UNIT_TYPES, WIDGETS } from "@/constants";
+import Quill, { Delta, Range } from "quill";
+import { ReactNode } from "react";
 
 // Пропси з типами Editor
 export interface EditorProps {
@@ -36,8 +36,8 @@ export type Widget = {
 
 export type WidgetContainerProps = {
   children?: ReactNode;
-  widgetName: Widget['type'];
-  widgetCreated?: Widget['createdAt'];
+  widgetName: Widget["type"];
+  widgetCreated?: Widget["createdAt"];
   widgetId: number;
   onRemoveHandler: (id: number) => void;
 };
@@ -45,7 +45,7 @@ export type WidgetContainerProps = {
 export interface IWidgetProps {
   widget: Widget;
   removeWidget: (id: number) => void;
-  saveWidget: (id: number, props: Widget['props']) => void;
+  saveWidget: (id: number, props: Widget["props"]) => void;
 }
 
 export type TWidgetNames = (typeof WIDGETS)[number];

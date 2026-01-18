@@ -21,7 +21,7 @@ interface SocketAddress {
 const ipGenerator = (
   _r: Request,
   _s: unknown,
-  { ip }: { ip: SocketAddress | null }
+  { ip }: { ip: SocketAddress | null },
 ) => ip?.address ?? "unknown";
 
 // **Не експортуємо app напряму**
@@ -41,9 +41,9 @@ const app = new Elysia()
           countFailedRequest: true,
           errorResponse: new Response(
             stringifyObjectUtil({ error: "Too many requests" }),
-            { status: 429 }
+            { status: 429 },
           ),
-        })
+        }),
       );
     }
 

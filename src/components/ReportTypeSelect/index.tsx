@@ -14,12 +14,12 @@ export const ReportTypeSelect: React.FC<{
 }> = ({ setChosenReportType }) => {
   return (
     <Select
-      defaultValue=''
+      defaultValue=""
       onValueChange={(v: TReportType) => setChosenReportType(v)}
       required
     >
-      <SelectTrigger id='checkout-exp-month-ts6'>
-        <SelectValue placeholder='Select Report Type' />
+      <SelectTrigger id="checkout-exp-month-ts6">
+        <SelectValue placeholder="Select Report Type" />
       </SelectTrigger>
       <SelectContent>
         {REPORT_TYPES.map((type) => (

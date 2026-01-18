@@ -6,7 +6,7 @@ import { Report, TReportView } from "@/types/reports";
 
 const buildReportsMap = (
   reports: Report[],
-  persons: TDBPerson[]
+  persons: TDBPerson[],
 ): { [name: string]: TReportView[] } => {
   const personsMap = new Map(persons.map((p) => [p.id, p]));
 
@@ -32,7 +32,7 @@ const buildReportsMap = (
 
 export const useReport = (reports: Report[], persons: TDBPerson[]) => {
   const [allReports, setReports] = useState<{ [name: string]: TReportView[] }>(
-    () => buildReportsMap(reports, persons)
+    () => buildReportsMap(reports, persons),
   );
 
   // State of the reports collections
@@ -43,12 +43,12 @@ export const useReport = (reports: Report[], persons: TDBPerson[]) => {
   // Currently selected report
   // Also used as open/close state for the Create/Update report dialog
   const [selectedReport, setSelectedReport] = useState<TReportView | null>(
-    null
+    null,
   );
 
   const { draggingId, dropTargetId, dropPos, onDragStart } = useReportDnD(
     allReports,
-    setReports
+    setReports,
   );
 
   return {

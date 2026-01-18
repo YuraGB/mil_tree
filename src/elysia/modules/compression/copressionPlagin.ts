@@ -34,10 +34,14 @@ export const compression = new Elysia({ name: "compressResponses" })
     const compressed = Buffer.concat(chunks);
 
     set.headers["Content-Encoding"] = "gzip";
-    set.headers["Vary"] = "Accept-Encoding";
-    set.headers["Content-Type"] = isJson
-      ? "application/json; charset=utf-8"
-      : "text/plain; charset=utf-8";
+
+    const vary = set.headers["Vary"];
+    set.headers["Vary"] = vary ? `${vary}, Accept-Encoding` : "Accept-Encoding";
+    if (!set.headers["Content-Type"]) {
+      set.headers["Content-Type"] = isJson
+        ? "application/json; charset=utf-8"
+        : "text/plain; charset=utf-8";
+    }
 
     return compressed;
   })

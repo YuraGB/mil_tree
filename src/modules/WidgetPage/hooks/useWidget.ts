@@ -21,7 +21,7 @@ export const useWidget = () => {
   const removeWidget = useCallback(
     (widgetId: number) =>
       setWidgets((prev) => prev.filter(({ id }) => id !== widgetId)),
-    []
+    [],
   );
 
   const saveWidget = useCallback(
@@ -36,11 +36,11 @@ export const useWidget = () => {
                   [newProps.key]: newProps.value.toString(), // ✅ перетворюємо number у string
                 },
               }
-            : widget
-        )
+            : widget,
+        ),
       );
     },
-    []
+    [],
   );
 
   const savePage = useCallback(
@@ -50,7 +50,7 @@ export const useWidget = () => {
     },
     [
       /*widgets*/
-    ]
+    ],
   );
 
   const widgetType = useWidgetType();
