@@ -22,23 +22,13 @@ export const getAllMarkTypes = async (): Promise<TDBMark[]> => {
  */
 export const saveMark = async (markData: TMark): Promise<TDBMark | null> => {
   try {
-    // Prevent duplicates
-    const existing = await db
-      .select()
-      .from(mapMarks)
-      .where(eq(mapMarks.id, markData.id))
-      .limit(1);
-
-    if (existing.length) {
-      return null;
-    }
-
     const [saved] = await db
       .insert(mapMarks)
       .values({
         ...markData,
         properties: markData.properties ?? {},
       })
+      .onConflictDoNothing({ target: mapMarks.id })
       .returning();
 
     return saved;

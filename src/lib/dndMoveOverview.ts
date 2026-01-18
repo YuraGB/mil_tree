@@ -12,7 +12,7 @@ function cloneTree(root: UnitNode): UnitNode {
 // -----------------------------
 function removeNode(
   root: UnitNode,
-  fromId: string,
+  fromId: string
 ): { updated: UnitNode; removed: UnitNode | null } {
   const copy = cloneTree(root);
   let removed: UnitNode | null = null;
@@ -51,7 +51,7 @@ function isInsideSubtree(node: UnitNode, targetId: string): boolean {
   if (node.id === targetId) return true;
   if ("commander" in node && node.commander?.id === targetId) return true;
 
-  if ("subordinates" in node && node.subordinates) {
+  if ("subUnits" in node && node.subUnits) {
     return node.subUnits.some((c) => isInsideSubtree(c, targetId));
   }
   return false;
@@ -64,7 +64,7 @@ function insertNode(
   root: UnitNode,
   moving: UnitNode,
   toId: string,
-  position: "above" | "below" | "inside",
+  position: "above" | "below" | "inside"
 ): boolean {
   function dfs(node: UnitNode): boolean {
     // Вставка inside
@@ -123,7 +123,7 @@ function insertAtParentLevel(
   root: UnitNode,
   moving: UnitNode,
   toId: string,
-  position: "above" | "below",
+  position: "above" | "below"
 ): boolean {
   function dfs(node: UnitNode): boolean {
     if ("subUnits" in node && node.subUnits) {
@@ -156,14 +156,14 @@ export function moveNode(
   root: UnitNode,
   fromId: string,
   toId: string,
-  position: "above" | "below" | "inside",
+  position: "above" | "below" | "inside"
 ): UnitNode | null {
   // root не можна переносити
 
   if (root.id === fromId) {
     return null;
   }
-  console.log(root.id, fromId, "ss");
+
   // Видаляємо movingNode
   const { updated, removed } = removeNode(root, fromId);
   if (!removed) return null;
