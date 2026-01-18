@@ -1,15 +1,16 @@
-import { EditControlProps } from 'react-leaflet-draw';
-import { GeoJSONLayer, toGeoJSONSafe } from '../utils';
-import { useMapService } from '../services';
-import { LayerWithMeta } from '@/types/map';
+import { EditControlProps } from "react-leaflet-draw";
+import { GeoJSONLayer, toGeoJSONSafe } from "../utils";
+import { useMapService } from "../services";
+import { LayerWithMeta } from "@/types/map";
 
 export const useMapDraw = () => {
   const { onDeleteMapMark, onCreateMapMark, onUpdateMapMark, loading } =
     useMapService();
 
-  const onEditPath: EditControlProps['onEdited'] = (e) => {
+  const onEditPath: EditControlProps["onEdited"] = (e) => {
     e.layers.eachLayer((layer: GeoJSONLayer) => {
       const geo = toGeoJSONSafe(layer);
+      console.log(geo);
       let id = layer.options?.serverId;
 
       if (!id) id = crypto.randomUUID();
@@ -20,9 +21,9 @@ export const useMapDraw = () => {
     });
   };
 
-  const onCreate: EditControlProps['onCreated'] = (e) => {
+  const onCreate: EditControlProps["onCreated"] = (e) => {
     const geo = toGeoJSONSafe(e.layer);
-
+    console.log(geo);
     const id = crypto.randomUUID();
     (e.layer as LayerWithMeta).options.serverId = id;
 
@@ -31,7 +32,7 @@ export const useMapDraw = () => {
     }
   };
 
-  const onDelete: EditControlProps['onDeleted'] = (e) => {
+  const onDelete: EditControlProps["onDeleted"] = (e) => {
     e.layers.eachLayer((layer: LayerWithMeta) => {
       if (layer.options?.serverId) onDeleteMapMark(layer.options.serverId);
     });

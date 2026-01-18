@@ -6,13 +6,21 @@ export type TMarkCoordinates = [number, number];
 
 export type TMArkGeometry = {
   type: TMArkTypes;
-  coordinates: TMarkCoordinates | TMarkCoordinates[];
+  coordinates:
+    | TMarkCoordinates
+    | TMarkCoordinates[]
+    | TMarkCoordinates[][]
+    | TMarkCoordinates[][][];
 };
 
 export type TMarkJson = {
   geometry: TMArkGeometry;
   type: "Feature";
-  properties: object;
+  properties?:
+    | object
+    | {
+        radius?: number;
+      };
 };
 
 export type LayerWithMeta = L.Layer & {
@@ -20,3 +28,14 @@ export type LayerWithMeta = L.Layer & {
     serverId?: string;
   };
 };
+
+export type TMark = {
+  id: string;
+  geometry: TMArkGeometry;
+  properties: TMarkJson["properties"];
+};
+
+export type TPolygonPosition =
+  | TMarkCoordinates[]
+  | TMarkCoordinates[][]
+  | TMarkCoordinates[][][];

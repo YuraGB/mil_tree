@@ -29,7 +29,7 @@ const ipGenerator = (
 const app = new Elysia()
   .use(compression)
   .use(utilityRoutes)
-  //   .all("/api/auth/*", betterAuthView)
+  .all("/api/auth/*", betterAuthView)
   .group("/api", (api) => {
     if (!isNext) {
       api.use(
