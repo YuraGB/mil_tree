@@ -1,12 +1,12 @@
-"use client";
-import { STATUSES } from "@/constants";
-import { DynamicIcon } from "lucide-react/dynamic";
+'use client';
+import { STATUSES } from '@/constants';
+import { DynamicIcon } from 'lucide-react/dynamic';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { UnitNode } from "@/types/units";
+} from '@/components/ui/tooltip';
+import { UnitNode } from '@/types/units';
 
 export const UnitCard: React.FC<{
   node: UnitNode;
@@ -17,10 +17,10 @@ export const UnitCard: React.FC<{
       role="button"
       tabIndex={0}
       aria-pressed="false"
-      className={`card ${css ? css : ""} relative`}
+      className={`card ${css ? css : ''} relative`}
       data-node-id={node.id}
     >
-      {"rank" in node ? (
+      {'rank' in node ? (
         <>
           <strong className="mr-4 flex justify-between">
             <span className="text-left">{node.name}</span>
@@ -28,15 +28,15 @@ export const UnitCard: React.FC<{
               <TooltipTrigger asChild>
                 <span className="absolute top-2 right-2">
                   <DynamicIcon
-                    name={STATUSES[node.commander?.statusCode ?? "800"].icon}
+                    name={STATUSES[node.commander?.statusCode ?? '800'].icon}
                     size={24}
-                    color={STATUSES[node.commander?.statusCode ?? "800"].color}
+                    color={STATUSES[node.commander?.statusCode ?? '800'].color}
                   />
                 </span>
               </TooltipTrigger>
               <TooltipContent>
                 <p>
-                  {STATUSES[node.commander?.statusCode ?? "800"].description}
+                  {STATUSES[node.commander?.statusCode ?? '800'].description}
                 </p>
               </TooltipContent>
             </Tooltip>

@@ -1,23 +1,23 @@
-import Elysia from "elysia";
+import Elysia from 'elysia';
 
 // Compression plugin for Elysia
-export const compression = new Elysia({ name: "compressResponses" })
+export const compression = new Elysia({ name: 'compressResponses' })
   .onAfterHandle(async ({ request, set, responseValue }) => {
     if (responseValue == null) return responseValue;
 
-    const acceptEncoding = request.headers.get("accept-encoding") ?? "";
-    const compressionRequested = acceptEncoding.includes("gzip");
+    const acceptEncoding = request.headers.get('accept-encoding') ?? '';
+    const compressionRequested = acceptEncoding.includes('gzip');
     if (!compressionRequested) return responseValue;
 
     const isJson =
-      typeof responseValue === "object" &&
+      typeof responseValue === 'object' &&
       !(responseValue instanceof Uint8Array) &&
       !(responseValue instanceof ArrayBuffer);
 
     const text = isJson ? JSON.stringify(responseValue) : String(responseValue);
     if (text.length < 8) return responseValue;
 
-    const cs = new CompressionStream("gzip");
+    const cs = new CompressionStream('gzip');
     const writer = cs.writable.getWriter();
     const reader = cs.readable.getReader();
 
@@ -33,16 +33,16 @@ export const compression = new Elysia({ name: "compressResponses" })
 
     const compressed = Buffer.concat(chunks);
 
-    set.headers["Content-Encoding"] = "gzip";
+    set.headers['Content-Encoding'] = 'gzip';
 
-    const vary = set.headers["Vary"];
-    set.headers["Vary"] = vary ? `${vary}, Accept-Encoding` : "Accept-Encoding";
-    if (!set.headers["Content-Type"]) {
-      set.headers["Content-Type"] = isJson
-        ? "application/json; charset=utf-8"
-        : "text/plain; charset=utf-8";
+    const vary = set.headers['Vary'];
+    set.headers['Vary'] = vary ? `${vary}, Accept-Encoding` : 'Accept-Encoding';
+    if (!set.headers['Content-Type']) {
+      set.headers['Content-Type'] = isJson
+        ? 'application/json; charset=utf-8'
+        : 'text/plain; charset=utf-8';
     }
 
     return compressed;
   })
-  .as("global");
+  .as('global');

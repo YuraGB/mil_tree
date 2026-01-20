@@ -1,7 +1,7 @@
-import { db } from "@/db";
-import { mapMarks } from "@/db/schemas/mapMarks";
-import { TDBMark, TMark } from "@/types/map";
-import { eq } from "drizzle-orm";
+import { db } from '@/db';
+import { mapMarks } from '@/db/schemas/mapMarks';
+import { TDBMark, TMark } from '@/types/map';
+import { eq } from 'drizzle-orm';
 
 /**
  *
@@ -18,7 +18,7 @@ export const getAllMarkTypes = async (): Promise<TMark[]> => {
       })
       .from(mapMarks);
   } catch (e) {
-    console.error("Error fetching marks:", e);
+    console.error('Error fetching marks:', e);
     return [];
   }
 };
@@ -40,7 +40,7 @@ export const saveMark = async (markData: TMark): Promise<TDBMark | null> => {
 
     return saved ?? null;
   } catch (e) {
-    console.error("Error fetching marks:", e);
+    console.error('Error fetching marks:', e);
     return null;
   }
 };
@@ -61,7 +61,7 @@ export const deleteMark = async (markId: string): Promise<string | null> => {
 
     return deleted?.id ?? null;
   } catch (e) {
-    console.error("Error delete mark:", e);
+    console.error('Error delete mark:', e);
     return null;
   }
 };
@@ -89,7 +89,7 @@ export const updateMark = async (updateData: TMark): Promise<TMark | null> => {
 
     return updated ?? null;
   } catch (e) {
-    console.error("Error fetching marks:", e);
+    console.error('Error fetching marks:', e);
     return null;
   }
 };

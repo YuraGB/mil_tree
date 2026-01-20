@@ -1,6 +1,6 @@
-import { EditorIndexProps } from "@/types";
-import Quill from "quill";
-import { useEffect, useRef, useState } from "react";
+import { EditorIndexProps } from '@/types';
+import Quill from 'quill';
+import { useEffect, useRef, useState } from 'react';
 
 export const useEditorIndex = ({
   valueDefault,
@@ -38,7 +38,7 @@ export const useEditorIndex = ({
       setIsDirty(JSON.stringify(current) !== JSON.stringify(initial));
     };
 
-    quill.on("text-change", handler);
+    quill.on('text-change', handler);
   };
 
   return { quillRef, readOnly, setReadOnly, isDirty, onSave, onEditorReady };

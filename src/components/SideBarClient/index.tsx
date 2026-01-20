@@ -1,8 +1,8 @@
-"use cache";
+'use cache';
 
-import { TSideBarLink } from "@/types/client";
-import { SideBarLink } from "./SideBarLink";
-import { sideBarLinks } from "@/constants";
+import { TSideBarLink } from '@/types/client';
+import { SideBarLink } from './SideBarLink';
+import { sideBarLinks } from '@/constants';
 
 export const SideBarClient = async ({
   links,

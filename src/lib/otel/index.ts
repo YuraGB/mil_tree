@@ -1,4 +1,4 @@
 // otel/index.ts
-import "server-only";
+import 'server-only';
 export const enableOtel =
-  process.env.NODE_ENV === "development" && process.env.OTEL_ENABLED === "1";
+  process.env.NODE_ENV === 'development' && process.env.OTEL_ENABLED === '1';

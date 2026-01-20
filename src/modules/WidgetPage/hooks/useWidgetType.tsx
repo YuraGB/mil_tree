@@ -1,9 +1,9 @@
-import { EditorWidget } from "../components/EditorWidget";
-import { MainImageWidget } from "../components/MainImageWidget";
-import { RankSelectorWidget } from "../components/RankSelectorWidget";
-import { StatusSelectorWidjet } from "../components/StatusSelectorWidjet";
-import { TWidgetNames } from "@/types";
-import { AwardsSelectorWidget } from "../components/AwardsSelectorWidget";
+import { EditorWidget } from '../components/EditorWidget';
+import { MainImageWidget } from '../components/MainImageWidget';
+import { RankSelectorWidget } from '../components/RankSelectorWidget';
+import { StatusSelectorWidjet } from '../components/StatusSelectorWidjet';
+import { TWidgetNames } from '@/types';
+import { AwardsSelectorWidget } from '../components/AwardsSelectorWidget';
 
 export const useWidgetType = (): {
   [key in TWidgetNames]: React.ElementType;

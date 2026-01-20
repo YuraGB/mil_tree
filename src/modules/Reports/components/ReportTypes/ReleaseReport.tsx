@@ -6,22 +6,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { ITransferReport } from "@/types/reports";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import z from "zod";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { ITransferReport } from '@/types/reports';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import z from 'zod';
 
 const formSchema = z.object({
   assignedTo: z.string().min(2, {
-    message: "Assigned To must be at least 2 characters.",
+    message: 'Assigned To must be at least 2 characters.',
   }),
   releaseDate: z.string().min(10, {
-    message: "Release date must be at least 10 characters.",
+    message: 'Release date must be at least 10 characters.',
   }),
   reason: z.string().min(10, {
-    message: "Reason must be at least 10 characters.",
+    message: 'Reason must be at least 10 characters.',
   }),
 });
 

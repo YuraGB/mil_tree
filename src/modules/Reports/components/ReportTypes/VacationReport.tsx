@@ -6,22 +6,22 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { IVacationReport } from "@/types/reports";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import z from "zod";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { IVacationReport } from '@/types/reports';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import z from 'zod';
 
 const formSchema = z.object({
   assignedTo: z.string().min(2, {
-    message: "Assigned To must be at least 2 characters.",
+    message: 'Assigned To must be at least 2 characters.',
   }),
   vacationFrom: z.string().min(2, {
-    message: "Vacation From must be at least 2 characters.",
+    message: 'Vacation From must be at least 2 characters.',
   }),
   vacationTo: z.string().min(2, {
-    message: "Vacation To must be at least 2 characters.",
+    message: 'Vacation To must be at least 2 characters.',
   }),
 });
 
@@ -32,9 +32,9 @@ export const VacationReport: React.FC<{
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      assignedTo: reportData?.assignedToPersonId || "",
-      vacationFrom: new Date(reportData?.vacationFrom || "").toLocaleString(),
-      vacationTo: new Date(reportData?.vacationTo || "").toLocaleString(),
+      assignedTo: reportData?.assignedToPersonId || '',
+      vacationFrom: new Date(reportData?.vacationFrom || '').toLocaleString(),
+      vacationTo: new Date(reportData?.vacationTo || '').toLocaleString(),
     },
   });
   const onSubmit = (values: z.infer<typeof formSchema>) => {

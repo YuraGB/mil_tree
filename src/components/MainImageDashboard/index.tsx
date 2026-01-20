@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 
 const MainImageDashboard = ({
   handleSave,
@@ -27,7 +27,7 @@ const MainImageDashboard = ({
   return (
     <article className="flex flex-col items-start gap-4">
       <Image
-        src={preview || "/main_image_placeholder.png"}
+        src={preview || '/main_image_placeholder.png'}
         alt="Main character image"
         width={600}
         height={400}

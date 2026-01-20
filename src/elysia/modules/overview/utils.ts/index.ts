@@ -1,5 +1,5 @@
-import { PersonNode, TDBPerson, TRank } from "@/types/persons";
-import { TDBUnit, UnitNode } from "@/types/units";
+import { PersonNode, TDBPerson, TRank } from '@/types/persons';
+import { TDBUnit, UnitNode } from '@/types/units';
 
 /**
  * buildUnitNode

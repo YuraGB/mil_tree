@@ -1,5 +1,5 @@
-import { Report } from "@/types/reports";
-import { useEffect, useState } from "react";
+import { Report } from '@/types/reports';
+import { useEffect, useState } from 'react';
 
 export const useReportDialog = (
   selectedReport: Report | null,

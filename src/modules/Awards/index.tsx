@@ -4,8 +4,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { AWARDS } from "@/constants";
+} from '@/components/ui/select';
+import { AWARDS } from '@/constants';
 
 export const AwardsSelector = ({
   onValueChange,

@@ -1,8 +1,8 @@
-import { EditControlProps } from "react-leaflet-draw";
-import { GeoJSONLayer, getPropertiesToPayload } from "../utils";
-import { useMapService } from "../services";
-import { LayerWithMeta } from "@/types/map";
-import { useMemo } from "react";
+import { EditControlProps } from 'react-leaflet-draw';
+import { GeoJSONLayer, getPropertiesToPayload } from '../utils';
+import { useMapService } from '../services';
+import { LayerWithMeta } from '@/types/map';
+import { useMemo } from 'react';
 
 export const useMapDraw = () => {
   const {
@@ -14,7 +14,7 @@ export const useMapDraw = () => {
   } = useMapService();
 
   // Handle edit path
-  const onEditPath: EditControlProps["onEdited"] = (e) => {
+  const onEditPath: EditControlProps['onEdited'] = (e) => {
     e.layers.eachLayer(async (layer: GeoJSONLayer) => {
       const { geometry, properties, id } = await getPropertiesToPayload(
         layer as GeoJSONLayer,
@@ -27,7 +27,7 @@ export const useMapDraw = () => {
   };
 
   // Handle create
-  const onCreate: EditControlProps["onCreated"] = async (e) => {
+  const onCreate: EditControlProps['onCreated'] = async (e) => {
     const { geometry, properties, id } = await getPropertiesToPayload(
       e.layer as GeoJSONLayer,
     );
@@ -38,7 +38,7 @@ export const useMapDraw = () => {
   };
 
   // Handle delete
-  const onDelete: EditControlProps["onDeleted"] = (e) => {
+  const onDelete: EditControlProps['onDeleted'] = (e) => {
     e.layers.eachLayer((layer: LayerWithMeta) => {
       if (layer.options?.serverId) onDeleteMapMark(layer.options.serverId);
     });

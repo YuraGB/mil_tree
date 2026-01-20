@@ -1,7 +1,7 @@
-"use client";
-import { useSearch } from "./hook/useSearch";
-import { SearchResults } from "./components/SearchResults";
-import { UnitNode } from "@/types/units";
+'use client';
+import { useSearch } from './hook/useSearch';
+import { SearchResults } from './components/SearchResults';
+import { UnitNode } from '@/types/units';
 
 export const Search = ({ data }: { data: UnitNode }) => {
   const { onSearchChange, results } = useSearch(data);

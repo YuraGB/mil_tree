@@ -1,13 +1,13 @@
-import { REPORT_TYPES } from "@/constants";
+import { REPORT_TYPES } from '@/constants';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Dispatch, SetStateAction } from "react";
-import { TReportType } from "@/types/reports";
+} from '../ui/select';
+import { Dispatch, SetStateAction } from 'react';
+import { TReportType } from '@/types/reports';
 
 export const ReportTypeSelect: React.FC<{
   setChosenReportType: Dispatch<SetStateAction<TReportType | null>>;

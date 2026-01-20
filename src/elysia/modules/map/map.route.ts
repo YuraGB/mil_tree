@@ -1,29 +1,29 @@
-import { Elysia } from "elysia";
+import { Elysia } from 'elysia';
 
 import {
   deleteMark,
   getAllMarkTypes,
   saveMark,
   updateMark,
-} from "./map.service";
+} from './map.service';
 import {
   createUpdateMarkSchema,
   deleteMarkSchema,
-} from "./map.validation.schemas";
-import { formatMarkDataFromDb } from "@/lib/formatMarkDataFromDb";
+} from './map.validation.schemas';
+import { formatMarkDataFromDb } from '@/lib/formatMarkDataFromDb';
 
 // Routes
 export const mapRoutes = new Elysia({
-  name: "map_routes",
+  name: 'map_routes',
 })
   // Handler
-  .get("/map", async () => {
+  .get('/map', async () => {
     const raw = await getAllMarkTypes();
 
     const { valid, invalid } = formatMarkDataFromDb(raw);
 
     if (invalid && invalid.length) {
-      console.warn("Invalid map marks:", invalid);
+      console.warn('Invalid map marks:', invalid);
     }
 
     return valid;
@@ -31,7 +31,7 @@ export const mapRoutes = new Elysia({
 
   // Post Route
   .post(
-    "/createMapMark",
+    '/createMapMark',
     // Handler
     async ({ body }) => {
       return await saveMark(body);
@@ -42,16 +42,16 @@ export const mapRoutes = new Elysia({
     },
   )
   .put(
-    "/updateMarks",
+    '/updateMarks',
     async ({ body }) => {
       const updateMarks = await updateMark(body);
 
       const { valid, invalid } = formatMarkDataFromDb(updateMarks);
-         if (invalid && invalid.length) {
-      console.warn("Invalid map marks:", invalid);
-    }
+      if (invalid && invalid.length) {
+        console.warn('Invalid map marks:', invalid);
+      }
 
-    return valid;
+      return valid;
     },
     // Validation schema
     {
@@ -59,7 +59,7 @@ export const mapRoutes = new Elysia({
     },
   )
   .delete(
-    "/deleteMarks",
+    '/deleteMarks',
     // Handler
     async ({ body }) => {
       return await deleteMark(body.id);

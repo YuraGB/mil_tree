@@ -1,5 +1,5 @@
-import { ReportColumnItem } from "./ReportColumnItem";
-import { Report, TReportView } from "@/types/reports";
+import { ReportColumnItem } from './ReportColumnItem';
+import { Report, TReportView } from '@/types/reports';
 
 export const ReportColumn = ({
   name,

@@ -1,5 +1,5 @@
-import { useRef } from "react";
-import { DropPos } from "./useTreeDnD";
+import { useRef } from 'react';
+import { DropPos } from './useTreeDnD';
 
 // The Global helper hook for Drag and Drop functionality
 export const useDnDHelpers = (
@@ -34,7 +34,7 @@ export const useDnDHelpers = (
       return;
     }
 
-    const item = el.closest("[data-node-id]") as HTMLElement | null;
+    const item = el.closest('[data-node-id]') as HTMLElement | null;
     if (!item) {
       dropTargetId.current = null;
       dropPos.current = null;
@@ -51,9 +51,9 @@ export const useDnDHelpers = (
     const r = item.getBoundingClientRect();
     const y = ev.clientY - r.top;
     const h = r.height;
-    if (y < h * 0.25) dropPos.current = "above";
-    else if (y > h * 0.75) dropPos.current = "below";
-    else dropPos.current = "inside";
+    if (y < h * 0.25) dropPos.current = 'above';
+    else if (y > h * 0.75) dropPos.current = 'below';
+    else dropPos.current = 'inside';
     dropTargetId.current = id;
   }
 
@@ -78,7 +78,7 @@ export const useDnDHelpers = (
   function onDragStart(e: React.MouseEvent) {
     e.preventDefault();
     const nodeEl = (e.target as HTMLElement)?.closest(
-      "[data-node-id]",
+      '[data-node-id]',
     ) as HTMLElement | null;
     if (!nodeEl) return;
     const id = nodeEl.dataset.nodeId!;
@@ -86,13 +86,13 @@ export const useDnDHelpers = (
 
     const rect = nodeEl.getBoundingClientRect();
     const clone = nodeEl.cloneNode(true) as HTMLElement;
-    clone.style.position = "fixed";
+    clone.style.position = 'fixed';
     clone.style.left = `${rect.left}px`;
     clone.style.top = `${rect.top}px`;
     clone.style.width = `${rect.width}px`;
-    clone.style.pointerEvents = "none";
-    clone.style.opacity = "0.85";
-    clone.style.zIndex = "9999";
+    clone.style.pointerEvents = 'none';
+    clone.style.opacity = '0.85';
+    clone.style.zIndex = '9999';
     document.body.appendChild(clone);
 
     cloneRef.current = {

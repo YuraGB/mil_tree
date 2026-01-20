@@ -1,17 +1,17 @@
-import { TMarkCoordinates, TMArkGeometry } from "@/types/map";
-import { Circle, Polyline } from "react-leaflet";
-import { geoPointToLatLng, geoPolygonToLatLngs } from "../utils";
+import { TMarkCoordinates, TMArkGeometry } from '@/types/map';
+import { Circle, Polyline } from 'react-leaflet';
+import { geoPointToLatLng, geoPolygonToLatLngs } from '../utils';
 
 export const MarkComponent = ({ markData }: { markData: TMArkGeometry }) => {
   switch (markData.type) {
-    case "Point":
+    case 'Point':
       return (
         <Circle
           center={geoPointToLatLng(markData.coordinates as TMarkCoordinates)}
           radius={markData.properties?.radius ?? 100}
         />
       );
-    case "Circle":
+    case 'Circle':
       return (
         <Circle
           center={geoPointToLatLng(
@@ -21,14 +21,14 @@ export const MarkComponent = ({ markData }: { markData: TMArkGeometry }) => {
         />
       );
 
-    case "Polygon":
+    case 'Polygon':
       return (
         <Polyline
-          fillColor='green'
+          fillColor="green"
           fillOpacity={0.4}
           fill={true}
-          fillRule='evenodd'
-          lineCap='butt'
+          fillRule="evenodd"
+          lineCap="butt"
           stroke={false}
           smoothFactor={2}
           interactive={false}

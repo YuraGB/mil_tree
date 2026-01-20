@@ -1,5 +1,5 @@
-import { MARK_TYPES } from "@/constants";
-import z from "zod";
+import { MARK_TYPES } from '@/constants';
+import z from 'zod';
 
 export const MarkCoordinatesSchema = z.tuple([z.number(), z.number()]);
 
@@ -31,7 +31,7 @@ export const deleteMarkSchema = z.object({
 
 const PointSchema = z.object({
   id: z.string(),
-  type: z.literal("Point"),
+  type: z.literal('Point'),
   coordinates: z.tuple([z.number(), z.number()]),
   properties: z
     .object({
@@ -42,14 +42,14 @@ const PointSchema = z.object({
 
 const PolygonSchema = z.object({
   id: z.string(),
-  type: z.literal("Polygon"),
+  type: z.literal('Polygon'),
   coordinates: z.array(z.array(z.tuple([z.number(), z.number()]))),
   properties: z.record(z.string(), z.any()),
 });
 
 const CircleSchema = z.object({
   id: z.string(),
-  type: z.literal("Circle"),
+  type: z.literal('Circle'),
   coordinates: z.object({
     center: z.tuple([z.number(), z.number()]),
     radius: z.number(),
@@ -57,7 +57,7 @@ const CircleSchema = z.object({
   properties: z.record(z.string(), z.any()),
 });
 
-export const MarkSchema = z.discriminatedUnion("type", [
+export const MarkSchema = z.discriminatedUnion('type', [
   PointSchema,
   PolygonSchema,
   CircleSchema,

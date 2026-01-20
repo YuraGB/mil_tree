@@ -1,4 +1,4 @@
-import { LayerWithMeta, TMArkGeometry, TMarkJson } from "@/types/map";
+import { LayerWithMeta, TMArkGeometry, TMarkJson } from '@/types/map';
 
 export type GeoJSONLayer = LayerWithMeta & {
   toGeoJSON: () => GeoJSON.GeoJsonObject;
@@ -29,17 +29,16 @@ export const toGeoJSONSafe = (layer: GeoJSONLayer): TMarkJson | null => {
  */
 export const getPropertiesToPayload = async (layer: GeoJSONLayer) => {
   const geo = toGeoJSONSafe(layer);
-  const id = crypto.randomUUID();
+  const existingId = (layer as LayerWithMeta).options.serverId;
+  const id = existingId ?? crypto.randomUUID();
   (layer as LayerWithMeta).options.serverId = id;
-  const properties: TMArkGeometry["properties"] = {
+  const properties: TMArkGeometry['properties'] = {
     ...(geo?.properties ?? {}),
     serverId: id,
   };
-
-  if ("getRadius" in layer && typeof layer.getRadius === "function") {
+  if ('getRadius' in layer && typeof layer.getRadius === 'function') {
     properties.radius = (await layer.getRadius?.()) ?? 10;
   }
-
   return {
     geometry: geo?.geometry,
     properties,
