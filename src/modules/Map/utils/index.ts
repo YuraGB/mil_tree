@@ -36,7 +36,7 @@ export const getPropertiesToPayload = async (layer: GeoJSONLayer) => {
     serverId: id,
   };
 
-  if ("getRadius" in layer && typeof typeof layer.getRadius === "function") {
+  if ("getRadius" in layer && typeof layer.getRadius === "function") {
     properties.radius = (await layer.getRadius?.()) ?? 10;
   }
 
