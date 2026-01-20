@@ -10,6 +10,7 @@ import {
   createUpdateMarkSchema,
   deleteMarkSchema,
 } from "./map.validation.schemas";
+import { formatMarkDataFromDb } from "@/lib/formatMarkDataFromDb";
 
 // Routes
 export const mapRoutes = new Elysia({
@@ -17,8 +18,18 @@ export const mapRoutes = new Elysia({
 })
   // Handler
   .get("/map", async () => {
-    return await getAllMarkTypes();
+    const raw = await getAllMarkTypes();
+
+    const { valid, invalid } = formatMarkDataFromDb(raw);
+
+    if (invalid && invalid.length) {
+      console.warn("Invalid map marks:", invalid);
+    }
+
+    return valid;
   })
+
+  // Post Route
   .post(
     "/createMapMark",
     // Handler
@@ -33,7 +44,10 @@ export const mapRoutes = new Elysia({
   .put(
     "/updateMarks",
     async ({ body }) => {
-      return await updateMark(body);
+      const updateMarks = await updateMark(body);
+
+      const { valid, invalid } = formatMarkDataFromDb(updateMarks);
+      return;
     },
     // Validation schema
     {
