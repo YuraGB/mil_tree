@@ -1,12 +1,12 @@
-"use client";
-import dynamic from "next/dynamic";
-import { Button } from "@/components/ui/button";
-import { useEditorIndex } from "./hooks/useEditorIndex";
-import { EditorIndexProps } from "@/types";
-import React from "react";
+'use client';
+import dynamic from 'next/dynamic';
+import { Button } from '@/components/ui/button';
+import { useEditorIndex } from './hooks/useEditorIndex';
+import { EditorIndexProps } from '@/types';
+import React from 'react';
 
 const EditorClient = dynamic(
-  () => import("./EditorComponent").then((mod) => mod.default),
+  () => import('./EditorComponent').then((mod) => mod.default),
   { ssr: false },
 );
 
@@ -40,7 +40,7 @@ function EditorIndex(props: EditorIndexProps) {
       />
       <div className="controls">
         <label>
-          Read Only:{" "}
+          Read Only:{' '}
           <input
             type="checkbox"
             checked={readOnly}

@@ -1,11 +1,11 @@
-import { MapContainer, TileLayer, FeatureGroup } from "react-leaflet";
-import { EditControl } from "react-leaflet-draw";
+import { MapContainer, TileLayer, FeatureGroup } from 'react-leaflet';
+import { EditControl } from 'react-leaflet-draw';
 
-import "leaflet/dist/leaflet.css";
-import "leaflet-draw/dist/leaflet.draw.css";
-import { useMapDraw } from "./hooks/useMapDraw";
-import { MAP_ATTR_URL, MAP_MAP_ATTR_URL } from "@/constants";
-import { MarkComponent } from "./components/Mark";
+import 'leaflet/dist/leaflet.css';
+import 'leaflet-draw/dist/leaflet.draw.css';
+import { useMapDraw } from './hooks/useMapDraw';
+import { MAP_ATTR_URL, MAP_MAP_ATTR_URL } from '@/constants';
+import { MarkComponent } from './components/Mark';
 
 const MapComponent = () => {
   const { onCreate, onDelete, onEditPath, initialMarks } = useMapDraw();
@@ -13,13 +13,13 @@ const MapComponent = () => {
     <MapContainer
       center={[51.505, -0.09]}
       zoom={13}
-      style={{ height: "500px", width: "100%" }}
+      style={{ height: '500px', width: '100%' }}
     >
       <TileLayer attribution={MAP_MAP_ATTR_URL} url={MAP_ATTR_URL} />
 
       <FeatureGroup>
         <EditControl
-          position='topright'
+          position="topright"
           onEdited={onEditPath}
           onCreated={onCreate}
           onDeleted={onDelete}

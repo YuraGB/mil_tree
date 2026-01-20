@@ -1,6 +1,6 @@
-import { PersonNode } from "@/types/persons";
-import { UnitNode } from "@/types/units";
-import { useState } from "react";
+import { PersonNode } from '@/types/persons';
+import { UnitNode } from '@/types/units';
+import { useState } from 'react';
 
 export const useSearch = (data: UnitNode) => {
   const [results, setSearchResults] = useState<PersonNode[]>([]);
@@ -31,7 +31,7 @@ export const useSearch = (data: UnitNode) => {
   };
 
   function isUnitNode(node: UnitNode) {
-    return "commander" in node;
+    return 'commander' in node;
   }
 
   const onSearchChange = (value: string) => {

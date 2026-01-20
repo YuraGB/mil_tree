@@ -1,5 +1,5 @@
-import { AssignmentRole, TAwardName, TRank, TStatusCodes } from "../persons";
-import { TUnit } from "../units";
+import { AssignmentRole, TAwardName, TRank, TStatusCodes } from '../persons';
+import { TUnit } from '../units';
 
 export interface Unit {
   type: TUnit;
@@ -11,7 +11,7 @@ export interface Person {
   name: string;
   rank: TRank;
   statusCode: TStatusCodes;
-  assignmentRole: AssignmentRole | "soldier";
+  assignmentRole: AssignmentRole | 'soldier';
   awards: TAwardName[];
   unit: Unit;
   subordinates?: TreeNode[];
@@ -29,7 +29,7 @@ export interface CommandNode {
 export type TreeNode = Person | CommandNode;
 
 export interface BrigadeRoot {
-  unitType: "brigade";
+  unitType: 'brigade';
   unitName: string;
   commander: Person;
 }

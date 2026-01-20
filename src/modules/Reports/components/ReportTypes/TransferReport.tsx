@@ -6,25 +6,25 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { ITransferReport } from "@/types/reports/";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import z from "zod";
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { ITransferReport } from '@/types/reports/';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import z from 'zod';
 
 const formSchema = z.object({
   assignedTo: z.string().min(2, {
-    message: "Assigned To must be at least 2 characters.",
+    message: 'Assigned To must be at least 2 characters.',
   }),
   transferFrom: z.string().min(2, {
-    message: "Transfer From must be at least 2 characters.",
+    message: 'Transfer From must be at least 2 characters.',
   }),
   transferTo: z.string().min(2, {
-    message: "Transfer To must be at least 2 characters.",
+    message: 'Transfer To must be at least 2 characters.',
   }),
   reason: z.string().min(10, {
-    message: "Reason must be at least 10 characters.",
+    message: 'Reason must be at least 10 characters.',
   }),
 });
 
@@ -35,10 +35,10 @@ export const TransferReport: React.FC<{
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      assignedTo: reportData?.assignedToPersonId || "",
-      transferFrom: reportData?.transferFrom || "",
-      transferTo: reportData?.transferTo || "",
-      reason: reportData?.reason || "",
+      assignedTo: reportData?.assignedToPersonId || '',
+      transferFrom: reportData?.transferFrom || '',
+      transferTo: reportData?.transferTo || '',
+      reason: reportData?.reason || '',
     },
   });
   const onSubmit = (values: z.infer<typeof formSchema>) => {

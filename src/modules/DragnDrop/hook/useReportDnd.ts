@@ -1,8 +1,8 @@
-"use client";
-import { useCallback, useEffect } from "react";
-import { useDnDHelpers } from "./helpers";
-import { findReport, moveReport } from "@/lib/dndMoveReports";
-import { TReportView, TRoot } from "@/types/reports";
+'use client';
+import { useCallback, useEffect } from 'react';
+import { useDnDHelpers } from './helpers';
+import { findReport, moveReport } from '@/lib/dndMoveReports';
+import { TReportView, TRoot } from '@/types/reports';
 
 export function useReportDnD(
   root: { [name: string]: TReportView[] },
@@ -11,7 +11,7 @@ export function useReportDnD(
   // this will update the Reports state
   // This callback will trigger if drag and drop will be successfull
   const onUpdateStateCallback = useCallback(
-    (draggingId: TReportView["id"], dropTargetId: TReportView["id"]) => {
+    (draggingId: TReportView['id'], dropTargetId: TReportView['id']) => {
       setRoot((prev) => {
         const found = findReport(prev, draggingId);
         if (!found) return prev;
@@ -33,11 +33,11 @@ export function useReportDnD(
     useDnDHelpers(onUpdateStateCallback);
 
   useEffect(() => {
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseup", onUp);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
     return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseup", onUp);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
     };
   }, [draggingId, dropTargetId, dropPos, root, setRoot, onMove, onUp]);
 

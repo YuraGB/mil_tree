@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { CreateReport } from "../ReportTypes";
-import { EditReport } from "../EditReport";
-import { Report } from "@/types/reports";
-import { useReportDialog } from "../../hooks/useReportDialog";
-import { ReportDialogFooter } from "./RepordDialogFooter";
-import { CreateReportDialogHeader } from "./CreateReportDialogHeader";
-import { EditReportDialogHeader } from "./EditReportDialogHeader";
+import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
+import { CreateReport } from '../ReportTypes';
+import { EditReport } from '../EditReport';
+import { Report } from '@/types/reports';
+import { useReportDialog } from '../../hooks/useReportDialog';
+import { ReportDialogFooter } from './RepordDialogFooter';
+import { CreateReportDialogHeader } from './CreateReportDialogHeader';
+import { EditReportDialogHeader } from './EditReportDialogHeader';
 
 export function ReportDialog({
   selectedReport,
@@ -22,11 +22,11 @@ export function ReportDialog({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant='outline' onClick={onClickHandler}>
+        <Button variant="outline" onClick={onClickHandler}>
           Create Dialog
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className="sm:max-w-[425px]">
         {selectedReport ? (
           <>
             <EditReportDialogHeader />

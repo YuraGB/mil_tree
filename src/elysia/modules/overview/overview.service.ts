@@ -1,7 +1,7 @@
-import { getAllPersons } from "@/elysia/modules/person/person.service";
-import { getAllUnits } from "@/elysia/modules/unit/unit.service";
-import { PersonNode } from "@/types/persons";
-import { buildUnitNode, indexById, mapPerson } from "./utils.ts";
+import { getAllPersons } from '@/elysia/modules/person/person.service';
+import { getAllUnits } from '@/elysia/modules/unit/unit.service';
+import { PersonNode } from '@/types/persons';
+import { buildUnitNode, indexById, mapPerson } from './utils.ts';
 
 /**
  * getOverview

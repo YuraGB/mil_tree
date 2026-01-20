@@ -1,28 +1,28 @@
-import { ASSIGNMENT_ROLES, AWARDS, RANKS, STATUSES } from "@/constants";
-import { person } from "@/db/schemas/auth-schema";
+import { ASSIGNMENT_ROLES, AWARDS, RANKS, STATUSES } from '@/constants';
+import { person } from '@/db/schemas/auth-schema';
 
 export type TDBPerson = typeof person.$inferSelect;
 
-export type TPerson = Omit<TDBPerson, "createdAt" | "updatedAt">;
+export type TPerson = Omit<TDBPerson, 'createdAt' | 'updatedAt'>;
 
 // status selector types
 export type TStatusIcons =
-  | "skull"
-  | "bandage"
-  | "alert"
-  | "warning"
-  | "question"
-  | "ambulance"
-  | "shield";
+  | 'skull'
+  | 'bandage'
+  | 'alert'
+  | 'warning'
+  | 'question'
+  | 'ambulance'
+  | 'shield';
 
 export type TStatusCodes =
-  | "200" // KIA
-  | "300" // WIA
-  | "400" // Concussion
-  | "500" // Insubordination
-  | "600" // MIA
-  | "700" // Evacuation
-  | "800"; // Active
+  | '200' // KIA
+  | '300' // WIA
+  | '400' // Concussion
+  | '500' // Insubordination
+  | '600' // MIA
+  | '700' // Evacuation
+  | '800'; // Active
 
 export interface IStatus {
   code: keyof typeof STATUSES;
@@ -35,14 +35,14 @@ export interface IStatus {
 export type TRank = (typeof RANKS)[number];
 
 // Awards
-export type TAwardName = (typeof AWARDS)[number]["name"];
+export type TAwardName = (typeof AWARDS)[number]['name'];
 
 export interface IAward {
   name: TAwardName;
   title: string;
   description: string;
   icon: string; // emoji or url
-  category: "State" | "MOD" | "GeneralStaff" | "Command" | "Unit";
+  category: 'State' | 'MOD' | 'GeneralStaff' | 'Command' | 'Unit';
 }
 
 export type AssignmentRole =

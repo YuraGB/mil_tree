@@ -1,7 +1,7 @@
-"use client";
-import WidgetSelector from "@/components/WidgetSelector";
-import { useWidget } from "./hooks/useWidget";
-import { ButtonSave } from "./components/ButtonSave";
+'use client';
+import WidgetSelector from '@/components/WidgetSelector';
+import { useWidget } from './hooks/useWidget';
+import { ButtonSave } from './components/ButtonSave';
 
 export const WidgetPage = ({ personId }: { personId: string }) => {
   console.log(personId);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -6,8 +6,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
+} from '@/components/ui/dropdown-menu';
+import { Button } from '@/components/ui/button';
 interface ISelectProps {
   values: {
     key: string;
@@ -45,7 +45,7 @@ const MultiSelect = ({ values }: ISelectProps) => {
         >
           <DropdownMenuLabel>Appearance</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {values.map((value: ISelectProps["values"][0], index: number) => {
+          {values.map((value: ISelectProps['values'][0], index: number) => {
             return (
               <DropdownMenuCheckboxItem
                 onSelect={(e) => e.preventDefault()}

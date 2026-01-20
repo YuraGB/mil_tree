@@ -1,14 +1,14 @@
-import { IWidgetProps } from "@/types";
-import { memo } from "react";
-import WidgetContainer from "../WidgetConteiner";
-import { STATUSES } from "@/constants";
+import { IWidgetProps } from '@/types';
+import { memo } from 'react';
+import WidgetContainer from '../WidgetConteiner';
+import { STATUSES } from '@/constants';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 export const StatusSelectorWidjet = memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
@@ -21,7 +21,7 @@ export const StatusSelectorWidjet = memo(
       >
         <Select
           onValueChange={(val) => saveWidget(widget.id, { status: val })}
-          value={widget.props?.status || ""}
+          value={widget.props?.status || ''}
         >
           <SelectTrigger className="w-[200px]">
             <SelectValue placeholder="Select a widget to display" />
@@ -43,4 +43,4 @@ export const StatusSelectorWidjet = memo(
   },
 );
 
-StatusSelectorWidjet.displayName = "StatusSelectorWidjet";
+StatusSelectorWidjet.displayName = 'StatusSelectorWidjet';

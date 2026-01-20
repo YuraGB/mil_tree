@@ -1,13 +1,13 @@
-import { pgTable, uuid, varchar, jsonb, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, uuid, varchar, jsonb, timestamp } from 'drizzle-orm/pg-core';
 
-export const mapMarks = pgTable("map_marks", {
-  id: uuid("id").primaryKey().defaultRandom(),
+export const mapMarks = pgTable('map_marks', {
+  id: uuid('id').primaryKey().defaultRandom(),
 
-  type: varchar("type", {
-    enum: ["Point", "LineString", "Polygon", "Circle"],
+  type: varchar('type', {
+    enum: ['Point', 'LineString', 'Polygon', 'Circle'],
   }).notNull(),
 
-  coordinates: jsonb("coordinates").notNull(),
+  coordinates: jsonb('coordinates').notNull(),
   /*
     coordinates = {
       [number, number], // for Point
@@ -17,7 +17,7 @@ export const mapMarks = pgTable("map_marks", {
     }
   */
 
-  properties: jsonb("properties").default({}),
+  properties: jsonb('properties').default({}),
   /*
     properties = {
       radius?: number,
@@ -27,6 +27,6 @@ export const mapMarks = pgTable("map_marks", {
     }
   */
 
-  createdAt: timestamp("created_at").defaultNow(),
-  updatedAt: timestamp("updated_at").defaultNow(),
+  createdAt: timestamp('created_at').defaultNow(),
+  updatedAt: timestamp('updated_at').defaultNow(),
 });

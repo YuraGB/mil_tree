@@ -1,8 +1,8 @@
-import { useReportDnD } from "@/modules/DragnDrop/hook/useReportDnd";
-import { useEffect, useState } from "react";
+import { useReportDnD } from '@/modules/DragnDrop/hook/useReportDnd';
+import { useEffect, useState } from 'react';
 
-import { TDBPerson } from "@/types/persons";
-import { Report, TReportView } from "@/types/reports";
+import { TDBPerson } from '@/types/persons';
+import { Report, TReportView } from '@/types/reports';
 
 const buildReportsMap = (
   reports: Report[],

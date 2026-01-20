@@ -1,6 +1,6 @@
-import { api } from "@/elysia/eden";
-import { TMArkGeometry } from "@/types/map";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { api } from '@/elysia/eden';
+import { TMArkGeometry } from '@/types/map';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 // Map service hook
 // CRUD operations for map marks
@@ -11,7 +11,7 @@ export const useMapService = () => {
     error: errorMapData,
     isPending: loadingMapData,
   } = useQuery({
-    queryKey: ["map-data"],
+    queryKey: ['map-data'],
     queryFn: () => api.map.get(),
   });
 

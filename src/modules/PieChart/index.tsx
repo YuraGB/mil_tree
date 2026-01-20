@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import { Cell, Pie, PieChart } from "recharts";
+'use client';
+import React from 'react';
+import { Cell, Pie, PieChart } from 'recharts';
 import {
   Card,
   CardContent,
@@ -8,19 +8,19 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from '@/components/ui/card';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart";
-import { Widget } from "@/types";
-import { useChartPie } from "./hooks/useChartPie";
-import { TooltipProps } from "recharts";
+} from '@/components/ui/chart';
+import { Widget } from '@/types';
+import { useChartPie } from './hooks/useChartPie';
+import { TooltipProps } from 'recharts';
 
-export const description = "A pie chart with no separator";
+export const description = 'A pie chart with no separator';
 
-const tooltipFormatter: TooltipProps<number, string>["formatter"] = (name) => [
+const tooltipFormatter: TooltipProps<number, string>['formatter'] = (name) => [
   `Created at ${name}`,
 ];
 
@@ -70,6 +70,6 @@ function ChartPieComponent({ widgets }: { widgets?: Widget[] }) {
   );
 }
 
-ChartPieComponent.displayName = "ChartPieComponent";
+ChartPieComponent.displayName = 'ChartPieComponent';
 // ✅ Обгортаємо в React.memo — не ререндериться, якщо widgets не змінились за посиланням
 export const ChartPie = React.memo(ChartPieComponent);

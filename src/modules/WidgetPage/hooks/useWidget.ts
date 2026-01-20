@@ -1,6 +1,6 @@
-import { TWidgetNames, Widget } from "@/types";
-import { useCallback, useState } from "react";
-import { useWidgetType } from "./useWidgetType";
+import { TWidgetNames, Widget } from '@/types';
+import { useCallback, useState } from 'react';
+import { useWidgetType } from './useWidgetType';
 
 export const useWidget = () => {
   const [widgets, setWidgets] = useState<Widget[]>([]);

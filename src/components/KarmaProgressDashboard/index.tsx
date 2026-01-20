@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 
 export default function KarmaBar({
   valueDefault,
@@ -21,9 +21,9 @@ export default function KarmaBar({
   };
 
   const getColor = () => {
-    if (value < 0) return "bg-red-500";
-    if (value > 0) return "bg-green-500";
-    return "bg-gray-400";
+    if (value < 0) return 'bg-red-500';
+    if (value > 0) return 'bg-green-500';
+    return 'bg-gray-400';
   };
 
   return (
@@ -35,7 +35,7 @@ export default function KarmaBar({
         <div
           className={`absolute top-0 h-6 ${getColor()}`}
           style={{
-            left: value < 0 ? `${50 + value / 2}%` : "50%",
+            left: value < 0 ? `${50 + value / 2}%` : '50%',
             width: `${Math.abs(value) / 2}%`,
           }}
         />

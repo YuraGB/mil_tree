@@ -1,6 +1,6 @@
-import { WidgetContainerProps } from "@/types";
-import { Tooltip } from "@/components/ui/tooltip"; // Update this import to your actual UI tooltip component
-import { TooltipContent, TooltipTrigger } from "@radix-ui/react-tooltip";
+import { WidgetContainerProps } from '@/types';
+import { Tooltip } from '@/components/ui/tooltip'; // Update this import to your actual UI tooltip component
+import { TooltipContent, TooltipTrigger } from '@radix-ui/react-tooltip';
 
 const WidgetContainer = ({
   children,
@@ -15,10 +15,10 @@ const WidgetContainer = ({
         <section className="flex flex-col justify-items-end gap-2">
           <h3>
             {widgetName[0].toUpperCase() +
-              widgetName.substring(1).replace("-", " ").replace("_", " ")}
+              widgetName.substring(1).replace('-', ' ').replace('_', ' ')}
           </h3>
           <span className="text-sm opacity-50">
-            {widgetDate.toLocaleDateString()}{" "}
+            {widgetDate.toLocaleDateString()}{' '}
           </span>
         </section>
         <Tooltip defaultOpen={false} delayDuration={200}>

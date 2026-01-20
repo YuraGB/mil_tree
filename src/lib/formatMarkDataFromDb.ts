@@ -1,13 +1,19 @@
-import { getAllMarkTypes, updateMark } from "@/elysia/modules/map/map.service";
-import { MarkSchema } from "@/elysia/modules/map/map.validation.schemas";
-import { TMark } from "@/types/map";
-import { ZodFormattedError } from "zod";
+import { getAllMarkTypes, updateMark } from '@/elysia/modules/map/map.service';
+import { MarkSchema } from '@/elysia/modules/map/map.validation.schemas';
+import { TMark } from '@/types/map';
+import { ZodFormattedError } from 'zod';
 
 export const formatMarkDataFromDb = (
-  raw: Awaited< ReturnType<typeof getAllMarkTypes>> | Awaited< ReturnType<typeof updateMark>> ,
+  raw:
+    | Awaited<ReturnType<typeof getAllMarkTypes>>
+    | Awaited<ReturnType<typeof updateMark>>,
 ) => {
-  let valid;
-  let invalid;
+  let valid: TMark[] = [];
+  let invalid: ZodFormattedError<string | undefined>[] = [];
+
+  if (raw == null) {
+    return { valid, invalid };
+  }
   if (Array.isArray(raw)) {
     const parsed = raw.map((item) => ({
       raw: item,

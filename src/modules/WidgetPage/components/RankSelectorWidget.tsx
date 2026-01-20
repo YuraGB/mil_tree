@@ -1,14 +1,14 @@
-import { IWidgetProps } from "@/types";
-import { memo } from "react";
-import WidgetContainer from "../WidgetConteiner";
-import { RANKS } from "@/constants";
+import { IWidgetProps } from '@/types';
+import { memo } from 'react';
+import WidgetContainer from '../WidgetConteiner';
+import { RANKS } from '@/constants';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from '@/components/ui/select';
 
 export const RankSelectorWidget = memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
@@ -21,7 +21,7 @@ export const RankSelectorWidget = memo(
       >
         <Select
           onValueChange={(val) => saveWidget(widget.id, { rank: val })}
-          value={widget.props?.rank || ""}
+          value={widget.props?.rank || ''}
         >
           <SelectTrigger className="w-[200px]">
             <SelectValue placeholder="Select a widget to display" />
@@ -43,4 +43,4 @@ export const RankSelectorWidget = memo(
   },
 );
 
-RankSelectorWidget.displayName = "RankSelectorWidget";
+RankSelectorWidget.displayName = 'RankSelectorWidget';

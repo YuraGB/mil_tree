@@ -1,6 +1,6 @@
-import { ChartConfig } from "@/components/ui/chart";
-import { Widget } from "@/types";
-import { useMemo } from "react";
+import { ChartConfig } from '@/components/ui/chart';
+import { Widget } from '@/types';
+import { useMemo } from 'react';
 
 export const useChartPie = (widgets: Widget[]) => {
   // ✅ Мемоїзуємо baseConfig — не перераховується, якщо widgets не змінились
@@ -14,8 +14,8 @@ export const useChartPie = (widgets: Widget[]) => {
           label: key.createdAt.toDateString(),
           color:
             Number(karma) > 0
-              ? "var(--color-success)"
-              : "var(--color-destructive)",
+              ? 'var(--color-success)'
+              : 'var(--color-destructive)',
         };
       }
     }
@@ -27,7 +27,7 @@ export const useChartPie = (widgets: Widget[]) => {
   const chartData = useMemo(() => {
     return (
       widgets
-        ?.filter((w) => typeof w.props?.karmaValue === "number")
+        ?.filter((w) => typeof w.props?.karmaValue === 'number')
         .map((w, i, arr) => {
           const karma = Number(w.props!.karmaValue || 0);
           const abs = Math.abs(karma);
