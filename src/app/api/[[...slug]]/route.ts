@@ -9,6 +9,8 @@ import { overviewRoute } from "@/elysia/modules/overview/overview.route";
 import { reportRoutes } from "@/elysia/modules/report/report.route";
 import { personRoutes } from "@/elysia/modules/person/person.route";
 import { mapRoutes } from "@/elysia/modules/map/map.route";
+import { ZodError } from "zod";
+import { ValidationErrorLike } from "@/types/map";
 
 const isNext = process.env.NEXT_RUNTIME === "nodejs";
 
@@ -54,7 +56,25 @@ const app = new Elysia()
       .use(personRoutes)
       .use(mapRoutes)
       .onError(({ code, error, set }) => {
-        set.status = code === "NOT_FOUND" ? 404 : 500;
+        if (
+          typeof error === "object" &&
+          error !== null &&
+          "type" in error &&
+          error.type === "body"
+        ) {
+          set.status = 400;
+
+          const issues = extractIssues(error);
+
+          return {
+            message: "Validation error",
+            errors: issues?.map((issue) => ({
+              field: issue?.path?.join(".") ?? "body",
+              message: issue?.message ?? "Invalid value",
+            })),
+          };
+        }
+
         return stringifyObjectUtil({
           error:
             error instanceof Error
@@ -84,3 +104,21 @@ export const POST = app.fetch;
 export const PUT = app.fetch;
 export const DELETE = app.fetch;
 export const PATCH = app.fetch;
+
+function extractIssues(error: unknown) {
+  if (
+    typeof error === "object" &&
+    error !== null &&
+    "errors" in error &&
+    Array.isArray((error as ValidationErrorLike).errors)
+  ) {
+    return (error as ValidationErrorLike).errors;
+  }
+
+  // fallback на одиночну помилку
+  if (typeof error === "object" && error !== null && "valueError" in error) {
+    return [(error as ValidationErrorLike).valueError];
+  }
+
+  return [];
+}

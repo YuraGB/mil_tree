@@ -7,9 +7,16 @@ import { eq } from "drizzle-orm";
  *
  * @returns {TDBMark[]}array of all mark types
  */
-export const getAllMarkTypes = async (): Promise<TDBMark[]> => {
+export const getAllMarkTypes = async (): Promise<TMark[]> => {
   try {
-    return await db.select().from(mapMarks);
+    return await db
+      .select({
+        id: mapMarks.id,
+        type: mapMarks.type,
+        coordinates: mapMarks.coordinates,
+        properties: mapMarks.properties,
+      })
+      .from(mapMarks);
   } catch (e) {
     console.error("Error fetching marks:", e);
     return [];
@@ -64,9 +71,7 @@ export const deleteMark = async (markId: string): Promise<string | null> => {
  * @param updateData {TMark}
  * @returns
  */
-export const updateMark = async (
-  updateData: TMark
-): Promise<TDBMark | null> => {
+export const updateMark = async (updateData: TMark): Promise<TMark | null> => {
   try {
     const [updated] = await db
       .update(mapMarks)
@@ -75,7 +80,12 @@ export const updateMark = async (
         updatedAt: new Date(),
       })
       .where(eq(mapMarks.id, updateData.id))
-      .returning();
+      .returning({
+        id: mapMarks.id,
+        type: mapMarks.type,
+        coordinates: mapMarks.coordinates,
+        properties: mapMarks.properties,
+      });
 
     return updated ?? null;
   } catch (e) {

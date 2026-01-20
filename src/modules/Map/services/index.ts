@@ -1,16 +1,19 @@
 import { api } from "@/elysia/eden";
 import { TMArkGeometry } from "@/types/map";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
+// Map service hook
+// CRUD operations for map marks
+// Create, Read, Update, Delete
 export const useMapService = () => {
-  //   const {
-  //     data: mapData,
-  //     error: errorMapData,
-  //     isPending: loadingMapData,
-  //   } = useQuery({
-  //     queryKey: ['map-data'],
-  //     queryFn: () => api.map.get(),
-  //   });
+  const {
+    data: mapData,
+    error: errorMapData,
+    isPending: loadingMapData,
+  } = useQuery({
+    queryKey: ["map-data"],
+    queryFn: () => api.map.get(),
+  });
 
   const {
     mutate: onCreateMapMark,
@@ -45,16 +48,18 @@ export const useMapService = () => {
     onDeleteMapMark,
     onCreateMapMark,
     onUpdateMapMark,
-    // onGetMapData,
-    // mapData,
+    mapData,
     deletedMark,
     createdMark,
     updatedMark,
     errorDeleteMark,
     errorUpdateMark,
     errorCreatedMark,
-    // errorMapData,
-    loading: loadingDeleteMark || loadingUpdateMark || loadingCreateMark,
-    //   loadingMapData,
+    errorMapData,
+    loading:
+      loadingDeleteMark ||
+      loadingUpdateMark ||
+      loadingCreateMark ||
+      loadingMapData,
   };
 };

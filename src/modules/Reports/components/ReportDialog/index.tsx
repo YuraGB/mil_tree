@@ -22,24 +22,25 @@ export function ReportDialog({
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline" onClick={onClickHandler}>
+        <Button variant='outline' onClick={onClickHandler}>
           Create Dialog
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className='sm:max-w-[425px]'>
         {selectedReport ? (
-          <EditReportDialogHeader />
+          <>
+            <EditReportDialogHeader />
+            <EditReport report={selectedReport}>
+              <ReportDialogFooter />
+            </EditReport>
+          </>
         ) : (
-          <CreateReportDialogHeader />
-        )}
-        {selectedReport ? (
-          <EditReport report={selectedReport}>
-            <ReportDialogFooter />
-          </EditReport>
-        ) : (
-          <CreateReport>
-            <ReportDialogFooter />
-          </CreateReport>
+          <>
+            <CreateReportDialogHeader />
+            <CreateReport>
+              <ReportDialogFooter />
+            </CreateReport>
+          </>
         )}
       </DialogContent>
     </Dialog>
