@@ -9,7 +9,6 @@ import { overviewRoute } from "@/elysia/modules/overview/overview.route";
 import { reportRoutes } from "@/elysia/modules/report/report.route";
 import { personRoutes } from "@/elysia/modules/person/person.route";
 import { mapRoutes } from "@/elysia/modules/map/map.route";
-import { ZodError } from "zod";
 import { ValidationErrorLike } from "@/types/map";
 
 const isNext = process.env.NEXT_RUNTIME === "nodejs";
@@ -55,7 +54,7 @@ const app = new Elysia()
       .use(reportRoutes)
       .use(personRoutes)
       .use(mapRoutes)
-      .onError(({ code, error, set }) => {
+      .onError(({ error, set }) => {
         if (
           typeof error === "object" &&
           error !== null &&

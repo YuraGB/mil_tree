@@ -47,7 +47,11 @@ export const mapRoutes = new Elysia({
       const updateMarks = await updateMark(body);
 
       const { valid, invalid } = formatMarkDataFromDb(updateMarks);
-      return;
+         if (invalid && invalid.length) {
+      console.warn("Invalid map marks:", invalid);
+    }
+
+    return valid;
     },
     // Validation schema
     {
