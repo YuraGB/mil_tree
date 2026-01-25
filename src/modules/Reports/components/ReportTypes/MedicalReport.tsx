@@ -83,6 +83,20 @@ export const MedicalReport: React.FC<{
             </FormItem>
           )}
         />
+        <FormField
+          control={form.control}
+          name='description'
+          render={({ field }) => (
+            <FormItem className='my-4 border-b pb-4'>
+              <FormLabel>Description:</FormLabel>
+              <FormControl>
+                <Input placeholder='Description' {...field} />
+              </FormControl>
+              <FormDescription>Additional details.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         {children}
       </form>
     </Form>
