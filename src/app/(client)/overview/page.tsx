@@ -1,15 +1,10 @@
-'use cache';
-import { api } from '@/elysia/eden';
-import { OverviewModule } from '@/modules/Overview';
-import { UnitNode } from '@/types/units';
-import { Suspense } from 'react';
+import OverviewData from "@/modules/Overview/OverviewData";
+import { Suspense } from "react";
 
-export default async function Overview() {
-  const { data }: { data: UnitNode | null } = await api.overview.get();
-  if (!data) return null;
+export default function OverviewPage() {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <OverviewModule data={data} />
+    <Suspense fallback={<div>Loading overview…</div>}>
+      <OverviewData />
     </Suspense>
   );
 }

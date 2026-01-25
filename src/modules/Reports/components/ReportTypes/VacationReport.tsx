@@ -1,3 +1,10 @@
+import { IVacationReport, TReportCreateUpdatePayload } from "@/types/reports";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { SelectAssignedTo } from "../SelectAssignedTo";
+import { DataPicker } from "@/components/ui/dataPicker";
+import { vacationFormSchema } from "../../util/formSchemas";
 import {
   Form,
   FormControl,
@@ -6,56 +13,41 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { IVacationReport } from '@/types/reports';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import z from 'zod';
-
-const formSchema = z.object({
-  assignedTo: z.string().min(2, {
-    message: 'Assigned To must be at least 2 characters.',
-  }),
-  vacationFrom: z.string().min(2, {
-    message: 'Vacation From must be at least 2 characters.',
-  }),
-  vacationTo: z.string().min(2, {
-    message: 'Vacation To must be at least 2 characters.',
-  }),
-});
+} from "@/components/ui/form";
 
 export const VacationReport: React.FC<{
   children?: React.ReactNode;
   reportData?: IVacationReport;
-}> = ({ children, reportData }) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  onSubmit: (data: TReportCreateUpdatePayload) => void;
+}> = ({ children, reportData, onSubmit }) => {
+  // Initialize the form with react-hook-form and zod validation
+  const form = useForm<z.infer<typeof vacationFormSchema>>({
+    resolver: zodResolver(vacationFormSchema),
     defaultValues: {
-      assignedTo: reportData?.assignedToPersonId || '',
-      vacationFrom: new Date(reportData?.vacationFrom || '').toLocaleString(),
-      vacationTo: new Date(reportData?.vacationTo || '').toLocaleString(),
+      assignedTo: reportData?.assignedToPersonId || "",
+      vacationFrom: reportData?.vacationFrom
+        ? new Date(reportData.vacationFrom).toISOString()
+        : "",
+      vacationTo: reportData?.vacationTo
+        ? new Date(reportData.vacationTo).toISOString()
+        : "",
+      type: reportData?.type || "vacation",
     },
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
 
   return (
     <Form {...form}>
-      <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
-        <h3 className="mt-1 border-t pt-1">
+      <form id='form-rhf-demo' onSubmit={form.handleSubmit(onSubmit)}>
+        <h3 className='mt-1 border-t pt-1'>
           <b>Vacation Report Form</b>
         </h3>
         <FormField
           control={form.control}
-          name="assignedTo"
+          name='assignedTo'
           render={({ field }) => (
-            <FormItem className="my-4 border-b pb-4">
+            <FormItem className='my-4 border-b pb-4'>
               <FormLabel>Assigned To</FormLabel>
-              <FormControl>
-                <Input placeholder="Commander name" {...field} />
-              </FormControl>
+              <SelectAssignedTo value={field.value} onChange={field.onChange} />
               <FormDescription>
                 The next person in the chain of command.
               </FormDescription>
@@ -65,12 +57,12 @@ export const VacationReport: React.FC<{
         />
         <FormField
           control={form.control}
-          name="vacationFrom"
+          name='vacationFrom'
           render={({ field }) => (
-            <FormItem className="my-4 border-b pb-4">
+            <FormItem className='my-4 border-b pb-4'>
               <FormLabel>Vacation From</FormLabel>
               <FormControl>
-                <Input placeholder="Vacation start date" {...field} />
+                <DataPicker value={field.value} onChange={field.onChange} />
               </FormControl>
               <FormDescription>The start date of the vacation.</FormDescription>
               <FormMessage />
@@ -79,12 +71,12 @@ export const VacationReport: React.FC<{
         />
         <FormField
           control={form.control}
-          name="vacationTo"
+          name='vacationTo'
           render={({ field }) => (
-            <FormItem className="my-4 border-b pb-4">
+            <FormItem className='my-4 border-b pb-4'>
               <FormLabel>Vacation To</FormLabel>
               <FormControl>
-                <Input placeholder="Vacation end date" {...field} />
+                <DataPicker value={field.value} onChange={field.onChange} />
               </FormControl>
               <FormDescription>The end date of the vacation.</FormDescription>
               <FormMessage />

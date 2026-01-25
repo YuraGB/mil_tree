@@ -1,16 +1,21 @@
-import { BASE_URL } from '@/constants';
-import { helmetConfig } from '@/lib/csp';
-import { batchSpanProcessor } from '@/lib/otel/batchSpanProcessor';
-import { otelResource } from '@/lib/otel/resources';
-import cors from '@elysiajs/cors';
-import { opentelemetry } from '@elysiajs/opentelemetry';
-import serverTiming from '@elysiajs/server-timing';
-import { Elysia } from 'elysia';
-import { ip } from 'elysia-ip';
-import { elysiaHelmet } from 'elysiajs-helmet';
+import { BASE_URL } from "@/constants";
+import { helmetConfig } from "@/lib/csp";
+import { batchSpanProcessor } from "@/lib/otel/batchSpanProcessor";
+import { otelResource } from "@/lib/otel/resources";
+import cors from "@elysiajs/cors";
+import { opentelemetry } from "@elysiajs/opentelemetry";
+import serverTiming from "@elysiajs/server-timing";
+import { Elysia } from "elysia";
+import { ip } from "elysia-ip";
+import { elysiaHelmet } from "elysiajs-helmet";
+import { compression } from "../compression/copressionPlagin";
 
-export const utilityRoutes = new Elysia({ name: 'utility_handlers' })
-
+export const utilityRoutes = new Elysia({ name: "utility_handlers" })
+  /**
+   * Applies compression middleware to responses.
+   */
+  .use(compression)
+  // --- Tracing configuration ---
   .trace(
     /**
      * Configures tracing hooks for before/after/error handling.
@@ -35,8 +40,11 @@ export const utilityRoutes = new Elysia({ name: 'utility_handlers' })
       });
     },
   )
+  // --- Security headers configuration ---
   .use(elysiaHelmet(helmetConfig))
+  // --- IP address extraction middleware ---
   .use(ip())
+  // --- OpenTelemetry integration ---
   .use(
     // Only use OpenTelemetry in local development
     batchSpanProcessor
@@ -46,6 +54,7 @@ export const utilityRoutes = new Elysia({ name: 'utility_handlers' })
         })
       : new Elysia(),
   )
+  // --- Server Timing middleware for performance metrics ---
   .use(
     serverTiming({
       trace: {
@@ -65,8 +74,8 @@ export const utilityRoutes = new Elysia({ name: 'utility_handlers' })
   .use(
     cors({
       origin: BASE_URL, // Configurable frontend URL
-      methods: ['GET', 'POST', 'OPTIONS', 'PUT', 'DELETE'], // Specify allowed HTTP methods
-      allowedHeaders: ['Content-Type', 'Authorization'], // Specify allowed headers
+      methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"], // Specify allowed HTTP methods
+      allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
       credentials: true, // Allow credentials (e.g., cookies, authorization headers)
       maxAge: 86_400, // Cache the preflight response for 24 hours
     }),

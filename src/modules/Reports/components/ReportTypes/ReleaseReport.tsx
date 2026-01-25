@@ -6,54 +6,48 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
-import { ITransferReport } from '@/types/reports';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-import z from 'zod';
+} from "@/components/ui/form";
 
-const formSchema = z.object({
-  assignedTo: z.string().min(2, {
-    message: 'Assigned To must be at least 2 characters.',
-  }),
-  releaseDate: z.string().min(10, {
-    message: 'Release date must be at least 10 characters.',
-  }),
-  reason: z.string().min(10, {
-    message: 'Reason must be at least 10 characters.',
-  }),
-});
+import { Input } from "@/components/ui/input";
+import { IReleaseReport, TReportCreateUpdatePayload } from "@/types/reports";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import z from "zod";
+import { SelectAssignedTo } from "../SelectAssignedTo";
+import { DataPicker } from "@/components/ui/dataPicker";
+import { releaseFormSchema } from "../../util/formSchemas";
 
 export const ReleaseReport: React.FC<{
   children?: React.ReactNode;
-  reportData?: ITransferReport;
-}> = ({ children, reportData }) => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: reportData,
+  reportData?: IReleaseReport;
+  onSubmit: (data: TReportCreateUpdatePayload) => void;
+}> = ({ children, reportData, onSubmit }) => {
+  // Initialize the form with react-hook-form and zod validation
+  const form = useForm<z.infer<typeof releaseFormSchema>>({
+    resolver: zodResolver(releaseFormSchema),
+    defaultValues: {
+      type: reportData?.type || "release",
+      assignedTo: reportData?.assignedToPersonId || "",
+      releaseDate: new Date(reportData?.releaseDate || "").toLocaleString(),
+      reason: reportData?.releaseReason || "",
+    },
   });
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
-  };
 
   return (
     <Form {...form}>
-      <form id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+      <form id='form-rhf-demo' onSubmit={form.handleSubmit(onSubmit)}>
         <h3>
-          <b>Complaint Report Form</b>
+          <b>Release Report Form</b>
         </h3>
         <FormField
           control={form.control}
-          name="assignedTo"
+          name='assignedTo'
           render={({ field }) => (
-            <FormItem className="my-4 border-b pb-4">
+            <FormItem className='my-4 border-b pb-4'>
               <FormLabel>Assigned To</FormLabel>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
+              <SelectAssignedTo value={field.value} onChange={field.onChange} />
               <FormDescription>
-                This is your public display name.
+                The next person in the chain of command.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -61,16 +55,28 @@ export const ReleaseReport: React.FC<{
         />
         <FormField
           control={form.control}
-          name="releaseDate"
+          name='releaseDate'
           render={({ field }) => (
-            <FormItem className="my-4 border-b pb-4">
+            <FormItem className='my-4 border-b pb-4'>
               <FormLabel>Release Date</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <DataPicker value={field.value} onChange={field.onChange} />
               </FormControl>
-              <FormDescription>
-                This is your public display name.
-              </FormDescription>
+              <FormDescription>The date of the release.</FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name='reason'
+          render={({ field }) => (
+            <FormItem className='my-4 border-b pb-4'>
+              <FormLabel>Reason</FormLabel>
+              <FormControl>
+                <Input placeholder='Reason' {...field} />
+              </FormControl>
+              <FormDescription>The reason for the release.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
