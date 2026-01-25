@@ -25,8 +25,12 @@ export const VacationReport: React.FC<{
     resolver: zodResolver(vacationFormSchema),
     defaultValues: {
       assignedTo: reportData?.assignedToPersonId || "",
-      vacationFrom: new Date(reportData?.vacationFrom || "").toLocaleString(),
-      vacationTo: new Date(reportData?.vacationTo || "").toLocaleString(),
+      vacationFrom: reportData?.vacationFrom
+        ? new Date(reportData.vacationFrom).toISOString()
+        : "",
+      vacationTo: reportData?.vacationTo
+        ? new Date(reportData.vacationTo).toISOString()
+        : "",
       type: reportData?.type || "vacation",
     },
   });

@@ -17,7 +17,7 @@ function mapReportToForm(
     case "medical":
       return {
         type: "medical",
-        assignedTo: report.toPersonName ?? "",
+        assignedTo: report.assignedToPersonId ?? "",
 
         diagnosis: report.diagnosis ?? "",
         treatment: report.treatment ?? "",
@@ -27,14 +27,14 @@ function mapReportToForm(
     case "complaint":
       return {
         type: "complaint",
-        assignedTo: report.toPersonName ?? "",
+        assignedTo: report.assignedToPersonId ?? "",
         description: report.description ?? "",
       };
 
     case "release":
       return {
         type: "release",
-        assignedTo: report.toPersonName ?? "",
+        assignedTo: report.assignedToPersonId ?? "",
         releaseDate: report.releaseDate
           ? new Date(report.releaseDate).toDateString()
           : new Date().toDateString(),
@@ -44,7 +44,7 @@ function mapReportToForm(
     case "transfer":
       return {
         type: "transfer",
-        assignedTo: report.toPersonName ?? "",
+        assignedTo: report.assignedToPersonId ?? "",
         transferFrom: report.transferFrom ?? "",
         transferTo: report.transferTo ?? "",
         reason: report.decisionReason ?? "",
@@ -53,11 +53,11 @@ function mapReportToForm(
     case "vacation":
       return {
         type: "vacation",
-        assignedTo: report.toPersonName ?? "",
+        assignedTo: report.assignedToPersonId ?? "",
         vacationFrom: report.vacationFrom
           ? new Date(report.vacationFrom).toDateString()
           : new Date().toDateString(),
-        vacationTo: report.vacationFrom
+        vacationTo: report.vacationTo
           ? new Date(report.vacationTo).toDateString()
           : new Date().toDateString(),
       };
