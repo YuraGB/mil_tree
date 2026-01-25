@@ -8,9 +8,14 @@ import serverTiming from "@elysiajs/server-timing";
 import { Elysia } from "elysia";
 import { ip } from "elysia-ip";
 import { elysiaHelmet } from "elysiajs-helmet";
+import { compression } from "../compression/copressionPlagin";
 
 export const utilityRoutes = new Elysia({ name: "utility_handlers" })
-
+  /**
+   * Applies compression middleware to responses.
+   */
+  .use(compression)
+  // --- Tracing configuration ---
   .trace(
     /**
      * Configures tracing hooks for before/after/error handling.
@@ -35,8 +40,11 @@ export const utilityRoutes = new Elysia({ name: "utility_handlers" })
       });
     },
   )
+  // --- Security headers configuration ---
   .use(elysiaHelmet(helmetConfig))
+  // --- IP address extraction middleware ---
   .use(ip())
+  // --- OpenTelemetry integration ---
   .use(
     // Only use OpenTelemetry in local development
     batchSpanProcessor
@@ -46,6 +54,7 @@ export const utilityRoutes = new Elysia({ name: "utility_handlers" })
         })
       : new Elysia(),
   )
+  // --- Server Timing middleware for performance metrics ---
   .use(
     serverTiming({
       trace: {

@@ -64,7 +64,7 @@ export const useDnDHelpers = (
     }
 
     if (draggingId.current && dropTargetId.current && dropPos.current) {
-      // update the state
+      console.log("Dropping");
       callBack(draggingId.current, dropTargetId.current, dropPos.current);
     }
 

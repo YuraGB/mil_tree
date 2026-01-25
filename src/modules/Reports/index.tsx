@@ -1,4 +1,3 @@
-"use cache";
 import ReportsWrapper from "./components/ReportsWrapper";
 import { getReportsData } from "./util/getReportsData";
 
@@ -7,7 +6,7 @@ export const ReportsComponent = async () => {
   if (!data) return null;
 
   return (
-    <article className="scrollbar h-full w-full p-4">
+    <article className='scrollbar h-full w-full p-4'>
       <ReportsWrapper
         reports={data.repsData ?? []}
         persons={data.persData ?? []}

@@ -6,9 +6,11 @@ import { MedicalReport } from "./MedicalReport";
 import { ReleaseReport } from "./ReleaseReport";
 import {
   IMedicalReport,
+  IReleaseReport,
   ITransferReport,
   IVacationReport,
   Report,
+  TReportCreateUpdatePayload,
   TReportType,
 } from "@/types/reports";
 
@@ -16,35 +18,51 @@ export const ReportTypeSwitcher: React.FC<{
   reportType: TReportType | null;
   reportData?: Report;
   children?: React.ReactNode;
-}> = ({ reportType, children, reportData }) => {
+  onSubmit: (data: TReportCreateUpdatePayload) => void;
+}> = ({ reportType, children, reportData, onSubmit }) => {
   switch (reportType) {
     case "complaint":
       return (
-        <ComplaintReport reportData={reportData as Report | undefined}>
+        <ComplaintReport
+          reportData={reportData as Report | undefined}
+          onSubmit={onSubmit}
+        >
           {children}
         </ComplaintReport>
       );
     case "vacation":
       return (
-        <VacationReport reportData={reportData as IVacationReport | undefined}>
+        <VacationReport
+          reportData={reportData as IVacationReport | undefined}
+          onSubmit={onSubmit}
+        >
           {children}
         </VacationReport>
       );
     case "transfer":
       return (
-        <TransferReport reportData={reportData as ITransferReport | undefined}>
+        <TransferReport
+          reportData={reportData as ITransferReport | undefined}
+          onSubmit={onSubmit}
+        >
           {children}
         </TransferReport>
       );
     case "medical":
       return (
-        <MedicalReport reportData={reportData as IMedicalReport | undefined}>
+        <MedicalReport
+          reportData={reportData as IMedicalReport | undefined}
+          onSubmit={onSubmit}
+        >
           {children}
         </MedicalReport>
       );
     case "release":
       return (
-        <ReleaseReport reportData={reportData as ITransferReport}>
+        <ReleaseReport
+          reportData={reportData as IReleaseReport | undefined}
+          onSubmit={onSubmit}
+        >
           {children}
         </ReleaseReport>
       );
