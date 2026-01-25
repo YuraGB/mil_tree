@@ -15,15 +15,16 @@ import {
 type Props = {
   value?: string;
   onChange: (value: string) => void;
+  title?: string;
 };
 
-export function DataPicker({ value, onChange }: Props) {
+export function DataPicker({ value, onChange, title = "Choose date" }: Props) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <div className='flex flex-col gap-3'>
       <Label htmlFor='date' className='px-1'>
-        Date of birth
+        {title}
       </Label>
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
