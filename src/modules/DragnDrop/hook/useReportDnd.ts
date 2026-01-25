@@ -54,12 +54,11 @@ function mapReportToForm(
       return {
         type: "vacation",
         assignedTo: report.toPersonName ?? "",
-        vacationFrom:
-          new Date(report.vacationFrom).toDateString() ??
-          new Date().toDateString(),
+        vacationFrom: report.vacationFrom
+          ? new Date(report.vacationFrom).toDateString()
+          : new Date().toDateString(),
         vacationTo: report.vacationFrom
-          ? (new Date(report.vacationTo).toDateString() ??
-            new Date().toDateString())
+          ? new Date(report.vacationTo).toDateString()
           : new Date().toDateString(),
       };
   }
