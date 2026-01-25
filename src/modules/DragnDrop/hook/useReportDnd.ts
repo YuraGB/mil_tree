@@ -3,7 +3,6 @@ import { useCallback, useEffect } from "react";
 import { useDnDHelpers } from "./helpers";
 import { findReport, moveReport } from "@/lib/dndMoveReports";
 import {
-  Report,
   TReportCreateUpdatePayload,
   TReportView,
   TRoot,
@@ -36,7 +35,9 @@ function mapReportToForm(
       return {
         type: "release",
         assignedTo: report.toPersonName ?? "",
-        releaseDate: new Date(report.releaseDate).toDateString() ?? new Date(),
+        releaseDate: report.releaseDate
+          ? new Date(report.releaseDate).toDateString()
+          : new Date().toDateString(),
         reason: report.decisionReason ?? "",
       };
 
@@ -54,8 +55,12 @@ function mapReportToForm(
         type: "vacation",
         assignedTo: report.toPersonName ?? "",
         vacationFrom:
-          new Date(report.vacationFrom).toDateString() ?? new Date(),
-        vacationTo: new Date(report.vacationTo).toDateString() ?? new Date(),
+          new Date(report.vacationFrom).toDateString() ??
+          new Date().toDateString(),
+        vacationTo: report.vacationFrom
+          ? (new Date(report.vacationTo).toDateString() ??
+            new Date().toDateString())
+          : new Date().toDateString(),
       };
   }
 }

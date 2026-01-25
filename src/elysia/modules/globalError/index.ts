@@ -19,12 +19,11 @@ export const globalError = new Elysia({
         })),
       };
     }
-
+    const customError = (error as { customError?: string } | null)?.customError;
     return {
       type: "validation",
       status: 422,
-      message:
-        (error as { customError?: string })?.customError ?? "Validation failed",
+      message: customError ?? "Validation failed",
     };
   }
 
