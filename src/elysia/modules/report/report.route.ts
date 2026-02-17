@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import { createReport, getAllReports, updateReport } from './report.service';
 import { createUpdateFormSchema } from '@/modules/Reports/util/formSchemas';
-import z, { string, object, array } from 'zod';
+import { string, object, array } from 'zod';
 import { ReportResponseSchema } from '@/types/reports';
 
 export const reportRoutes = new Elysia({
