@@ -1,9 +1,9 @@
-import { Report } from '@/types/reports';
+import { Report, ReportResponse } from '@/types/reports';
 import { useEffect, useState } from 'react';
 
 export const useReportDialog = (
-  selectedReport: Report | null,
-  setSelectedReport: (report: Report | null) => void,
+  selectedReport: ReportResponse | null,
+  setSelectedReport: (report: ReportResponse | null) => void,
 ) => {
   const [open, setOpen] = useState(false);
 

@@ -1,13 +1,13 @@
-import { TDBPerson } from '@/types/persons';
-import { Report, TReportView } from '@/types/reports';
+import { TPersonsRespons } from '@/types/persons';
+import { ReportResponse, TReportView } from '@/types/reports';
 
 export const buildReportsColumns = (
-  reports: Report[],
-  persons: TDBPerson[],
+  reports: ReportResponse[],
+  persons: TPersonsRespons[],
 ): TReportView[] => {
   const personsMap = new Map(persons.map((p) => [p.id, p]));
 
-  const grouped = new Map<string, Report[]>();
+  const grouped = new Map<string, ReportResponse[]>();
 
   for (const r of reports) {
     const personId = r.toPersonId ?? r.fromPersonId;

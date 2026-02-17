@@ -1,16 +1,21 @@
 import { useReportDnD } from '@/modules/DragnDrop/hook/useReportDnd';
 import { useEffect, useState } from 'react';
 
-import { TDBPerson } from '@/types/persons';
-import { Report, TReportView } from '@/types/reports';
+import { Report, ReportResponse, TReportView } from '@/types/reports';
 import { useReportService } from '../services/useReportService';
 import { buildReportsColumns } from '../util/buldReportsMap';
 import { useCreateUpdateForm } from './useCreateUpdateForm';
+import { TPersonsRespons } from '@/types/persons';
 
-export const useReport = (reports: Report[], persons: TDBPerson[]) => {
+export const useReport = (
+  reports: ReportResponse[],
+  persons: TPersonsRespons[],
+) => {
   // Currently selected report
   // Also used as open/close state for the Create/Update report dialog
-  const [selectedReport, setSelectedReport] = useState<Report | null>(null);
+  const [selectedReport, setSelectedReport] = useState<ReportResponse | null>(
+    null,
+  );
 
   const { onSubmit, onUpdateReport } = useCreateUpdateForm(selectedReport);
 

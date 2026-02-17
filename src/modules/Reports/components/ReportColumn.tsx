@@ -1,15 +1,15 @@
-import { TDBPerson } from '@/types/persons';
+import { TPersonsRespons } from '@/types/persons';
 import { ReportColumnItem } from './ReportColumnItem';
-import { Report } from '@/types/reports';
+import { ReportResponse } from '@/types/reports';
 
 export const ReportColumn = ({
   assignPerson,
   reports,
   setSelectedReport,
 }: {
-  assignPerson: TDBPerson;
-  reports: Report[];
-  setSelectedReport: (report: Report | null) => void;
+  assignPerson: TPersonsRespons;
+  reports: ReportResponse[];
+  setSelectedReport: (report: ReportResponse | null) => void;
 }) => {
   return (
     <section

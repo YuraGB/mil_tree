@@ -1,6 +1,7 @@
 import { ASSIGNMENT_ROLES, AWARDS, RANKS, STATUSES } from '@/constants';
 import { person } from '@/db/schemas/auth-schema';
 import { createSelectSchema } from 'drizzle-zod';
+import z from 'zod';
 
 export type TDBPerson = typeof person.$inferSelect;
 
@@ -70,3 +71,5 @@ export type OverviewPersonNode = {
 };
 
 export const PersonSchemaFromDB = createSelectSchema(person);
+
+export type TPersonsRespons = z.infer<typeof PersonSchemaFromDB>;

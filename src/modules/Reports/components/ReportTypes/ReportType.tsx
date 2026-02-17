@@ -10,13 +10,14 @@ import {
   ITransferReport,
   IVacationReport,
   Report,
+  ReportResponse,
   TReportCreateUpdatePayload,
   TReportType,
 } from '@/types/reports';
 
 export const ReportTypeSwitcher: React.FC<{
   reportType: TReportType | null;
-  reportData?: Report;
+  reportData?: ReportResponse;
   children?: React.ReactNode;
   onSubmit: (data: TReportCreateUpdatePayload) => void;
 }> = ({ reportType, children, reportData, onSubmit }) => {

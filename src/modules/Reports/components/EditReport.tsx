@@ -1,12 +1,12 @@
-import { Report, TReportCreateUpdatePayload } from "@/types/reports";
-import { ReportTypeSwitcher } from "./ReportTypes/ReportType";
+import { ReportResponse, TReportCreateUpdatePayload } from '@/types/reports';
+import { ReportTypeSwitcher } from './ReportTypes/ReportType';
 
 export const EditReport = ({
   report,
   children,
   onSubmit,
 }: {
-  report: Report;
+  report: ReportResponse;
   children?: React.ReactNode;
   onSubmit: (data: TReportCreateUpdatePayload) => void;
 }) => {

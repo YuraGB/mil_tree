@@ -1,13 +1,13 @@
 import { Button } from '@/components/ui/button';
-import { Report } from '@/types/reports';
+import { ReportResponse } from '@/types/reports';
 import { Edit2Icon } from 'lucide-react';
 
 export const ReportColumnItem = ({
   report,
   setSelectedReport,
 }: {
-  report: Report;
-  setSelectedReport?: (report: Report | null) => void;
+  report: ReportResponse;
+  setSelectedReport?: (report: ReportResponse | null) => void;
 }) => {
   const onDialogOpen = () => {
     if (setSelectedReport) {

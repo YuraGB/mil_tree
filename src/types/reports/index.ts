@@ -7,7 +7,7 @@ import {
   transferReport,
   vacationReport,
 } from '@/db/schemas/reports';
-import { TDBPerson } from '../persons';
+import { TDBPerson, TPersonsRespons } from '../persons';
 import z from 'zod';
 import { createUpdateFormSchema } from '@/modules/Reports/util/formSchemas';
 
@@ -58,8 +58,8 @@ export type ReportByType = {
 };
 
 export type TReportView = {
-  person: TDBPerson;
-  reports: Report[];
+  person: TPersonsRespons;
+  reports: ReportResponse[];
 };
 
 export type TRoot = TReportView[];
