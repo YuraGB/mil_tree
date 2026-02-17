@@ -1,4 +1,4 @@
-import { Report, ReportResponse } from '@/types/reports';
+import { ReportResponse } from '@/types/reports';
 import { useEffect, useState } from 'react';
 
 export const useReportDialog = (

@@ -1,7 +1,7 @@
 import { useReportDnD } from '@/modules/DragnDrop/hook/useReportDnd';
 import { useEffect, useState } from 'react';
 
-import { Report, ReportResponse, TReportView } from '@/types/reports';
+import { ReportResponse, TReportView } from '@/types/reports';
 import { useReportService } from '../services/useReportService';
 import { buildReportsColumns } from '../util/buldReportsMap';
 import { useCreateUpdateForm } from './useCreateUpdateForm';

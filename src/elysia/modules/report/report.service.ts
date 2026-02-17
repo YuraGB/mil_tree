@@ -1,4 +1,3 @@
-import { reportTypesToDbSchemas } from '@/constants';
 import { db } from '@/db';
 import {
   medicalReport,
@@ -7,11 +6,7 @@ import {
   transferReport,
   vacationReport,
 } from '@/db/schemas/reports';
-import {
-  Report,
-  ReportResponseSchema,
-  TReportCreateUpdatePayload,
-} from '@/types/reports';
+import { Report, TReportCreateUpdatePayload } from '@/types/reports';
 import { eq, ExtractTablesWithRelations } from 'drizzle-orm';
 import { PgTransaction } from 'drizzle-orm/pg-core';
 import { VercelPgQueryResultHKT } from 'drizzle-orm/vercel-postgres';
