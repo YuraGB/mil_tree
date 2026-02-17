@@ -1,29 +1,8 @@
 import { Elysia } from 'elysia';
 import { createReport, getAllReports, updateReport } from './report.service';
 import { createUpdateFormSchema } from '@/modules/Reports/util/formSchemas';
-import z, { string, object, array, any, unknown } from 'zod';
-import {
-  ReleaseReportResponseSchema,
-  ReportResponseSchema,
-} from '@/types/reports';
-import { AlignStartHorizontal } from 'lucide-react';
-
-const releaseSchema = z.object({
-  id: z.string(),
-  type: z.string(),
-  fromPersonId: z.string(),
-  toPersonId: z.string(),
-  status: z.string(), // можна розширити під інші статуси
-  assignedToPersonId: z.string(),
-  decidedByPersonId: z.string(),
-  description: z.string(),
-  decisionReason: z.string().nullable(),
-  createdAt: z.string(),
-  updatedAt: z.string(),
-  reportId: z.string(),
-  releaseDate: z.string(),
-  releaseReason: z.string(),
-});
+import z, { string, object, array } from 'zod';
+import { ReportResponseSchema } from '@/types/reports';
 
 export const reportRoutes = new Elysia({
   name: 'report_routes',

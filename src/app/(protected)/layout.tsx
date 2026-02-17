@@ -1,5 +1,4 @@
 import { headers } from 'next/headers';
-import { redirect } from 'next/navigation';
 import { auth } from '@/elysia/modules/auth/auth';
 import { ReactNode } from 'react';
 import { PageWrapper } from '@/components/PageWrapper';

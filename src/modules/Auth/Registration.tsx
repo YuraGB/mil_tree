@@ -1,9 +1,6 @@
 'use client';
 import { Controller } from 'react-hook-form';
 import { memo } from 'react';
-import { LoaderCircle } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
   Field,

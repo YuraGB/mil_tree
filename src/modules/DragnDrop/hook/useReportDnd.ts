@@ -3,7 +3,6 @@ import { useCallback, useEffect } from 'react';
 import { useDnDHelpers } from './helpers';
 import { findReport, moveReport } from '@/lib/dndMoveReports';
 import {
-  Report,
   ReportResponse,
   TReportCreateUpdatePayload,
   TReportView,

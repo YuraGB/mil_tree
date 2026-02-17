@@ -1,15 +1,10 @@
 import { TPersonsRespons } from '@/types/persons';
-import {
-  Report,
-  ReportResponse,
-  TReportAssigned,
-  TRoot,
-} from '@/types/reports';
+import { ReportResponse, TReportAssigned, TRoot } from '@/types/reports';
 
 // -----------------------------
-function cloneTree(root: TRoot): TRoot {
-  return structuredClone(root);
-}
+// function cloneTree(root: TRoot): TRoot {
+//   return structuredClone(root);
+// }
 
 // -----------------------------
 // 2. Видалення вузла

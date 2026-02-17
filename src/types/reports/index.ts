@@ -7,7 +7,7 @@ import {
   transferReport,
   vacationReport,
 } from '@/db/schemas/reports';
-import { TDBPerson, TPersonsRespons } from '../persons';
+import { TPersonsRespons } from '../persons';
 import z from 'zod';
 import { createUpdateFormSchema } from '@/modules/Reports/util/formSchemas';
 

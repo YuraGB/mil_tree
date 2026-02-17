@@ -8,10 +8,9 @@ export const MarkComponent = ({ markData }: { markData: TMark }) => {
       ? (markData.coordinates as TMarkCoordinates)
       : ([0, 0] as TMarkCoordinates);
 
-  const radius =
-    markData && (markData.properties as { radius?: number })?.radius
-      ? (markData.properties as { radius?: number }).radius
-      : 10;
+  const radius = (markData.properties as { radius?: number })?.radius
+    ? (markData.properties as { radius?: number }).radius
+    : 10;
 
   switch (markData.type) {
     case 'Point':
