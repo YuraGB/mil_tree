@@ -181,7 +181,7 @@ export const updateReport = async (
       // 🔹 details
       switch (type) {
         case 'medical':
-          await db
+          await tx
             .update(medicalReport)
             .set({
               diagnosis: data.diagnosis,
@@ -191,7 +191,7 @@ export const updateReport = async (
           break;
 
         case 'vacation':
-          await db
+          await tx
             .update(vacationReport)
             .set({
               vacationFrom: new Date(data.vacationFrom),
@@ -201,7 +201,7 @@ export const updateReport = async (
           break;
 
         case 'transfer':
-          await db
+          await tx
             .update(transferReport)
             .set({
               transferFromReport: data.transferFrom,
@@ -212,7 +212,7 @@ export const updateReport = async (
           break;
 
         case 'release':
-          await db
+          await tx
             .update(releaseReport)
             .set({
               releaseDate: new Date(data.releaseDate),
@@ -280,7 +280,7 @@ async function getReportWithChunk(
       const [row] = await tx
         .select()
         .from(report)
-        .leftJoin(releaseReport, eq(vacationReport.reportId, report.id))
+        .leftJoin(releaseReport, eq(releaseReport.reportId, report.id))
         .where(eq(report.id, reortId));
 
       return {

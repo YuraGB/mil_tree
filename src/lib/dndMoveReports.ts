@@ -55,7 +55,7 @@ function insertNode(
   report: ReportResponse,
   to: TReportAssigned,
 ): void {
-  for (let i = 0; i <= root.length; i++) {
+  for (let i = 0; i < root.length; i++) {
     if (root[i].person.id === to) {
       root[i].reports.push(report);
       break;

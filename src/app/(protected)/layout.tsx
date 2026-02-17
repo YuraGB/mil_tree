@@ -4,6 +4,7 @@ import { ReactNode } from 'react';
 import { PageWrapper } from '@/components/PageWrapper';
 import { SideBarClient } from '@/components/SideBarClient';
 import { sideBarLinks } from '@/constants';
+import { redirect } from 'next/navigation';
 
 // export const dynamic = 'force-dynamic';
 
@@ -17,7 +18,7 @@ export default async function ProtectedLayout({
   });
 
   if (!session) {
-    //  redirect('/');
+    redirect('/');
   }
 
   return (
