@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic';
 import { ReportColumn } from './ReportColumn';
 import { useReport } from '@/modules/Reports/hooks/useReport';
 
-import { Report } from '@/types/reports';
-import { TDBPerson } from '@/types/persons';
+import { ReportResponse } from '@/types/reports';
+import { TPersonsRespons } from '@/types/persons';
 
 const ReportDialog = dynamic(
   () => import('./ReportDialog').then((mod) => mod.ReportDialog),
@@ -14,8 +14,8 @@ const ReportDialog = dynamic(
 );
 
 export const ReportsWrapper: FC<{
-  reports: Report[] | [];
-  persons: TDBPerson[] | [];
+  reports: ReportResponse[] | [];
+  persons: TPersonsRespons[] | [];
 }> = ({ reports, persons }) => {
   const {
     allReports,
@@ -25,7 +25,6 @@ export const ReportsWrapper: FC<{
     onSubmit,
   } = useReport(reports, persons);
 
-  const z = Object.entries(allReports);
   return (
     <>
       <ReportDialog

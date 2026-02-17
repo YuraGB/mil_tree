@@ -1,7 +1,7 @@
-import { useCreateUpdateService } from "../services/useCreateUpdateService";
-import { Report, TReportCreateUpdatePayload } from "@/types/reports";
+import { useCreateUpdateService } from '../services/useCreateUpdateService';
+import { ReportResponse, TReportCreateUpdatePayload } from '@/types/reports';
 
-export const useCreateUpdateForm = (selectedReport: Report | null) => {
+export const useCreateUpdateForm = (selectedReport: ReportResponse | null) => {
   const { onCreateReport, onUpdateReport } = useCreateUpdateService();
   const onSubmit = (values: TReportCreateUpdatePayload) => {
     if (selectedReport) {

@@ -1,5 +1,5 @@
 import { api } from '@/elysia/eden';
-import { TDBPerson } from '@/types/persons';
+import { TPersonsRespons } from '@/types/persons';
 import { useQueryClient } from '@tanstack/react-query';
 
 export const getAllPersonsData = async () => {
@@ -10,7 +10,7 @@ export const getAllPersonsData = async () => {
 export const useReportService = ({
   persons,
 }: {
-  persons: TDBPerson[] | [];
+  persons: TPersonsRespons[] | [];
 }) => {
   const queryClient = useQueryClient();
   if (persons.length) {

@@ -1,5 +1,10 @@
-import { TDBPerson } from '@/types/persons';
-import { Report, TReportAssigned, TRoot } from '@/types/reports';
+import { TPersonsRespons } from '@/types/persons';
+import {
+  Report,
+  ReportResponse,
+  TReportAssigned,
+  TRoot,
+} from '@/types/reports';
 
 // -----------------------------
 function cloneTree(root: TRoot): TRoot {
@@ -14,7 +19,7 @@ function removeNode(
   root: TRoot,
   reportId: string,
   from: TReportAssigned,
-): { updated: TRoot; removed: Report | null } {
+): { updated: TRoot; removed: ReportResponse | null } {
   const columnIndex = root.findIndex((col) => col.person.id === from);
   if (columnIndex === -1) {
     return { updated: root, removed: null };
@@ -50,7 +55,11 @@ function removeNode(
 // -----------------------------
 // 3. Вставка всередину або відносно toId
 // -----------------------------
-function insertNode(root: TRoot, report: Report, to: TReportAssigned): void {
+function insertNode(
+  root: TRoot,
+  report: ReportResponse,
+  to: TReportAssigned,
+): void {
   for (let i = 0; i <= root.length; i++) {
     if (root[i].person.id === to) {
       root[i].reports.push(report);
@@ -63,7 +72,7 @@ function insertNode(root: TRoot, report: Report, to: TReportAssigned): void {
 // 6. Головна функція moveNode
 // -----------------------------
 export function moveReport(
-  current: Report,
+  current: ReportResponse,
   root: TRoot,
   from: TReportAssigned,
   to: TReportAssigned,
@@ -73,7 +82,7 @@ export function moveReport(
   const { updated, removed } = removeNode(root, current.id, from);
   if (!removed) return null;
 
-  const moved: Report = {
+  const moved: ReportResponse = {
     ...removed,
 
     assignedToPersonId: to,
@@ -88,7 +97,7 @@ export function moveReport(
 export function findReport(
   root: TRoot,
   id: string,
-): { report: Report; assigned: TDBPerson } | null {
+): { report: ReportResponse; assigned: TPersonsRespons } | null {
   for (const { person, reports } of Object.values(root)) {
     const found = reports.find((r) => r.id === id);
     if (found) {

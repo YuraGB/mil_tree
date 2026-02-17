@@ -4,16 +4,17 @@ import { useDnDHelpers } from './helpers';
 import { findReport, moveReport } from '@/lib/dndMoveReports';
 import {
   Report,
+  ReportResponse,
   TReportCreateUpdatePayload,
   TReportView,
   TRoot,
 } from '@/types/reports';
 import z from 'zod';
 import { createUpdateFormSchema } from '@/modules/Reports/util/formSchemas';
-import { TDBPerson } from '@/types/persons';
+import { TPersonsRespons } from '@/types/persons';
 
 function mapReportToForm(
-  report: Report,
+  report: ReportResponse,
 ): z.infer<typeof createUpdateFormSchema> {
   switch (report.type) {
     case 'medical':
@@ -73,7 +74,7 @@ export function useReportDnD(
   // this will update the Reports state
   // This callback will trigger if drag and drop will be successfull
   const onUpdateStateCallback = useCallback(
-    (draggingId: Report['id'], dropTargetId: TDBPerson['id']) => {
+    (draggingId: ReportResponse['id'], dropTargetId: TPersonsRespons['id']) => {
       const found = findReport(root, draggingId);
       if (!found) return;
 
