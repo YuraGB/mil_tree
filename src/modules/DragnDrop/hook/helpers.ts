@@ -2,6 +2,11 @@ import { useRef } from 'react';
 import { DropPos } from './useTreeDnD';
 
 // The Global helper hook for Drag and Drop functionality
+/**
+ *
+ * @param callBack function to finilize the Dnd (for ex.: send data to the server, update the state, etc.)
+ * @returns
+ */
 export const useDnDHelpers = (
   callBack: (
     draggingId: string,

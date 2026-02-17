@@ -1,10 +1,11 @@
-import Elysia from "elysia";
-import { IS_VERCEL } from "@/constants";
-import { batchSpanProcessor } from "@/lib/otel/batchSpanProcessor";
-import { utilityRoutes } from "@/elysia/modules/utilityRoutes/utilityHandlers";
-import { betterAuthView } from "@/elysia/modules/auth/auth.route";
-import { globalError } from "@/elysia/modules/globalError";
-import { apiRoutesPath } from "@/elysia/modules/apiRoutes";
+import Elysia from 'elysia';
+import { IS_VERCEL } from '@/constants';
+import { batchSpanProcessor } from '@/lib/otel/batchSpanProcessor';
+import { utilityRoutes } from '@/elysia/modules/utilityRoutes/utilityHandlers';
+import { betterAuthView } from '@/elysia/modules/auth/auth.route';
+import { globalError } from '@/elysia/modules/globalError';
+import { apiRoutesPath } from '@/elysia/modules/apiRoutes';
+import { compression } from '@/elysia/modules/compression/copressionPlagin';
 
 /**
  * Main application instance combining utility routes, authentication, API routes, and global error handling.
@@ -14,9 +15,15 @@ const app = new Elysia()
   // Utility routes
   .use(utilityRoutes)
   // Authentication routes
-  .all("/api/auth/*", betterAuthView)
+  .all('/api/auth/*', betterAuthView)
   // API routes
   .use(apiRoutesPath)
+
+  // Applies compression middleware to responses.
+  // It should be after api routes because api routes do validation in JSON format (if validation object is set).
+  // Compression do Buffer format.
+  // if compression will be first Elysia will send 422.
+  .use(compression)
   // Global error handler
   .use(globalError);
 
@@ -28,8 +35,8 @@ const shutdown = async (): Promise<void> => {
 };
 
 if (!IS_VERCEL) {
-  process.on("SIGINT", shutdown);
-  process.on("SIGTERM", shutdown);
+  process.on('SIGINT', shutdown);
+  process.on('SIGTERM', shutdown);
 }
 
 // Export the application type for use elsewhere

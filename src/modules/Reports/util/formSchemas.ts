@@ -1,5 +1,6 @@
 import z from 'zod';
 
+// Schema for Medical Report
 export const medicalFormSchema = z.object({
   type: z.literal('medical'),
   assignedTo: z.string().min(2, {
@@ -16,6 +17,7 @@ export const medicalFormSchema = z.object({
   }),
 });
 
+// Schema for Complaint Report
 export const complaintFormSchema = z.object({
   type: z.literal('complaint'),
   assignedTo: z.string().min(2, {
@@ -25,6 +27,8 @@ export const complaintFormSchema = z.object({
     message: 'Description must be at least 10 characters.',
   }),
 });
+
+// Additional schemas for other report types (release, transfer, vacation) can be defined similarly
 export const releaseFormSchema = z.object({
   type: z.literal('release'),
   assignedTo: z.string().min(2, {
@@ -38,6 +42,7 @@ export const releaseFormSchema = z.object({
   }),
 });
 
+// Additional schemas for other report types (release, transfer, vacation) can be defined similarly
 export const transferFormSchema = z.object({
   type: z.literal('transfer'),
   assignedTo: z.string().min(2, {
@@ -54,6 +59,7 @@ export const transferFormSchema = z.object({
   }),
 });
 
+// Additional schemas for other report types (release, transfer, vacation) can be defined similarly
 export const vacationFormSchema = z.object({
   type: z.literal('vacation'),
   assignedTo: z.string().min(2, {
@@ -66,6 +72,8 @@ export const vacationFormSchema = z.object({
     message: 'Vacation To must be at least 2 characters.',
   }),
 });
+
+// Discriminated union of all report types for form validation
 export const createUpdateFormSchema = z.discriminatedUnion('type', [
   complaintFormSchema,
   medicalFormSchema,

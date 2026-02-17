@@ -12,3 +12,7 @@ export const getAllUnits = async (): Promise<TDBUnit[] | null> => {
 };
 
 export const updateUnite = async () => {};
+
+export const createUnite = async () => {};
+
+export const deleteUnite = async () => {};

@@ -1,12 +1,26 @@
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
+import { auth } from '@/elysia/modules/auth/auth';
+import { ReactNode } from 'react';
 import { PageWrapper } from '@/components/PageWrapper';
 import { SideBarClient } from '@/components/SideBarClient';
 import { sideBarLinks } from '@/constants';
 
-export default function LayoutClient({
+// export const dynamic = 'force-dynamic';
+
+export default async function ProtectedLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: ReactNode;
+}) {
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  });
+
+  if (!session) {
+    //  redirect('/');
+  }
+
   return (
     <PageWrapper
       sidebar={<SideBarClient links={sideBarLinks} key={'side'} />}

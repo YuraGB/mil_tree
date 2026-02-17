@@ -1,5 +1,5 @@
-import OverviewData from "@/modules/Overview/OverviewData";
-import { Suspense } from "react";
+import OverviewData from '@/modules/Overview/OverviewData';
+import { Suspense } from 'react';
 
 export default function OverviewPage() {
   return (

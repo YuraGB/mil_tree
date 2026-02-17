@@ -1,6 +1,6 @@
 // src/routes/authRoute.ts
 import { Context } from 'elysia';
-import { auth } from '@/utils/auth';
+import { auth } from './auth';
 
 // Improved authentication handler
 export const betterAuthView = (context: Context) => {

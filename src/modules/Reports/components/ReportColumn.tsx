@@ -1,24 +1,27 @@
+import { TDBPerson } from '@/types/persons';
 import { ReportColumnItem } from './ReportColumnItem';
-import { Report, TReportView } from '@/types/reports';
+import { Report } from '@/types/reports';
 
 export const ReportColumn = ({
-  name,
+  assignPerson,
   reports,
   setSelectedReport,
 }: {
-  name: string;
-  reports: TReportView[];
+  assignPerson: TDBPerson;
+  reports: Report[];
   setSelectedReport: (report: Report | null) => void;
 }) => {
   return (
     <section
       className="flex w-full min-w-[200px] flex-col border px-2"
-      data-node-id={name}
+      data-node-id={assignPerson.id}
     >
-      <h3 className="mb-2 border-b py-2 text-center text-amber-950">{name}</h3>
+      <h3 className="mb-2 border-b py-2 text-center text-amber-950">
+        {assignPerson.name}
+      </h3>
       {reports.map((rep) => (
         <ReportColumnItem
-          key={rep.id + name}
+          key={rep.id}
           report={rep}
           setSelectedReport={setSelectedReport}
         />

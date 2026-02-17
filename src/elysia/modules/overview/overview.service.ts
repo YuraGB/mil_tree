@@ -13,6 +13,7 @@ import { buildUnitNode, indexById, mapPerson } from './utils.ts';
  */
 export const getOverview = async (rootUnitId: string) => {
   const [units, persons] = await Promise.all([getAllUnits(), getAllPersons()]);
+  console.log(persons);
 
   if (!units?.length || !persons) return null;
 
