@@ -1,3 +1,4 @@
+import { reportTypesToDbSchemas } from '@/constants';
 import { db } from '@/db';
 import {
   medicalReport,
@@ -7,12 +8,13 @@ import {
   vacationReport,
 } from '@/db/schemas/reports';
 import {
-  MedicalReport,
-  ReleaseReport,
-  TransferReport,
-  VacationReport,
+  Report,
+  ReportResponseSchema,
+  TReportCreateUpdatePayload,
 } from '@/types/reports';
-import { eq } from 'drizzle-orm';
+import { eq, ExtractTablesWithRelations } from 'drizzle-orm';
+import { PgTransaction } from 'drizzle-orm/pg-core';
+import { VercelPgQueryResultHKT } from 'drizzle-orm/vercel-postgres';
 
 export const getAllReports = async () => {
   try {
@@ -36,10 +38,10 @@ export const getAllReports = async () => {
         releaseReason: releaseReport.releaseReason,
         transferFromReport: transferReport.transferFromReport,
         transferToReport: transferReport.transferToReport,
-        transferReason: transferReport.reason,
+        transferReason: transferReport.reason, // буде згодом призначено в reason
         vacationFrom: vacationReport.vacationFrom,
         vacationTo: vacationReport.vacationTo,
-        vacationReason: vacationReport.reason,
+        vacationReason: vacationReport.reason, // буде згодом призначено в reason
       })
       .from(report)
       .leftJoin(medicalReport, eq(medicalReport.reportId, report.id))
@@ -47,88 +49,269 @@ export const getAllReports = async () => {
       .leftJoin(transferReport, eq(transferReport.reportId, report.id))
       .leftJoin(vacationReport, eq(vacationReport.reportId, report.id));
 
-    return rows.map((r) => {
+    const result = rows.map((r) => {
+      const base = {
+        id: r.id,
+        reportId: r.id,
+        type: r.type,
+        createdAt: r.createdAt.toISOString(),
+        updatedAt: r.updatedAt.toISOString(),
+        fromPersonId: r.fromPersonId,
+        toPersonId: r.toPersonId,
+        status: r.status,
+        decisionReason: r.decisionReason,
+        assignedToPersonId: r.assignedToPersonId,
+        decidedByPersonId: r.decidedByPersonId,
+        description: r.description,
+      };
+
       switch (r.type) {
         case 'medical':
           return {
-            id: r.id,
+            ...base,
             type: 'medical',
-            createdAt: r.createdAt,
-            updatedAt: r.updatedAt,
-            fromPersonId: r.fromPersonId,
-            toPersonId: r.toPersonId,
-            status: r.status,
-            decisionReason: r.decisionReason,
-            assignedToPersonId: r.assignedToPersonId,
-            decidedByPersonId: r.decidedByPersonId,
-            description: r.description,
-            diagnosis: r.diagnosis!,
-            treatment: r.treatment!,
-          } as MedicalReport;
-
+            diagnosis: r.diagnosis || '',
+            treatment: r.treatment || '',
+          };
         case 'release':
           return {
-            id: r.id,
+            ...base,
             type: 'release',
-            createdAt: r.createdAt,
-            updatedAt: r.updatedAt,
-            fromPersonId: r.fromPersonId,
-            toPersonId: r.toPersonId,
-            status: r.status,
-            decisionReason: r.decisionReason,
-            assignedToPersonId: r.assignedToPersonId,
-            decidedByPersonId: r.decidedByPersonId,
-            description: r.description,
-            releaseDate: r.releaseDate!,
-            releaseReason: r.releaseReason!,
-          } as ReleaseReport;
-
+            releaseDate: r.releaseDate!.toISOString(),
+            releaseReason: r.releaseReason || '',
+          };
         case 'transfer':
           return {
-            id: r.id,
+            ...base,
             type: 'transfer',
-            createdAt: r.createdAt,
-            updatedAt: r.updatedAt,
-            fromPersonId: r.fromPersonId,
-            toPersonId: r.toPersonId,
-            status: r.status,
-            decisionReason: r.decisionReason,
-            assignedToPersonId: r.assignedToPersonId,
-            decidedByPersonId: r.decidedByPersonId,
-            description: r.description,
-            transferFrom: r.transferFromReport!, // ⚠ повинні збігатися назви
-            transferTo: r.transferToReport!,
-            transferReason: r.transferReason!,
-          } as unknown as TransferReport;
-
+            transferFromReport: r.transferFromReport || '',
+            transferToReport: r.transferToReport || '',
+            reason: r.transferReason || '', // правильно мапимо у reason
+          };
         case 'vacation':
           return {
-            id: r.id,
+            ...base,
             type: 'vacation',
-            createdAt: r.createdAt,
-            updatedAt: r.updatedAt,
-            fromPersonId: r.fromPersonId,
-            toPersonId: r.toPersonId,
-            status: r.status,
-            decisionReason: r.decisionReason,
-            assignedToPersonId: r.assignedToPersonId,
-            decidedByPersonId: r.decidedByPersonId,
-            description: r.description,
-            vacationFrom: r.vacationFrom!,
-            vacationTo: r.vacationTo!,
-            vacationReason: r.vacationReason!,
-          } as unknown as VacationReport;
-
+            vacationFrom: r.vacationFrom?.toISOString(),
+            vacationTo: r.vacationTo?.toISOString(),
+            reason: r.vacationReason || '', // правильно мапимо у reason
+          };
         default:
           throw new Error('Unknown report type: ' + r.type);
       }
     });
+
+    return result;
+  } catch (e) {
+    console.error('Error fetching reports:', e);
+    return [];
+  }
+};
+
+export const createReport = async (data: TReportCreateUpdatePayload) => {
+  try {
+    const created = await db.transaction(async (tx) => {
+      const { type, assignedTo, ...rest } = data;
+
+      const [createdReport] = await tx
+        .insert(report)
+        .values({
+          id: crypto.randomUUID(),
+          type,
+          assignedToPersonId: assignedTo,
+          fromPersonId: assignedTo,
+          toPersonId: assignedTo,
+          description: 'description' in rest ? rest.description : undefined,
+        })
+        .returning();
+
+      // complaint doesn't have any chunks to create
+      if (type === 'complaint') {
+        return createdReport;
+      }
+
+      switch (data.type) {
+        case 'vacation':
+          await tx.insert(vacationReport).values({
+            reportId: createdReport.id,
+            vacationFrom: new Date(data.vacationFrom),
+            vacationTo: new Date(data.vacationTo),
+          });
+          break;
+
+        case 'release':
+          await tx.insert(releaseReport).values({
+            reportId: createdReport.id,
+            releaseDate: new Date(data.releaseDate),
+            releaseReason: data.reason,
+          });
+          break;
+
+        case 'medical':
+          await tx.insert(medicalReport).values({
+            reportId: createdReport.id,
+            diagnosis: data.diagnosis,
+            treatment: data.treatment,
+          });
+          break;
+      }
+
+      return await getReportWithChunk(type, createdReport.id, tx);
+    });
+
+    return created;
+  } catch (e) {
+    console.error('Error creating report', e);
+    return null;
+  }
+};
+
+export const updateReport = async (
+  data: TReportCreateUpdatePayload & { id: string },
+) => {
+  const { id, type, assignedTo } = data;
+
+  try {
+    return await db.transaction(async (tx) => {
+      await tx
+        .update(report)
+        .set({
+          type,
+          assignedToPersonId: assignedTo,
+          toPersonId: assignedTo,
+          description: 'description' in data ? data.description : undefined,
+        })
+        .where(eq(report.id, id));
+
+      // 🔹 details
+      switch (type) {
+        case 'medical':
+          await db
+            .update(medicalReport)
+            .set({
+              diagnosis: data.diagnosis,
+              treatment: data.treatment,
+            })
+            .where(eq(medicalReport.reportId, id));
+          break;
+
+        case 'vacation':
+          await db
+            .update(vacationReport)
+            .set({
+              vacationFrom: new Date(data.vacationFrom),
+              vacationTo: new Date(data.vacationTo),
+            })
+            .where(eq(vacationReport.reportId, id));
+          break;
+
+        case 'transfer':
+          await db
+            .update(transferReport)
+            .set({
+              transferFromReport: data.transferFrom,
+              transferToReport: data.transferTo,
+              reason: data.reason,
+            })
+            .where(eq(transferReport.reportId, id));
+          break;
+
+        case 'release':
+          await db
+            .update(releaseReport)
+            .set({
+              releaseDate: new Date(data.releaseDate),
+              releaseReason: data.reason,
+            })
+            .where(eq(releaseReport.reportId, id));
+          break;
+
+        case 'complaint':
+          break;
+      }
+
+      return await getReportWithChunk(type, id, tx);
+    });
   } catch (e: unknown) {
     if (e instanceof Error) {
-      console.log('No Reports found', e.message);
+      console.log('Error during update report', e.message, data);
     } else {
-      console.log('No Reports found', e);
+      console.log('Error during update report', e);
     }
     return null;
   }
 };
+
+export const deleteReport = async () => {};
+
+// helper
+async function getReportWithChunk(
+  type: Report['type'],
+  reortId: Report['id'],
+  tx: PgTransaction<
+    VercelPgQueryResultHKT,
+    Record<string, never>,
+    ExtractTablesWithRelations<Record<string, never>>
+  >,
+) {
+  // get base report and chunk (medical, vacation, etc...)
+  switch (type) {
+    case 'medical': {
+      const [row] = await tx
+        .select()
+        .from(report)
+        .leftJoin(medicalReport, eq(medicalReport.reportId, report.id))
+        .where(eq(report.id, reortId));
+
+      return {
+        ...row.report,
+        ...row.medical_report,
+      };
+    }
+
+    case 'vacation': {
+      const [row] = await tx
+        .select()
+        .from(report)
+        .leftJoin(vacationReport, eq(vacationReport.reportId, report.id))
+        .where(eq(report.id, reortId));
+
+      return {
+        ...row.report,
+        ...row.vacation_report,
+      };
+    }
+    case 'release': {
+      const [row] = await tx
+        .select()
+        .from(report)
+        .leftJoin(releaseReport, eq(vacationReport.reportId, report.id))
+        .where(eq(report.id, reortId));
+
+      return {
+        ...row.report,
+        ...row.release_report,
+      };
+    }
+    case 'transfer': {
+      const [row] = await tx
+        .select()
+        .from(report)
+        .leftJoin(transferReport, eq(vacationReport.reportId, report.id))
+        .where(eq(report.id, reortId));
+
+      return {
+        ...row.report,
+        ...row.transfer_report,
+      };
+    }
+
+    default: {
+      const [row] = await tx
+        .select()
+        .from(report)
+        .where(eq(report.id, reortId));
+      return row;
+    }
+  }
+}

@@ -1,5 +1,3 @@
-'use cache';
-
 import { TSideBarLink } from '@/types/client';
 import { SideBarLink } from './SideBarLink';
 import { sideBarLinks } from '@/constants';

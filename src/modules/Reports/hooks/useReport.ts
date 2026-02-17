@@ -1,23 +1,21 @@
-import { useReportDnD } from "@/modules/DragnDrop/hook/useReportDnd";
-import { useEffect, useState } from "react";
+import { useReportDnD } from '@/modules/DragnDrop/hook/useReportDnd';
+import { useEffect, useState } from 'react';
 
-import { TDBPerson } from "@/types/persons";
-import { Report, TReportView } from "@/types/reports";
-import { useReportService } from "../services/useReportService";
-import { buildReportsMap } from "../util/buldReportsMap";
-import { useCreateUpdateForm } from "./useCreateUpdateForm";
+import { TDBPerson } from '@/types/persons';
+import { Report, TReportView } from '@/types/reports';
+import { useReportService } from '../services/useReportService';
+import { buildReportsColumns } from '../util/buldReportsMap';
+import { useCreateUpdateForm } from './useCreateUpdateForm';
 
 export const useReport = (reports: Report[], persons: TDBPerson[]) => {
   // Currently selected report
   // Also used as open/close state for the Create/Update report dialog
-  const [selectedReport, setSelectedReport] = useState<TReportView | null>(
-    null,
-  );
+  const [selectedReport, setSelectedReport] = useState<Report | null>(null);
 
   const { onSubmit, onUpdateReport } = useCreateUpdateForm(selectedReport);
 
-  const [allReports, setReports] = useState<{ [name: string]: TReportView[] }>(
-    () => buildReportsMap(reports, persons),
+  const [allReports, setReports] = useState<TReportView[]>(() =>
+    buildReportsColumns(reports, persons),
   );
 
   // Load persons into cache
@@ -25,7 +23,7 @@ export const useReport = (reports: Report[], persons: TDBPerson[]) => {
 
   // State of the reports collections
   useEffect(() => {
-    setReports(buildReportsMap(reports, persons));
+    setReports(buildReportsColumns(reports, persons));
   }, [reports, persons]);
 
   const { draggingId, dropTargetId, dropPos, onDragStart } = useReportDnD(

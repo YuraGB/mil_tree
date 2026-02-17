@@ -18,9 +18,9 @@ export const person = pgTable(
       .primaryKey()
       .$defaultFn(() => createId()),
     commanderId: text('commander_id'),
-    unitId: text('unit_id'),
+    unitId: text('unit_id').default('p-0001'),
     name: text('name').notNull(),
-    rank: text('rank').$type<TRank>(),
+    rank: text('rank').$type<TRank>().default('Private'),
     statusCode: text('status_code')
       .$type<IStatus['code']>()
       .notNull()

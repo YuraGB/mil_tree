@@ -1,28 +1,27 @@
 import { TDBPerson } from '@/types/persons';
 import { Report, TReportView } from '@/types/reports';
 
-export const buildReportsMap = (
+export const buildReportsColumns = (
   reports: Report[],
   persons: TDBPerson[],
-): { [name: string]: TReportView[] } => {
+): TReportView[] => {
   const personsMap = new Map(persons.map((p) => [p.id, p]));
 
-  return reports.reduce<{ [key: string]: TReportView[] }>((acc, r) => {
-    const fromPerson = personsMap.get(r.fromPersonId);
-    const toPerson = personsMap.get(r.toPersonId);
+  const grouped = new Map<string, Report[]>();
 
-    const key = toPerson?.name || fromPerson?.name || r.status;
+  for (const r of reports) {
+    const personId = r.toPersonId ?? r.fromPersonId;
+    if (!personId) continue;
 
-    if (!acc[key]) acc[key] = [];
+    if (!grouped.has(personId)) {
+      grouped.set(personId, []);
+    }
 
-    acc[key].push({
-      ...r,
-      fromPersonName: fromPerson?.name,
-      fromPersonRank: fromPerson?.rank,
-      toPersonName: toPerson?.name,
-      toPersonRank: toPerson?.rank,
-    });
+    grouped.get(personId)!.push(r);
+  }
 
-    return acc;
-  }, {});
+  return [...grouped.entries()].map(([personId, reports]) => ({
+    person: personsMap.get(personId)!,
+    reports,
+  }));
 };

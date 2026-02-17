@@ -1,59 +1,60 @@
-"use client";
-import { useCallback, useEffect } from "react";
-import { useDnDHelpers } from "./helpers";
-import { findReport, moveReport } from "@/lib/dndMoveReports";
+'use client';
+import { useCallback, useEffect } from 'react';
+import { useDnDHelpers } from './helpers';
+import { findReport, moveReport } from '@/lib/dndMoveReports';
 import {
+  Report,
   TReportCreateUpdatePayload,
   TReportView,
   TRoot,
-} from "@/types/reports";
-import z from "zod";
-import { createUpdateFormSchema } from "@/modules/Reports/util/formSchemas";
+} from '@/types/reports';
+import z from 'zod';
+import { createUpdateFormSchema } from '@/modules/Reports/util/formSchemas';
+import { TDBPerson } from '@/types/persons';
 
 function mapReportToForm(
-  report: TReportView,
+  report: Report,
 ): z.infer<typeof createUpdateFormSchema> {
   switch (report.type) {
-    case "medical":
+    case 'medical':
       return {
-        type: "medical",
-        assignedTo: report.assignedToPersonId ?? "",
-
-        diagnosis: report.diagnosis ?? "",
-        treatment: report.treatment ?? "",
-        description: report.description ?? "",
+        type: 'medical',
+        assignedTo: report.assignedToPersonId ?? '',
+        diagnosis: report.diagnosis ?? '',
+        treatment: report.treatment ?? '',
+        description: report.description ?? '',
       };
 
-    case "complaint":
+    case 'complaint':
       return {
-        type: "complaint",
-        assignedTo: report.assignedToPersonId ?? "",
-        description: report.description ?? "",
+        type: 'complaint',
+        assignedTo: report.assignedToPersonId ?? '',
+        description: report.description ?? '',
       };
 
-    case "release":
+    case 'release':
       return {
-        type: "release",
-        assignedTo: report.assignedToPersonId ?? "",
+        type: 'release',
+        assignedTo: report.assignedToPersonId ?? '',
         releaseDate: report.releaseDate
           ? new Date(report.releaseDate).toDateString()
           : new Date().toDateString(),
-        reason: report.decisionReason ?? "",
+        reason: report.decisionReason ?? '',
       };
 
-    case "transfer":
+    case 'transfer':
       return {
-        type: "transfer",
-        assignedTo: report.assignedToPersonId ?? "",
-        transferFrom: report.transferFrom ?? "",
-        transferTo: report.transferTo ?? "",
-        reason: report.decisionReason ?? "",
+        type: 'transfer',
+        assignedTo: report.assignedToPersonId ?? '',
+        transferFrom: report.transferFromReport ?? '',
+        transferTo: report.transferToReport ?? '',
+        reason: report.decisionReason ?? '',
       };
 
-    case "vacation":
+    case 'vacation':
       return {
-        type: "vacation",
-        assignedTo: report.assignedToPersonId ?? "",
+        type: 'vacation',
+        assignedTo: report.assignedToPersonId ?? '',
         vacationFrom: report.vacationFrom
           ? new Date(report.vacationFrom).toDateString()
           : new Date().toDateString(),
@@ -65,19 +66,23 @@ function mapReportToForm(
 }
 
 export function useReportDnD(
-  root: { [name: string]: TReportView[] },
+  root: TReportView[],
   setRoot: React.Dispatch<React.SetStateAction<TRoot>>,
   onUpdateReport: (report: TReportCreateUpdatePayload & { id: string }) => void,
 ) {
   // this will update the Reports state
   // This callback will trigger if drag and drop will be successfull
   const onUpdateStateCallback = useCallback(
-    (draggingId: TReportView["id"], dropTargetId: TReportView["id"]) => {
+    (draggingId: Report['id'], dropTargetId: TDBPerson['id']) => {
       const found = findReport(root, draggingId);
       if (!found) return;
 
       // update report service
-      onUpdateReport({ ...mapReportToForm(found.report), id: found.report.id });
+      onUpdateReport({
+        ...mapReportToForm(found.report),
+        id: found.report.id,
+        assignedTo: dropTargetId,
+      });
 
       // move the report in the UI
       setRoot((prev) => {
@@ -86,7 +91,7 @@ export function useReportDnD(
         const updated = moveReport(
           found.report,
           prev,
-          found.assigned,
+          found.assigned.id,
           dropTargetId,
         );
 
@@ -100,11 +105,11 @@ export function useReportDnD(
     useDnDHelpers(onUpdateStateCallback);
 
   useEffect(() => {
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseup", onUp);
+    document.addEventListener('mousemove', onMove);
+    document.addEventListener('mouseup', onUp);
     return () => {
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseup", onUp);
+      document.removeEventListener('mousemove', onMove);
+      document.removeEventListener('mouseup', onUp);
     };
   }, [draggingId, dropTargetId, dropPos, root, setRoot, onMove, onUp]);
 

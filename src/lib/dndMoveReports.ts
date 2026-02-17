@@ -1,3 +1,4 @@
+import { TDBPerson } from '@/types/persons';
 import { Report, TReportAssigned, TRoot } from '@/types/reports';
 
 // -----------------------------
@@ -14,22 +15,48 @@ function removeNode(
   reportId: string,
   from: TReportAssigned,
 ): { updated: TRoot; removed: Report | null } {
-  const copy = cloneTree(root);
-  const idx = copy[from].findIndex((r) => r.id === reportId);
-
-  if (idx === -1) {
-    return { updated: copy, removed: null };
+  const columnIndex = root.findIndex((col) => col.person.id === from);
+  if (columnIndex === -1) {
+    return { updated: root, removed: null };
   }
 
-  const [removed] = copy[from].splice(idx, 1);
-  return { updated: copy, removed };
+  const column = root[columnIndex];
+  const reportIndex = column.reports.findIndex((rep) => rep.id === reportId);
+
+  if (reportIndex === -1) {
+    return { updated: root, removed: null };
+  }
+
+  const removed = column.reports[reportIndex];
+
+  // 🔥 Копіюємо тільки потрібні частини
+  const updatedColumn = {
+    ...column,
+    reports: [
+      ...column.reports.slice(0, reportIndex),
+      ...column.reports.slice(reportIndex + 1),
+    ],
+  };
+
+  const updatedRoot = [
+    ...root.slice(0, columnIndex),
+    updatedColumn,
+    ...root.slice(columnIndex + 1),
+  ];
+
+  return { updated: updatedRoot, removed };
 }
 
 // -----------------------------
 // 3. Вставка всередину або відносно toId
 // -----------------------------
 function insertNode(root: TRoot, report: Report, to: TReportAssigned): void {
-  root[to].push(report);
+  for (let i = 0; i <= root.length; i++) {
+    if (root[i].person.id === to) {
+      root[i].reports.push(report);
+      break;
+    }
+  }
 }
 
 // -----------------------------
@@ -61,13 +88,13 @@ export function moveReport(
 export function findReport(
   root: TRoot,
   id: string,
-): { report: Report; assigned: TReportAssigned } | null {
-  for (const [assigned, reports] of Object.entries(root)) {
+): { report: Report; assigned: TDBPerson } | null {
+  for (const { person, reports } of Object.values(root)) {
     const found = reports.find((r) => r.id === id);
     if (found) {
       return {
         report: found,
-        assigned: assigned as TReportAssigned,
+        assigned: person,
       };
     }
   }

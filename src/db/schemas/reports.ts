@@ -3,30 +3,27 @@ import { person } from './auth-schema';
 import { TReportStatus, TReportType } from '@/types/reports';
 
 export const report = pgTable('report', {
-  id: varchar('id', { length: 20 }).primaryKey(),
+  id: varchar('id').primaryKey(),
 
   type: varchar('report_type').$type<TReportType>().notNull(),
 
-  fromPersonId: varchar('from_person_id', { length: 20 })
+  fromPersonId: varchar('from_person_id')
     .notNull()
     .references(() => person.id),
 
-  toPersonId: varchar('to_person_id', { length: 20 })
+  toPersonId: varchar('to_person_id')
     .notNull()
     .references(() => person.id),
 
   status: varchar('status').$type<TReportStatus>().notNull().default('created'),
 
-  assignedToPersonId: varchar('assigned_to_person_id', {
-    length: 20,
-  }).references(() => person.id),
-
-  decidedByPersonId: varchar('decided_by_person_id', { length: 20 }).references(
+  assignedToPersonId: varchar('assigned_to_person_id').references(
     () => person.id,
   ),
 
-  transferFrom: varchar('transfer_from', { length: 100 }),
-  transferTo: varchar('transfer_to', { length: 100 }),
+  decidedByPersonId: varchar('decided_by_person_id').references(
+    () => person.id,
+  ),
 
   description: text('description'),
 
@@ -43,7 +40,7 @@ export const report = pgTable('report', {
 
 // --------------------------------------
 export const medicalReport = pgTable('medical_report', {
-  reportId: varchar('report_id', { length: 20 })
+  reportId: varchar('report_id')
     .primaryKey()
     .references(() => report.id, { onDelete: 'cascade' }),
 
@@ -53,7 +50,7 @@ export const medicalReport = pgTable('medical_report', {
 
 // --------------------------------------
 export const releaseReport = pgTable('release_report', {
-  reportId: varchar('report_id', { length: 20 })
+  reportId: varchar('report_id')
     .primaryKey()
     .references(() => report.id, { onDelete: 'cascade' }),
 
@@ -63,23 +60,23 @@ export const releaseReport = pgTable('release_report', {
 
 // --------------------------------------
 export const transferReport = pgTable('transfer_report', {
-  reportId: varchar('report_id', { length: 20 })
+  reportId: varchar('report_id')
     .primaryKey()
     .references(() => report.id, { onDelete: 'cascade' }),
 
   transferFromReport: varchar('transfer_from_report', {
     length: 100,
   }).notNull(),
-  transferToReport: varchar('transfer_to_report', { length: 100 }).notNull(),
+  transferToReport: varchar('transfer_to_report').notNull(),
   reason: text('reason').notNull(),
 });
 
 export const vacationReport = pgTable('vacation_report', {
-  reportId: varchar('report_id', { length: 20 })
+  reportId: varchar('report_id')
     .primaryKey()
     .references(() => report.id, { onDelete: 'cascade' }),
 
   vacationFrom: timestamp('vacation_from', { withTimezone: true }).notNull(),
   vacationTo: timestamp('vacation_to', { withTimezone: true }).notNull(),
-  reason: text('reason').notNull(),
+  reason: text('reason'),
 });

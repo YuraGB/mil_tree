@@ -1,3 +1,11 @@
+import {
+  medicalReport,
+  releaseReport,
+  report,
+  transferReport,
+  vacationReport,
+} from '@/db/schemas/reports';
+
 export const BASE_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 export const EDITOR_TABS = [
@@ -328,3 +336,14 @@ export const MAP_ATTR_URL =
 export const MAP_MAP_ATTR_URL = '&copy; OpenStreetMap';
 
 export const MARK_TYPES = ['Point', 'LineString', 'Polygon', 'Circle'] as const;
+
+export const reportTypesToDbSchemas = {
+  medical: medicalReport,
+  release: releaseReport,
+  transfer: transferReport,
+  vacation: vacationReport,
+  complaint: report,
+} as const;
+
+export const LOGIN_ERROR_TITLE = "The person wasn't logged in";
+export const REGISTRATION_ERROR_TITLE = "The person wasn't created";

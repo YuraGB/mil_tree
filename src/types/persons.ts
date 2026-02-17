@@ -1,5 +1,6 @@
 import { ASSIGNMENT_ROLES, AWARDS, RANKS, STATUSES } from '@/constants';
 import { person } from '@/db/schemas/auth-schema';
+import { createSelectSchema } from 'drizzle-zod';
 
 export type TDBPerson = typeof person.$inferSelect;
 
@@ -67,3 +68,5 @@ export type OverviewPersonNode = {
   assignmentRole: AssignmentRole;
   awards: TAwardName | [];
 };
+
+export const PersonSchemaFromDB = createSelectSchema(person);

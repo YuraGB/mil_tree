@@ -1,4 +1,3 @@
-'use cache';
 export const PageWrapper = async ({
   sidebar,
   children,

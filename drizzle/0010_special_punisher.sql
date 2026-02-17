@@ -1,0 +1,1 @@
+ALTER TABLE "vacation_report" ALTER COLUMN "reason" DROP NOT NULL;
