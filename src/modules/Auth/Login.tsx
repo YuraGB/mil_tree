@@ -49,7 +49,7 @@ const Login = () => {
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>Email</FieldLabel>
+                <FieldLabel htmlFor={field.name}>Password</FieldLabel>
                 <Input
                   {...field}
                   id={field.name}

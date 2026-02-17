@@ -8,13 +8,17 @@ export const ProtectedRoutesProvider: FC<PropsWithChildren> = ({
   children,
 }) => {
   const router = useRouter();
-  const { data } = authClient.useSession();
+  const { data, isPending } = authClient.useSession();
   useEffect(() => {
     console.log(data);
-    if (!data) {
+    if (!isPending && !data) {
       router.push('/');
     }
-  }, [data, router]);
+  }, [data, isPending, router]);
+
+  if (isPending || !data) {
+    return null; // або <LoadingSpinner />
+  }
 
   return children;
 };
