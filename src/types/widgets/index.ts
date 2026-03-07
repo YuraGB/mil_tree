@@ -20,13 +20,13 @@ export interface EditorProps {
 }
 
 export interface EditorIndexProps {
-  valueDefault?: Delta;
+  widget?: Widget;
   handleSave?: (delta?: Delta) => void;
 }
 
 // Віджетні типи
 export type Widget = {
-  id: number; // унікальний id
+  id: string; // унікальний id
   type: TWidgetNames; // тип віджета
   props?: {
     [key: string]: string | undefined;
@@ -38,14 +38,14 @@ export type WidgetContainerProps = {
   children?: ReactNode;
   widgetName: Widget['type'];
   widgetCreated?: Widget['createdAt'];
-  widgetId: number;
-  onRemoveHandler: (id: number) => void;
+  widgetId: Widget['id'];
+  onRemoveHandler: (id: Widget['id']) => void;
 };
 
 export interface IWidgetProps {
   widget: Widget;
-  removeWidget: (id: number) => void;
-  saveWidget: (id: number, props: Widget['props']) => void;
+  removeWidget: (id: Widget['id']) => void;
+  saveWidget: (id: Widget['id'], props: Widget['props']) => void;
 }
 
 export type TWidgetNames = (typeof WIDGETS)[number];

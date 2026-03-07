@@ -1,7 +1,7 @@
 import { IWidgetProps } from '@/types';
 import { memo } from 'react';
 import WidgetContainer from '../WidgetConteiner';
-import { RANKS } from '@/constants';
+import { ASSIGNMENT_ROLES } from '@/constants';
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export const RankSelectorWidget = memo(
+export const AssignmentWidget = memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
     return (
       <WidgetContainer
@@ -20,16 +20,20 @@ export const RankSelectorWidget = memo(
         key={widget.id}
       >
         <Select
-          onValueChange={(val) => saveWidget(widget.id, { rank: val })}
-          value={widget.props?.rank || ''}
+          onValueChange={(val) => saveWidget(widget.id, { assignment: val })}
+          value={widget.props?.assignment || ''}
         >
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a widget to display" />
           </SelectTrigger>
           <SelectContent className="w-full">
-            {RANKS.map((rank) => (
-              <SelectItem key={rank} value={rank} className="w-full capitalize">
-                {rank}
+            {Object.entries(ASSIGNMENT_ROLES).map(([key, assigment]) => (
+              <SelectItem
+                key={assigment}
+                value={key}
+                className="w-full capitalize"
+              >
+                {assigment.replaceAll('_', ' ')}
               </SelectItem>
             ))}
           </SelectContent>
@@ -39,4 +43,4 @@ export const RankSelectorWidget = memo(
   },
 );
 
-RankSelectorWidget.displayName = 'RankSelectorWidget';
+AssignmentWidget.displayName = 'AssignmentWidget';

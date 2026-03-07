@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export const StatusSelectorWidjet = memo(
+export const StatusSelectorWidget = memo(
   ({ widget, removeWidget, saveWidget }: IWidgetProps) => {
     return (
       <WidgetContainer
@@ -23,15 +23,15 @@ export const StatusSelectorWidjet = memo(
           onValueChange={(val) => saveWidget(widget.id, { status: val })}
           value={widget.props?.status || ''}
         >
-          <SelectTrigger className="w-[200px]">
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Select a widget to display" />
           </SelectTrigger>
-          <SelectContent className="w-[200px]">
+          <SelectContent className="w-full">
             {Object.values(STATUSES).map((status) => (
               <SelectItem
                 key={status.code}
                 value={status.code}
-                className="w-[200px] capitalize"
+                className="w-full capitalize"
               >
                 {status.description}
               </SelectItem>
@@ -43,4 +43,4 @@ export const StatusSelectorWidjet = memo(
   },
 );
 
-StatusSelectorWidjet.displayName = 'StatusSelectorWidjet';
+StatusSelectorWidget.displayName = 'StatusSelectorWidget';

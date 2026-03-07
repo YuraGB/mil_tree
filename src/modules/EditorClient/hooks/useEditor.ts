@@ -1,6 +1,5 @@
 'use client';
-
-import { useEffect, useLayoutEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Quill, { Delta } from 'quill';
 import 'quill/dist/quill.snow.css';
 import { EditorProps } from '@/types';
@@ -20,20 +19,12 @@ export const useEditorClient = (
   props: EditorProps,
   ref: React.ForwardedRef<Quill | null>,
 ) => {
-  const { defaultValue, onTextChange, onSelectionChange, readOnly } = props;
+  const { defaultValue, readOnly } = props;
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const quillRef = useRef<Quill | null>(null);
 
   const defaultValueRef = useRef<Delta | undefined>(defaultValue);
-  const onTextChangeRef = useRef(onTextChange);
-  const onSelectionChangeRef = useRef(onSelectionChange);
-
-  /* keep callbacks fresh */
-  useLayoutEffect(() => {
-    onTextChangeRef.current = onTextChange;
-    onSelectionChangeRef.current = onSelectionChange;
-  }, [onTextChange, onSelectionChange]);
 
   /* toggle readOnly */
   useEffect(() => {
@@ -111,23 +102,6 @@ export const useEditorClient = (
     if (defaultValueRef.current) {
       quill.setContents(defaultValueRef.current);
     }
-
-    // events
-    quill.on('text-change', (...args) => {
-      onTextChangeRef.current?.(...args);
-    });
-
-    quill.on('selection-change', (...args) => {
-      onSelectionChangeRef.current?.(...args);
-    });
-
-    // NO DOM cleanup
-    // return () => {
-    //   if (ref && typeof ref !== 'function') {
-    //     // ref.current = null;
-    //   }
-    //   // quillRef.current = null;
-    // };
   }, [props, readOnly, ref]);
 
   return { containerRef };

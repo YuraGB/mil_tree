@@ -23,7 +23,7 @@ export const EditorWidget = React.memo(
         widgetId={widget.id}
         key={widget.id}
       >
-        <EditorIndex handleSave={updateEditorContent} />
+        <EditorIndex handleSave={updateEditorContent} widget={widget} />
       </WidgetContainer>
     );
   },
