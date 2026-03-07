@@ -2,11 +2,13 @@
 import WidgetSelector from '@/components/WidgetSelector';
 import { useWidget } from './hooks/useWidget';
 import { ButtonSave } from './components/ButtonSave';
+import { TPersonsRespons } from '@/types/persons';
 
-export const WidgetPage = ({ personId }: { personId: string }) => {
-  console.log(personId);
+export const WidgetPage = ({ person }: { person: TPersonsRespons }) => {
   const { addNewWidget, removeWidget, widgets, saveWidget, savePage, content } =
-    useWidget();
+    useWidget(person);
+
+  console.log('Rendering WidgetPage with widgets:', widgets);
 
   return (
     <article className="w-full px-4">

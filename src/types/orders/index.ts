@@ -6,7 +6,25 @@ export type TOrders = {
   craetedAt: string;
   updatedAt: string;
   fromWhatDate: string;
-  whoOrdered: Omit<TPerson, ''>;
-  onWhichName: Omit<TPerson, 'subUnits'>;
+  whoOrdered: Omit<
+    TPerson,
+    | 'subUnits'
+    | 'unitId'
+    | 'emailVerified'
+    | 'image'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'content'
+  >;
+  onWhichName: Omit<
+    TPerson,
+    | 'subUnits'
+    | 'unitId'
+    | 'emailVerified'
+    | 'image'
+    | 'createdAt'
+    | 'updatedAt'
+    | 'content'
+  >;
   description: string;
 };

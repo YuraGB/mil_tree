@@ -7,9 +7,11 @@ import {
   boolean,
   index,
   foreignKey,
+  jsonb,
 } from 'drizzle-orm/pg-core';
 import { unit } from './unit';
 import { AssignmentRole, IStatus, TRank } from '@/types/persons';
+import { Delta } from 'quill';
 
 export const person = pgTable(
   'Person',
@@ -37,6 +39,7 @@ export const person = pgTable(
       .defaultNow()
       .$onUpdate(() => new Date())
       .notNull(),
+    content: jsonb('content').$type<Delta>(),
   },
   (table) => ({
     // unitFk: foreignKey({

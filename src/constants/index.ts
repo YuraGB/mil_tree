@@ -23,6 +23,7 @@ export const WIDGETS = [
   'status_selector',
   'rank_selector',
   'awards',
+  'assignment',
 ] as const;
 
 export const STATUSES = {

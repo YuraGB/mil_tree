@@ -1,11 +1,8 @@
 import { EditorIndexProps } from '@/types';
 import Quill from 'quill';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
-export const useEditorIndex = ({
-  valueDefault,
-  handleSave,
-}: EditorIndexProps) => {
+export const useEditorIndex = ({ widget, handleSave }: EditorIndexProps) => {
   // Logic and config for EditorIndex
   const [readOnly, setReadOnly] = useState(false);
 
@@ -14,25 +11,23 @@ export const useEditorIndex = ({
 
   const [isDirty, setIsDirty] = useState(false);
 
-  // Initialize the editor with default content if provided
-  useEffect(() => {
-    if (valueDefault && quillRef.current) {
-      quillRef.current.setContents(valueDefault);
-    }
-  }, [valueDefault]);
-
   const onSave = () => {
     const delta = quillRef.current?.getContents();
 
     if (!delta || !handleSave) return;
+
     // save in db etc...
     handleSave(delta);
 
     // reset dirty state
     setIsDirty(false);
   };
+
+  // Handler for when the editor is ready
   const onEditorReady = (quill: Quill) => {
-    const initial = valueDefault || { ops: [] };
+    const initial = widget?.props?.content
+      ? JSON.parse(widget.props.content)
+      : { ops: [] };
     const handler = () => {
       const current = quill.getContents();
       setIsDirty(JSON.stringify(current) !== JSON.stringify(initial));
