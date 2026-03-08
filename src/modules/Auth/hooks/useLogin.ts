@@ -28,6 +28,13 @@ export const useLogin = () => {
     },
   });
 
+  /**
+   * Initiates an email sign-in with the provided form values and integrates auth lifecycle handlers with form feedback.
+   *
+   * When the request fails, sets a validation error on the `email` field with the message "Invalid email or password" before delegating to the configured `onError` handler.
+   *
+   * @param data - Form values for the email sign-in (email and password)
+   */
   function onSubmit(data: z.infer<typeof formSchema>) {
     authClient.signIn.email(
       {

@@ -40,6 +40,16 @@ type MultiSelectContextType = {
 }
 const MultiSelectContext = createContext<MultiSelectContextType | null>(null)
 
+/**
+ * Renders a context-backed multi-select UI that manages open state, selected values, and item labels, and provides that state to nested MultiSelect subcomponents.
+ *
+ * @param children - React nodes that typically include MultiSelectTrigger, MultiSelectValue, MultiSelectContent and item/group components; these receive state via context.
+ * @param values - Optional controlled list of selected value strings. When provided, selection state is controlled externally.
+ * @param defaultValues - Initial selected value strings used when `values` is not provided (uncontrolled mode).
+ * @param onValuesChange - Callback invoked with the updated array of selected values whenever the selection changes.
+ * @param single - When `true`, restricts selection to a single value and closes the popover after a selection.
+ * @returns The rendered MultiSelect element with its Popover and context provider.
+ */
 export function MultiSelect({
   children,
   values,
@@ -104,6 +114,11 @@ export function MultiSelect({
   )
 }
 
+/**
+ * Renders the trigger button for a MultiSelect popover, reflecting the popover open state and showing a chevron indicator.
+ *
+ * @returns The trigger button element that opens or closes the MultiSelect popover
+ */
 export function MultiSelectTrigger({
   className,
   children,
@@ -133,6 +148,20 @@ export function MultiSelectTrigger({
   )
 }
 
+/**
+ * Renders the currently selected values as badges (or a placeholder) and handles overflow and optional click-to-remove behavior.
+ *
+ * Displays a placeholder when no values are selected, the single selected item's label when in single mode, or a row of badges for multiple selections. When space is limited, an overflow badge showing “+N” is displayed; wrapping behavior is controlled by `overflowBehavior`. Clicking a badge removes that value when `clickToRemove` is true.
+ *
+ * @param placeholder - Text to show when no values are selected.
+ * @param clickToRemove - When true, clicking a badge will remove that value; disabled when false.
+ * @param overflowBehavior - Controls how selected badges are laid out and when overflow is shown:
+ *   - `"wrap"`: badges always wrap to multiple lines,
+ *   - `"wrap-when-open"`: wrap only when the popover is open,
+ *   - `"cutoff"`: keep badges on a single line and show an overflow `+N` badge when space is insufficient.
+ * @param className - Additional class names applied to the container.
+ * @returns A React element that displays the selected value(s) as badges, a placeholder, or a single-item label depending on state.
+ */
 export function MultiSelectValue({
   placeholder,
   clickToRemove = true,
@@ -263,6 +292,18 @@ export function MultiSelectValue({
   )
 }
 
+/**
+ * Renders the popover content for the MultiSelect, providing a Command list and optional search input.
+ *
+ * When `search` is enabled (boolean true or an object), a CommandInput is shown with an optional placeholder;
+ * when disabled, focus is still handled for accessibility. A hidden Command with the full children is rendered
+ * offscreen for structural completeness.
+ *
+ * @param search - `true` to enable search, `false` to disable, or an object with `placeholder` and `emptyMessage` to customize text.
+ * @param children - Command items (typically MultiSelectItem elements) that make up the selectable list.
+ * @param props - Additional props forwarded to the rendered `Command` inside the popover.
+ * @returns The Popover content element containing the configured Command list.
+ */
 export function MultiSelectContent({
   search = true,
   children,
@@ -305,6 +346,17 @@ export function MultiSelectContent({
   )
 }
 
+/**
+ * Renders a selectable item for the MultiSelect list and registers its label with the parent context.
+ *
+ * Registers the item's display label (from `badgeLabel` or `children`) with the MultiSelect context and renders
+ * a CommandItem that toggles the selection for `value` when activated.
+ *
+ * @param value - The unique identifier for this item used in the MultiSelect value set.
+ * @param badgeLabel - Optional label/content used to represent this item in the selected-values display; falls back to `children` if omitted.
+ * @param onSelect - Optional callback invoked with `value` after the item is selected.
+ * @returns The rendered CommandItem element representing the selectable item.
+ */
 export function MultiSelectItem({
   value,
   children,
@@ -338,18 +390,35 @@ export function MultiSelectItem({
   )
 }
 
+/**
+ * Renders a CommandGroup using the provided props.
+ *
+ * @param props - Props forwarded to the underlying CommandGroup component
+ * @returns A CommandGroup element configured with `props`
+ */
 export function MultiSelectGroup(
   props: ComponentPropsWithoutRef<typeof CommandGroup>,
 ) {
   return <CommandGroup {...props} />
 }
 
+/**
+ * Renders a separator for use inside the MultiSelect command list.
+ *
+ * @returns A `CommandSeparator` element with the provided props forwarded.
+ */
 export function MultiSelectSeparator(
   props: ComponentPropsWithoutRef<typeof CommandSeparator>,
 ) {
   return <CommandSeparator {...props} />
 }
 
+/**
+ * Access the MultiSelect context value for components rendered inside a MultiSelect.
+ *
+ * @returns The context object containing shared MultiSelect state and actions (e.g., `open`, `setOpen`, `selectedValues`, `single`, `toggleValue`, `items`, `onItemAdded`).
+ * @throws Error if called outside of a `MultiSelect` provider
+ */
 function useMultiSelectContext() {
   const context = useContext(MultiSelectContext)
   if (context == null) {
@@ -360,6 +429,13 @@ function useMultiSelectContext() {
   return context
 }
 
+/**
+ * Creates a debounced version of a function that delays invocation until `wait` milliseconds have elapsed since the last call.
+ *
+ * @param func - The function to debounce.
+ * @param wait - The delay in milliseconds to wait after the last call before invoking `func`.
+ * @returns A function that, when called, schedules `func` to run after `wait` milliseconds; subsequent calls reset the delay. The debounced function preserves the caller `this` and forwards all arguments to `func`.
+ */
 function debounce<T extends (...args: never[]) => void>(
   func: T,
   wait: number,
