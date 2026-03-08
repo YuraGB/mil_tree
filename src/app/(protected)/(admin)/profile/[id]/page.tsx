@@ -9,12 +9,15 @@ const ProfileIcon = () => {
   return <User className="text-grey-500" size={100} strokeWidth={1.5} />;
 };
 
-const ProfilePage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
-  const person = await api.persons({ id }).get();
-  if (!person || person.data === null) {
+function assertData<T>(res: { data: T | null; error: unknown }): T {
+  if (res.error || !res.data) {
     notFound();
   }
+  return res.data;
+}
+const ProfilePage = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const person = assertData(await api.persons({ id }).get());
 
   const {
     name,
@@ -25,8 +28,10 @@ const ProfilePage = async ({ params }: { params: Promise<{ id: string }> }) => {
     image,
     rank,
     statusCode,
+    content,
     unitId,
-  } = person.data;
+  } = person;
+
   return (
     <article>
       <section className="grid grid-cols-[200px_1fr] gap-4">
@@ -70,9 +75,9 @@ const ProfilePage = async ({ params }: { params: Promise<{ id: string }> }) => {
           </p>
         </section>
       </section>
-      <ProfileInfo content={person.data.content} />
+      <ProfileInfo content={content} />
 
-      <WidgetPage person={person.data} />
+      <WidgetPage person={person} />
     </article>
   );
 };
