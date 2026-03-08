@@ -21,7 +21,6 @@ export const useAuthRequestConfig = (errorTitle: string) => {
       router.push('/overview');
     },
     onResponse() {
-      toast.success('Success!');
       setIsLoading(false);
     },
   };
