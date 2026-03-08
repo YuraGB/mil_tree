@@ -4,7 +4,6 @@ import { useForm } from 'react-hook-form';
 import z from 'zod';
 import { useAuthRequestConfig } from './useAuthRequestConfig';
 import { LOGIN_ERROR_TITLE } from '@/constants';
-import { toast } from 'sonner';
 
 const formSchema = z.object({
   email: z.email().nonempty(),
