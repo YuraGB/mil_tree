@@ -11,6 +11,16 @@ import {
 import { TPersonsRespons } from '@/types/persons';
 import Link from 'next/link';
 
+/**
+ * Render a compact person summary card with badges and a profile link.
+ *
+ * Displays the user's `statusCode` and `rank` as secondary badges, the user's
+ * `name` as the card title, and `assignmentRole` as the description. Includes
+ * a full-width "View Profile" button that links to `/profile/{user.id}`.
+ *
+ * @param user - The person data to display. Expected properties used: `id`, `name`, `statusCode`, `rank`, and `assignmentRole`.
+ * @returns A JSX element rendering a styled card with the user's summary and a link to their profile.
+ */
 export function PersonCard({ user }: { user: TPersonsRespons }) {
   return (
     <Card className="relative mx-auto w-full max-w-sm gap-1 py-2">

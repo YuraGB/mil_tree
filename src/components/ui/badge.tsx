@@ -26,6 +26,14 @@ const badgeVariants = cva(
   }
 )
 
+/**
+ * Renders a stylable badge element with selectable visual variant and optional polymorphic child rendering.
+ *
+ * @param variant - Visual style of the badge; one of "default", "secondary", "destructive", "outline", "ghost", or "link".
+ * @param asChild - When true, renders using a Radix Slot.Root to allow a custom child component to be used in place of the default element.
+ * @param className - Additional CSS classes to merge with the component's computed classes.
+ * @returns The badge element with `data-slot="badge"`, `data-variant` set to the chosen variant, and composed `className`.
+ */
 function Badge({
   className,
   variant = "default",
