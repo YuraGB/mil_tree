@@ -27,13 +27,13 @@ export const AssignmentWidget = memo(
             <SelectValue placeholder="Select a widget to display" />
           </SelectTrigger>
           <SelectContent className="w-full">
-            {Object.entries(ASSIGNMENT_ROLES).map(([key, assigment]) => (
+            {Object.entries(ASSIGNMENT_ROLES).map(([, assignment]) => (
               <SelectItem
-                key={assigment}
-                value={key}
+                key={assignment}
+                value={assignment}
                 className="w-full capitalize"
               >
-                {assigment.replaceAll('_', ' ')}
+                {assignment.replaceAll('_', ' ')}
               </SelectItem>
             ))}
           </SelectContent>

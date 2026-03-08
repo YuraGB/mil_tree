@@ -3,6 +3,7 @@ import { api } from '@/elysia/eden';
 import { WidgetPage } from '@/modules/WidgetPage';
 import { User } from 'lucide-react';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 const ProfileIcon = () => {
   return <User className="text-grey-500" size={100} strokeWidth={1.5} />;
@@ -12,8 +13,9 @@ const ProfilePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
   const person = await api.persons({ id }).get();
   if (!person || person.data === null) {
-    return <p>Person not found</p>;
+    notFound();
   }
+
   const {
     name,
     email,

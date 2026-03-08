@@ -97,11 +97,17 @@ export const formatWidgetsDataForUpdateUser = (
         break;
 
       case 'editor':
-        updatedData.content = widget.props?.content
-          ? typeof widget.props.content === 'string'
-            ? JSON.parse(widget.props.content)
-            : widget.props.content
-          : person.content;
+        try {
+          updatedData.content = widget.props?.content
+            ? typeof widget.props.content === 'string'
+              ? JSON.parse(widget.props.content)
+              : widget.props.content
+            : person.content;
+        } catch (error) {
+          console.error('Error parsing content:', error);
+          updatedData.content = person.content; // Fallback to original content on error
+        }
+
         break;
       default:
         break;

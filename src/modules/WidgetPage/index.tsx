@@ -8,8 +8,6 @@ export const WidgetPage = ({ person }: { person: TPersonsRespons }) => {
   const { addNewWidget, removeWidget, widgets, saveWidget, savePage, content } =
     useWidget(person);
 
-  console.log('Rendering WidgetPage with widgets:', widgets);
-
   return (
     <article className="w-full px-4">
       <WidgetSelector addWidgetHandler={addNewWidget} />

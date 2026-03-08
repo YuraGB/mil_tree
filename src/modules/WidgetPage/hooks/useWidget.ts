@@ -1,5 +1,5 @@
 import { TWidgetNames, Widget } from '@/types';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useWidgetType } from './useWidgetType';
 import { TPersonsRespons } from '@/types/persons';
 import { formatWidgetsDataForUpdateUser, getWidgetContent } from '../util';
@@ -8,7 +8,7 @@ import { useUpdatePerson } from '../api/useUpdatePerson';
 
 export const useWidget = (person: TPersonsRespons) => {
   const [widgets, setWidgets] = useState<Widget[]>(getWidgetContent(person));
-  const { updatePerson, data } = useUpdatePerson();
+  const { updatePerson } = useUpdatePerson();
 
   const addNewWidget = useCallback((type?: TWidgetNames) => {
     if (!type) return;
@@ -63,12 +63,6 @@ export const useWidget = (person: TPersonsRespons) => {
 
     updatePerson(updatedData);
   };
-
-  useEffect(() => {
-    if (data && !data.error) {
-      setTimeout(() => setWidgets([]), 0);
-    }
-  }, [data]);
 
   const widgetType = useWidgetType();
 
