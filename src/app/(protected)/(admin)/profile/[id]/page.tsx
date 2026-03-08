@@ -1,9 +1,7 @@
 import { ProfileData } from '@/components/ProfileData';
-import ProfileIcon from '@/components/ProfileIcon';
 import { ProfileInfo } from '@/components/ProfileInfo';
 import { api } from '@/elysia/eden';
 import { WidgetPage } from '@/modules/WidgetPage';
-import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 function assertData<T>(res: { data: T | null; error: unknown }): T {
