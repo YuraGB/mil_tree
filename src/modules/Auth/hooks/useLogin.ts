@@ -28,6 +28,14 @@ export const useLogin = () => {
     },
   });
 
+  /**
+   * Submit login form values to the authentication client.
+   *
+   * Sends the provided `email` and `password` to `authClient.signIn.email` and wires the configured request lifecycle handlers.
+   * If the request errors, sets a form error on the `email` field with the message "Invalid email or password" before invoking the configured error handler.
+   *
+   * @param data - The validated form values containing `email` and `password`
+   */
   function onSubmit(data: z.infer<typeof formSchema>) {
     authClient.signIn.email(
       {
@@ -35,7 +43,12 @@ export const useLogin = () => {
       },
       {
         onRequest,
-        onError,
+        onError: (context) => {
+          form.setError('email', {
+            message: 'Invalid email or password',
+          });
+          onError(context);
+        },
         onSuccess,
         onResponse,
       },

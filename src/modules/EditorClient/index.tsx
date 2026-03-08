@@ -10,32 +10,28 @@ const EditorClient = dynamic(
   { ssr: false },
 );
 
+/**
+ * Render the editor UI with an editor instance, a read-only toggle, and a conditional Save button.
+ *
+ * The editor is initialized with parsed content from `props.widget.props.content` when present.
+ *
+ * @param props - Component props; may include `widget.props.content` (a JSON string) used as the editor's initial value.
+ * @returns A JSX element containing the editor, a read-only toggle, and a Save button shown when there are unsaved changes.
+ */
 function EditorIndex(props: EditorIndexProps) {
   const { isDirty, onSave, quillRef, readOnly, onEditorReady, setReadOnly } =
     useEditorIndex(props);
-
-  // const [html, setHtml] = useState<string>('');
-  // const handler = () => {
-  //   const delta = quillRef.current?.getContents();
-  //   if (delta) {
-  //     // // 1. Зберегти delta у БД
-  //     // fetch('/api/save', {
-  //     //   method: 'POST',
-  //     //   body: JSON.stringify({ content: delta }),
-  //     // });
-
-  //     // 2. Конвертувати у HTML для перегляду
-  //     const converter = new QuillDeltaToHtmlConverter(delta.ops, {});
-  //     const htmlOutput = converter.convert();
-  //     setHtml(htmlOutput);
-  //   }
-  // };
 
   return (
     <section className="py-2">
       <EditorClient
         readOnly={readOnly}
         onReady={onEditorReady}
+        defaultValue={
+          props.widget?.props?.content
+            ? JSON.parse(props.widget.props.content)
+            : undefined
+        }
         ref={quillRef}
       />
       <div className="controls">
@@ -53,13 +49,6 @@ function EditorIndex(props: EditorIndexProps) {
           Save
         </Button>
       )}
-
-      {/* <div className="state">
-          <div className="state-title">Last Change:</div>
-          {lastChange ? JSON.stringify(lastChange.ops) : 'Empty'}
-        </div> */}
-
-      {/* <div dangerouslySetInnerHTML={{ __html: html }} /> */}
     </section>
   );
 }
